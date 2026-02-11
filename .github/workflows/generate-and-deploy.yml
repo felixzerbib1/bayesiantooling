@@ -1,0 +1,64 @@
+name: Generate & Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/feature-flags.json"
+      - "generate.js"
+
+  # Allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+# Sets permissions for GITHUB_TOKEN to deploy to Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate files from JSON
+        run: node generate.js
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feature-flags.md index.html
+          git diff --cached --quiet || git commit -m "Auto-generate files from feature-flags.json"
+          git push
+
+  deploy:
+    needs: generate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout (with generated files)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

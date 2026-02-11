@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open:*)",
+      "Bash(node:*)",
+      "Bash(gh auth status:*)",
+      "Bash(git init:*)"
+    ]
+  }
+}

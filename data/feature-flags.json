@@ -1,0 +1,332 @@
+{
+  "meta": {
+    "lastUpdated": "2026-02-11",
+    "description": "Single source of truth for all Bayesian Health feature flag configurations. Edit this file, then run 'node generate.js' to regenerate feature-flags.md and index.html."
+  },
+  "products": [
+    { "key": "sepsis", "name": "Sepsis", "description": "Early sepsis detection, bundle tracking, and alert system" },
+    { "key": "palliative_care", "name": "Palliative Care", "description": "Palliative care identification and goals-of-care support" },
+    { "key": "deterioration", "name": "Deterioration", "description": "Patient deterioration early warning system" }
+  ],
+  "customers": [
+    { "key": "memorial_care", "name": "Memorial Care", "products": ["sepsis"], "ehr": "Epic" },
+    { "key": "inova_health", "name": "Inova Health", "products": ["sepsis"], "ehr": "Epic" },
+    { "key": "thedacare", "name": "ThedaCare", "products": ["sepsis"], "ehr": "Epic" },
+    { "key": "medstar_health", "name": "MedStar Health", "products": ["sepsis"], "ehr": "Cerner" },
+    { "key": "mayo_clinic", "name": "Mayo Clinic", "products": ["palliative_care"], "ehr": "Epic" },
+    { "key": "ccf", "name": "CCF", "products": ["sepsis"], "ehr": "Epic" },
+    { "key": "uchicago", "name": "UChicago", "products": ["palliative_care", "sepsis"], "ehr": "Epic" },
+    { "key": "urmc", "name": "URMC", "products": ["deterioration", "sepsis"], "ehr": "Epic" }
+  ],
+  "flagDefinitions": {
+    "general": [
+      { "key": "bundle_tracking", "name": "Bundle Tracking", "applicableProducts": "all", "description": "Enables the sepsis bundle tracking workflow with time-based compliance monitoring" },
+      { "key": "fluid_mod_bayesian_ui", "name": "Fluid Modification (Bayesian UI)", "applicableProducts": ["sepsis"], "description": "Fluid contraindication/modification questions surfaced within the Bayesian application UI" },
+      { "key": "fluid_mod_ehr_order_set", "name": "Fluid Modification (EHR Order Set)", "applicableProducts": ["sepsis"], "description": "Fluid contraindication data pulled from the EHR order set rather than Bayesian UI" },
+      { "key": "investigational_banner", "name": "Investigational Banner", "applicableProducts": "all", "description": "Displays an investigational use banner across all application screens" },
+      { "key": "ifu", "name": "Instructions for Use (IFU)", "applicableProducts": "all", "description": "Displays IFU documentation link within the application" }
+    ],
+    "nurses": [
+      { "key": "nurse_escalation_questions", "name": "Nurse Assessment - Provider Escalation Questions", "applicableProducts": "all", "description": "Enables provider escalation questions within the nurse assessment workflow" },
+      { "key": "nurse_writeback_flowsheet", "name": "Nurse Assessment - Auto Writeback to Flowsheet Rows", "applicableProducts": "all", "description": "Automatically writes nurse assessment answers back to EHR flowsheet rows" },
+      { "key": "nurse_writeback_note", "name": "Nurse Assessment - Auto Writeback as Clinical Note", "applicableProducts": "all", "description": "Writes nurse assessment as a separate clinical note instead of flowsheet rows" },
+      { "key": "nurse_order_set", "name": "Nurse Order Set Enabled", "applicableProducts": ["sepsis"], "description": "Enables the nurse order set link (e.g., Rapid Response Sepsis Set) within the application" },
+      { "key": "qsofa", "name": "qSOFA", "applicableProducts": ["sepsis"], "description": "Enables qSOFA scoring driven by nursing assessment" }
+    ],
+    "providers": [
+      { "key": "provider_flowsheet_writeback", "name": "Provider Assessment - Auto Flowsheet Writeback", "applicableProducts": "all", "description": "Automatically writes provider assessment answers to EHR flowsheet rows" },
+      { "key": "provider_doc_tab", "name": "Provider Documentation Tab in Treatment Management", "applicableProducts": "all", "description": "Enables the provider documentation tab within the treatment management view" },
+      { "key": "provider_fluid_questions", "name": "Provider - Fluid Documentation Questions", "applicableProducts": ["sepsis"], "description": "Enables fluid documentation questions in the provider assessment workflow" },
+      { "key": "create_new_note", "name": "Create a New Note Button", "applicableProducts": "all", "description": "Enables the Create New Note button for providers to generate a clinical note" },
+      { "key": "add_to_existing_note", "name": "Add to Existing Note Button", "applicableProducts": "all", "description": "Enables the Add to Existing Note button to append to an open note" },
+      { "key": "auto_writeback_note_type", "name": "Automatic Flowsheet Writeback of Note Type", "applicableProducts": ["sepsis"], "description": "Automatically writes back the note type answer to a flowsheet row" },
+      { "key": "focused_exam_writeback", "name": "Focused Exam Writeback to Flowsheet Row", "applicableProducts": ["sepsis"], "description": "Writes focused exam data back to EHR flowsheet rows" },
+      { "key": "focused_exam_read", "name": "Focused Exam Read from Flowsheet", "applicableProducts": ["sepsis"], "description": "Reads focused exam data from existing EHR flowsheet values" },
+      { "key": "provider_order_set", "name": "Provider Order Set Enabled", "applicableProducts": ["sepsis"], "description": "Enables the provider order set link within the bundle tracking page" },
+      { "key": "bundle_start_provider_trigger", "name": "Bundle Start Time by Provider Trigger", "applicableProducts": ["sepsis"], "description": "Bundle timer starts when the provider triggers the order set" },
+      { "key": "ibw_calculation", "name": "Ideal Body Weight Calculation", "applicableProducts": ["sepsis"], "description": "Auto-calculates IBW in Bayesian for fluid contraindication when BMI > 30" },
+      { "key": "auto_obesity_contraindication", "name": "Auto-Selection of Obesity Contraindication", "applicableProducts": ["sepsis"], "description": "Automatically selects obesity fluid contraindication when IBW criteria are met" }
+    ]
+  },
+  "configurations": {
+    "memorial_care": {
+      "sepsis": {
+        "flags": {
+          "bundle_tracking": true,
+          "fluid_mod_bayesian_ui": false,
+          "fluid_mod_ehr_order_set": true,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "nurse_order_set": true,
+          "qsofa": false,
+          "provider_flowsheet_writeback": false,
+          "provider_doc_tab": true,
+          "provider_fluid_questions": false,
+          "create_new_note": true,
+          "add_to_existing_note": false,
+          "auto_writeback_note_type": true,
+          "focused_exam_writeback": false,
+          "focused_exam_read": false,
+          "provider_order_set": true,
+          "bundle_start_provider_trigger": false,
+          "ibw_calculation": false,
+          "auto_obesity_contraindication": false
+        },
+        "notes": {
+          "nurse_escalation_questions": "Unsure if they have provided the existing flowsheet",
+          "nurse_order_set": "Primary user is rapid response nurses; managed through education",
+          "provider_fluid_questions": "Fluid reason question is in the orderset; Bayesian pulls from flowsheets",
+          "create_new_note": "\"Chg in Clinical Condition\" note",
+          "add_to_existing_note": "Dot-phrase name TBD; build by ClinDoc team",
+          "provider_order_set": "Order Panel ID varies between ED and inpatient locations"
+        }
+      }
+    },
+    "inova_health": {
+      "sepsis": {
+        "flags": {
+          "bundle_tracking": true,
+          "fluid_mod_bayesian_ui": true,
+          "fluid_mod_ehr_order_set": true,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "nurse_order_set": false,
+          "qsofa": false,
+          "provider_flowsheet_writeback": true,
+          "provider_doc_tab": true,
+          "provider_fluid_questions": true,
+          "create_new_note": true,
+          "add_to_existing_note": false,
+          "auto_writeback_note_type": true,
+          "focused_exam_writeback": true,
+          "focused_exam_read": true,
+          "provider_order_set": true,
+          "bundle_start_provider_trigger": true,
+          "ibw_calculation": true,
+          "auto_obesity_contraindication": true
+        },
+        "notes": {
+          "create_new_note": "Still need to determine note type",
+          "provider_order_set": "Order set button navigates to Managed Orders in Epic"
+        }
+      }
+    },
+    "thedacare": {
+      "sepsis": {
+        "flags": {
+          "bundle_tracking": true,
+          "fluid_mod_bayesian_ui": true,
+          "fluid_mod_ehr_order_set": true,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "nurse_order_set": false,
+          "qsofa": false,
+          "provider_flowsheet_writeback": true,
+          "provider_doc_tab": true,
+          "provider_fluid_questions": true,
+          "create_new_note": true,
+          "add_to_existing_note": true,
+          "auto_writeback_note_type": true,
+          "focused_exam_writeback": true,
+          "focused_exam_read": true,
+          "provider_order_set": true,
+          "bundle_start_provider_trigger": true,
+          "ibw_calculation": true,
+          "auto_obesity_contraindication": true
+        },
+        "notes": {
+          "fluid_mod_ehr_order_set": "Not pulling fluid contraindication from EHR (only IBW derived from weight and height)",
+          "nurse_escalation_questions": "Unsure if they have provided the existing flowsheet",
+          "nurse_order_set": "Currently enabled (can turn off later)",
+          "provider_fluid_questions": "Fluid orders in order set but no reasoning for contraindications",
+          "create_new_note": "Progress note",
+          "add_to_existing_note": "ThedaCare built smartphrase integration using Bayesian flowsheet data",
+          "provider_order_set": "Order Panel ID varies between ED and inpatient locations"
+        }
+      }
+    },
+    "medstar_health": {
+      "sepsis": {
+        "flags": {
+          "bundle_tracking": true,
+          "fluid_mod_bayesian_ui": true,
+          "fluid_mod_ehr_order_set": true,
+          "investigational_banner": true,
+          "ifu": true,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "nurse_order_set": false,
+          "qsofa": true,
+          "provider_flowsheet_writeback": true,
+          "provider_doc_tab": true,
+          "provider_fluid_questions": true,
+          "create_new_note": true,
+          "add_to_existing_note": true,
+          "auto_writeback_note_type": true,
+          "focused_exam_writeback": true,
+          "focused_exam_read": false,
+          "provider_order_set": false,
+          "bundle_start_provider_trigger": false,
+          "ibw_calculation": false,
+          "auto_obesity_contraindication": false
+        },
+        "notes": {
+          "fluid_mod_ehr_order_set": "TBD if MedStar order set includes this data",
+          "investigational_banner": "Active in all application screens",
+          "ifu": "IFU required",
+          "nurse_order_set": "qSOFA score will auto order lactate",
+          "qsofa": "Nursing assessment Q2 drives scoring of modified qSOFA",
+          "provider_order_set": "Clinicians manually navigate to orders; MedStar could not build MPage without hyperlink"
+        }
+      }
+    },
+    "mayo_clinic": {
+      "palliative_care": {
+        "flags": {
+          "bundle_tracking": false,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "provider_flowsheet_writeback": true,
+          "provider_doc_tab": true,
+          "create_new_note": true,
+          "add_to_existing_note": false
+        },
+        "notes": {}
+      }
+    },
+    "ccf": {
+      "sepsis": {
+        "flags": {
+          "bundle_tracking": true,
+          "fluid_mod_bayesian_ui": true,
+          "fluid_mod_ehr_order_set": true,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "nurse_order_set": true,
+          "qsofa": false,
+          "provider_flowsheet_writeback": true,
+          "provider_doc_tab": true,
+          "provider_fluid_questions": true,
+          "create_new_note": true,
+          "add_to_existing_note": true,
+          "auto_writeback_note_type": true,
+          "focused_exam_writeback": true,
+          "focused_exam_read": false,
+          "provider_order_set": true,
+          "bundle_start_provider_trigger": false,
+          "ibw_calculation": false,
+          "auto_obesity_contraindication": false
+        },
+        "notes": {}
+      }
+    },
+    "uchicago": {
+      "palliative_care": {
+        "flags": {
+          "bundle_tracking": false,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "provider_flowsheet_writeback": false,
+          "provider_doc_tab": true,
+          "create_new_note": true,
+          "add_to_existing_note": false
+        },
+        "notes": {}
+      },
+      "sepsis": {
+        "flags": {
+          "bundle_tracking": true,
+          "fluid_mod_bayesian_ui": true,
+          "fluid_mod_ehr_order_set": false,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "nurse_order_set": false,
+          "qsofa": false,
+          "provider_flowsheet_writeback": true,
+          "provider_doc_tab": true,
+          "provider_fluid_questions": true,
+          "create_new_note": true,
+          "add_to_existing_note": false,
+          "auto_writeback_note_type": true,
+          "focused_exam_writeback": false,
+          "focused_exam_read": false,
+          "provider_order_set": true,
+          "bundle_start_provider_trigger": false,
+          "ibw_calculation": false,
+          "auto_obesity_contraindication": false
+        },
+        "notes": {}
+      }
+    },
+    "urmc": {
+      "deterioration": {
+        "flags": {
+          "bundle_tracking": false,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "provider_flowsheet_writeback": true,
+          "provider_doc_tab": true,
+          "create_new_note": true,
+          "add_to_existing_note": false
+        },
+        "notes": {}
+      },
+      "sepsis": {
+        "flags": {
+          "bundle_tracking": true,
+          "fluid_mod_bayesian_ui": false,
+          "fluid_mod_ehr_order_set": false,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": true,
+          "nurse_writeback_flowsheet": true,
+          "nurse_writeback_note": false,
+          "nurse_order_set": false,
+          "qsofa": false,
+          "provider_flowsheet_writeback": true,
+          "provider_doc_tab": true,
+          "provider_fluid_questions": false,
+          "create_new_note": true,
+          "add_to_existing_note": false,
+          "auto_writeback_note_type": true,
+          "focused_exam_writeback": false,
+          "focused_exam_read": false,
+          "provider_order_set": true,
+          "bundle_start_provider_trigger": false,
+          "ibw_calculation": false,
+          "auto_obesity_contraindication": false
+        },
+        "notes": {}
+      }
+    }
+  },
+  "changelog": [
+    { "date": "2026-02-11", "author": "—", "change": "Initial feature flag configuration" },
+    { "date": "2026-02-11", "author": "—", "change": "Updated flags to match Bayesian Frontend Integration Checklist format (Memorial Care, Inova, ThedaCare, MedStar)" }
+  ]
+}
