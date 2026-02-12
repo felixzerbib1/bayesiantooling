@@ -72,6 +72,13 @@
       { "key": "reset_suppression_on_admission", "name": "Re-set Suppression on Admission (ED to IP)", "applicableProducts": ["sepsis"], "description": "Resets suppression state when patient is admitted from ED to inpatient" },
       { "key": "code_status_suppression", "name": "Code Status Suppression", "applicableProducts": ["sepsis"], "description": "Suppresses sepsis alerts for patients with comfort-care or DNR code status" }
     ],
+    "bedside_workflow": [
+      { "key": "initiated_by_bedside_workflow", "name": "Initiated by Bedside Workflow", "applicableProducts": ["palliative_care"], "description": "Enables palliative care initiation through the bedside clinical workflow" },
+      { "key": "storyboard_alert", "name": "Storyboard Alert", "applicableProducts": ["palliative_care"], "description": "Enables palliative care alert within the EHR storyboard view" }
+    ],
+    "palliative_care_workflow": [
+      { "key": "initiated_by_palliative_care_team", "name": "Initiated by Palliative Care Team", "applicableProducts": ["palliative_care"], "description": "Enables palliative care initiation by the palliative care team directly" }
+    ],
     "other": [
       { "key": "neutropenic_fever_enabled", "name": "Neutropenic Fever Model", "applicableProducts": ["sepsis"], "description": "Enables the neutropenic fever detection model" },
       { "key": "neutropenic_fever_notifications", "name": "Neutropenic Fever Notifications", "applicableProducts": ["sepsis"], "description": "Enables clinical notifications for neutropenic fever alerts" }
@@ -284,7 +291,16 @@
         }
       }
     },
-    "mayo_clinic": {},
+    "mayo_clinic": {
+      "palliative_care": {
+        "flags": {
+          "initiated_by_bedside_workflow": false,
+          "storyboard_alert": false,
+          "initiated_by_palliative_care_team": true
+        },
+        "notes": {}
+      }
+    },
     "ccf": {
       "sepsis": {
         "flags": {
@@ -332,7 +348,11 @@
     },
     "uchicago": {
       "palliative_care": {
-        "flags": {},
+        "flags": {
+          "initiated_by_bedside_workflow": false,
+          "storyboard_alert": false,
+          "initiated_by_palliative_care_team": false
+        },
         "notes": {}
       }
     },

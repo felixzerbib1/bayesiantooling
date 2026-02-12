@@ -109,6 +109,19 @@
 | `reset_suppression_on_admission` | Re-set Suppression on Admission (ED to IP) | boolean | Resets suppression state when patient is admitted from ED to inpatient |
 | `code_status_suppression` | Code Status Suppression | boolean | Suppresses sepsis alerts for patients with comfort-care or DNR code status |
 
+### Bedside Workflow
+
+| Flag Key | Display Name | Type | Description |
+|----------|-------------|------|-------------|
+| `initiated_by_bedside_workflow` | Initiated by Bedside Workflow | boolean | Enables palliative care initiation through the bedside clinical workflow |
+| `storyboard_alert` | Storyboard Alert | boolean | Enables palliative care alert within the EHR storyboard view |
+
+### Palliative Care Workflow
+
+| Flag Key | Display Name | Type | Description |
+|----------|-------------|------|-------------|
+| `initiated_by_palliative_care_team` | Initiated by Palliative Care Team | boolean | Enables palliative care initiation by the palliative care team directly |
+
 ### Other
 
 | Flag Key | Display Name | Type | Description |
@@ -360,6 +373,11 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
+| **Bedside Workflow** | | | |
+| Initiated by Bedside Workflow |  | ✓ |  |
+| Storyboard Alert |  | ✓ |  |
+| **Palliative Care Workflow** | | | |
+| Initiated by Palliative Care Team | ✓ |  |  |
 
 ---
 
@@ -429,6 +447,11 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
+| **Bedside Workflow** | | | |
+| Initiated by Bedside Workflow |  | ✓ |  |
+| Storyboard Alert |  | ✓ |  |
+| **Palliative Care Workflow** | | | |
+| Initiated by Palliative Care Team |  | ✓ |  |
 
 ---
 

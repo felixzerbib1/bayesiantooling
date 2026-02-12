@@ -653,6 +653,34 @@ const FLAG_DATA = {
         ]
       }
     ],
+    "bedside_workflow": [
+      {
+        "key": "initiated_by_bedside_workflow",
+        "name": "Initiated by Bedside Workflow",
+        "type": "boolean",
+        "products": [
+          "Palliative Care"
+        ]
+      },
+      {
+        "key": "storyboard_alert",
+        "name": "Storyboard Alert",
+        "type": "boolean",
+        "products": [
+          "Palliative Care"
+        ]
+      }
+    ],
+    "palliative_care_workflow": [
+      {
+        "key": "initiated_by_palliative_care_team",
+        "name": "Initiated by Palliative Care Team",
+        "type": "boolean",
+        "products": [
+          "Palliative Care"
+        ]
+      }
+    ],
     "other": [
       {
         "key": "neutropenic_fever_enabled",
@@ -890,7 +918,13 @@ const FLAG_DATA = {
         "neutropenic_fever_notifications": false
       }
     },
-    "Mayo Clinic": {},
+    "Mayo Clinic": {
+      "Palliative Care": {
+        "initiated_by_bedside_workflow": false,
+        "storyboard_alert": false,
+        "initiated_by_palliative_care_team": true
+      }
+    },
     "CCF": {
       "Sepsis": {
         "nurse_writeback_flowsheet": true,
@@ -934,7 +968,11 @@ const FLAG_DATA = {
       }
     },
     "UChicago": {
-      "Palliative Care": {}
+      "Palliative Care": {
+        "initiated_by_bedside_workflow": false,
+        "storyboard_alert": false,
+        "initiated_by_palliative_care_team": false
+      }
     },
     "URMC": {
       "Sepsis": {
