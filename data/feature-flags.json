@@ -54,14 +54,14 @@
     ],
     "contributing_factors": [
       { "key": "qsofa", "name": "qSOFA", "applicableProducts": ["sepsis"], "description": "Enables qSOFA scoring driven by nursing assessment" },
-      { "key": "lactate_trending", "name": "Lactate Trending", "applicableProducts": ["sepsis"], "description": "Enables lactate trending display in contributing factors" },
       { "key": "historical_contributing_factors", "name": "Historical Contributing Factors", "applicableProducts": ["sepsis"], "description": "Displays historical contributing factor data alongside current values" }
     ],
     "clinical_workflow": [
       { "key": "redirect_to_treatment_management", "name": "Redirect to Treatment Management", "applicableProducts": ["sepsis"], "description": "Automatically redirects clinicians to the treatment management view" }
     ],
     "bp_management": [
-      { "key": "bp_management", "name": "BP Management", "applicableProducts": ["sepsis"], "description": "Enables blood pressure management workflow and monitoring" }
+      { "key": "bp_management", "name": "BP Management", "applicableProducts": ["sepsis"], "description": "Enables blood pressure management workflow and monitoring" },
+      { "key": "lactate_trending", "name": "Lactate Trending", "applicableProducts": ["sepsis"], "description": "Enables lactate trending display in contributing factors" }
     ],
     "regulatory": [
       { "key": "investigational_banner", "name": "Investigational Banner", "applicableProducts": ["sepsis"], "description": "Displays an investigational use banner across all application screens" },

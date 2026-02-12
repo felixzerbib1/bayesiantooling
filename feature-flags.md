@@ -79,7 +79,6 @@
 | Flag Key | Display Name | Type | Description |
 |----------|-------------|------|-------------|
 | `qsofa` | qSOFA | boolean | Enables qSOFA scoring driven by nursing assessment |
-| `lactate_trending` | Lactate Trending | boolean | Enables lactate trending display in contributing factors |
 | `historical_contributing_factors` | Historical Contributing Factors | boolean | Displays historical contributing factor data alongside current values |
 
 ### Clinical Workflow
@@ -93,6 +92,7 @@
 | Flag Key | Display Name | Type | Description |
 |----------|-------------|------|-------------|
 | `bp_management` | BP Management | boolean | Enables blood pressure management workflow and monitoring |
+| `lactate_trending` | Lactate Trending | boolean | Enables lactate trending display in contributing factors |
 
 ### Regulatory
 
@@ -172,12 +172,12 @@
 | Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
-| Lactate Trending |  | ✓ |  |
 | Historical Contributing Factors | ✓ |  |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
 | **Regulatory** | | | |
 | Investigational Banner |  | ✓ |  |
 | Instructions for Use (IFU) |  | ✓ |  |
@@ -230,12 +230,12 @@
 | Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
-| Lactate Trending | ✓ |  |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management | ✓ |  |  |
+| Lactate Trending | ✓ |  |  |
 | **Regulatory** | | | |
 | Investigational Banner |  | ✓ |  |
 | Instructions for Use (IFU) |  | ✓ |  |
@@ -288,12 +288,12 @@
 | Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
-| Lactate Trending |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
 | **Regulatory** | | | |
 | Investigational Banner |  | ✓ |  |
 | Instructions for Use (IFU) |  | ✓ |  |
@@ -346,12 +346,12 @@
 | Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA | ✓ |  | Nursing assessment Q2 drives scoring of modified qSOFA |
-| Lactate Trending |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
 | **Regulatory** | | | |
 | Investigational Banner | ✓ |  | Active in all application screens |
 | Instructions for Use (IFU) | ✓ |  | IFU required |
@@ -420,12 +420,12 @@
 | Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
-| Lactate Trending |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
 | **Regulatory** | | | |
 | Investigational Banner |  | ✓ |  |
 | Instructions for Use (IFU) |  | ✓ |  |
@@ -494,12 +494,12 @@
 | Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
-| Lactate Trending |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
 | **Regulatory** | | | |
 | Investigational Banner |  | ✓ |  |
 | Instructions for Use (IFU) |  | ✓ |  |
@@ -552,12 +552,12 @@
 | Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
-| Lactate Trending |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
 | **Regulatory** | | | |
 | Investigational Banner |  | ✓ |  |
 | Instructions for Use (IFU) |  | ✓ |  |
