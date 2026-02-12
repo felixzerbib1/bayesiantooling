@@ -150,6 +150,7 @@
   .pill-enabled { background: var(--green-100); color: var(--green-700); }
   .pill-disabled { background: var(--red-100); color: var(--red-700); }
   .pill-na { background: var(--gray-100); color: var(--gray-400); font-style: italic; }
+  .pill-not-live { background: var(--amber-50); color: var(--amber-600); font-style: italic; border: 1px dashed var(--amber-100); }
   .pill-value { background: var(--blue-100); color: var(--blue-700); }
   .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
   .pill-enabled .pill-dot { background: var(--green-600); }
@@ -258,7 +259,8 @@
   </div>
 
   <div class="tabs">
-    <div class="tab active" data-view="product">By Product</div>
+    <div class="tab active" data-view="matrix">Overview</div>
+    <div class="tab" data-view="product">By Product</div>
     <div class="tab" data-view="customer">By Customer</div>
   </div>
 
@@ -268,9 +270,11 @@
     <span class="legend-item"><span class="pill pill-disabled"><span class="pill-dot"></span>Disabled</span></span>
     <span class="legend-item"><span class="pill pill-value">Value</span></span>
     <span class="legend-item"><span class="pill pill-na">N/A</span></span>
+    <span class="legend-item"><span class="pill pill-not-live">Not Live</span></span>
   </div>
 
-  <div id="productView"></div>
+  <div id="matrixView"></div>
+  <div id="productView" class="hidden"></div>
   <div id="customerView" class="hidden"></div>
 </div>
 
@@ -739,7 +743,7 @@ const FLAG_DATA = {
 
 // ===== STATE =====
 const state = {
-  view: "product",
+  view: "matrix",
   search: "",
   customerFilter: "all",
   productFilter: "all",
@@ -780,7 +784,8 @@ function getFlagValue(customer, product, flagKey) {
   return config[flagKey];
 }
 
-function renderPill(value, flag, applicable) {
+function renderPill(value, flag, applicable, notLive) {
+  if (notLive) return '<span class="pill pill-not-live">Not Live</span>';
   if (!applicable) return '<span class="pill pill-na">N/A</span>';
   if (value === undefined) return '<span class="pill pill-na">N/A</span>';
   if (typeof value === "string") return `<span class="pill pill-value">${value}</span>`;
@@ -994,15 +999,130 @@ function renderProductView() {
   document.getElementById("productView").innerHTML = html || `<div class="no-results"><span class="no-results-icon">&#128269;</span><div class="no-results-text">No flags match your search</div></div>`;
 }
 
+// ===== MATRIX VIEW =====
+function renderMatrixView() {
+  const allCustomers = Object.keys(FLAG_DATA.customers);
+  const allProducts = FLAG_DATA.products;
+  const allFlags = getAllFlags();
+
+  // Filter customers based on filter
+  const customers = allCustomers.filter(c => state.customerFilter === "all" || state.customerFilter === c);
+  if (customers.length === 0) {
+    document.getElementById("matrixView").innerHTML = `<div class="no-results"><span class="no-results-icon">&#128269;</span><div class="no-results-text">No customers match filters</div></div>`;
+    return;
+  }
+
+  // Filter products
+  const products = allProducts.filter(p => state.productFilter === "all" || state.productFilter === p);
+  if (products.length === 0) {
+    document.getElementById("matrixView").innerHTML = `<div class="no-results"><span class="no-results-icon">&#128269;</span><div class="no-results-text">No products match filters</div></div>`;
+    return;
+  }
+
+  // Build column headers: each column is a customer-product pair (all combos, including not-live)
+  const columns = [];
+  for (const customer of customers) {
+    for (const product of products) {
+      columns.push({ customer, product, live: FLAG_DATA.customers[customer].includes(product) });
+    }
+  }
+
+  if (columns.length === 0) {
+    document.getElementById("matrixView").innerHTML = `<div class="no-results"><span class="no-results-icon">&#128269;</span><div class="no-results-text">No data to display</div></div>`;
+    return;
+  }
+
+  let html = '<div class="matrix-container"><table class="matrix-table"><thead>';
+
+  // Two header rows: customer name, then product name
+  // First row: customer names spanning their product columns
+  html += '<tr><th></th>';
+  let i = 0;
+  while (i < columns.length) {
+    const customer = columns[i].customer;
+    let span = 0;
+    while (i + span < columns.length && columns[i + span].customer === customer) span++;
+    html += `<th colspan="${span}" style="text-align:center;border-left:2px solid var(--gray-200)"><span class="col-header-customer">${customer}</span></th>`;
+    i += span;
+  }
+  html += '</tr>';
+
+  // Second row: product names
+  html += '<tr><th>Feature Flag</th>';
+  for (const col of columns) {
+    const badge = productBadgeClass(col.product);
+    const opacity = col.live ? '' : 'opacity:0.5;';
+    html += `<th style="text-align:center;border-left:1px solid var(--gray-200);${opacity}"><span class="col-header-product">${col.product}</span>${!col.live ? '<br><span style="font-size:10px;color:var(--amber-600);font-style:italic">Not Live</span>' : ''}</th>`;
+  }
+  html += '</tr></thead><tbody>';
+
+  // Rows: flags grouped by category
+  const categories = [
+    { key: "general", label: "General" },
+    { key: "nurses", label: "Nurses" },
+    { key: "providers", label: "Providers" }
+  ];
+
+  let hasVisibleRows = false;
+
+  for (const cat of categories) {
+    if (state.categoryFilter !== "all" && state.categoryFilter !== cat.key) continue;
+    const catFlags = allFlags.filter(f => f.category === cat.key);
+
+    // Filter by search and status
+    const visibleFlags = catFlags.filter(f => {
+      if (!matchesSearch(f.name)) return false;
+      if (state.statusFilter !== "all") {
+        const anyMatch = columns.some(col => {
+          if (!col.live) return false;
+          if (!isFlagApplicable(f, col.product)) return false;
+          const val = getFlagValue(col.customer, col.product, f.key);
+          if (state.statusFilter === "enabled") return val === true || typeof val === "string";
+          if (state.statusFilter === "disabled") return val === false;
+          return true;
+        });
+        if (!anyMatch) return false;
+      }
+      return true;
+    });
+
+    if (visibleFlags.length === 0) continue;
+    hasVisibleRows = true;
+
+    html += `<tr class="category-row"><td colspan="${columns.length + 1}">${cat.label}</td></tr>`;
+
+    for (const flag of visibleFlags) {
+      html += `<tr><td style="font-weight:500">${flag.name}</td>`;
+      for (const col of columns) {
+        const applicable = isFlagApplicable(flag, col.product);
+        const isNotLive = !col.live;
+        const val = isNotLive ? undefined : getFlagValue(col.customer, col.product, flag.key);
+        const note = isNotLive ? "" : getFlagNote(col.customer, col.product, flag.key);
+        html += `<td style="text-align:center;border-left:1px solid var(--gray-100)">${renderPill(val, flag, applicable, isNotLive)}${note ? '<span class="note-text">' + note + '</span>' : ''}</td>`;
+      }
+      html += '</tr>';
+    }
+  }
+
+  if (!hasVisibleRows) {
+    html += `<tr><td colspan="${columns.length + 1}" style="text-align:center;padding:32px;color:var(--gray-400)">No flags match your search</td></tr>`;
+  }
+
+  html += '</tbody></table></div>';
+  document.getElementById("matrixView").innerHTML = html;
+}
+
 // ===== RENDER =====
 function render() {
   renderStats();
   renderFilters();
 
+  document.getElementById("matrixView").classList.toggle("hidden", state.view !== "matrix");
   document.getElementById("productView").classList.toggle("hidden", state.view !== "product");
   document.getElementById("customerView").classList.toggle("hidden", state.view !== "customer");
 
-  if (state.view === "product") renderProductView();
+  if (state.view === "matrix") renderMatrixView();
+  else if (state.view === "product") renderProductView();
   else if (state.view === "customer") renderCustomerView();
 }
 
