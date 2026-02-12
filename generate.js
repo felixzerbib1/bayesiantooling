@@ -270,7 +270,7 @@ ${getCSS()}
     <div class="filter-divider"></div>
     <div class="filter-group">
       <label>Category:</label>
-      <div id="categoryFilters"></div>
+      <select id="categoryFilter" class="filter-select"></select>
     </div>
   </div>
 
@@ -488,6 +488,12 @@ function getCSS() {
   }
   .filter-chip:hover { border-color: var(--blue-500); color: var(--blue-600); }
   .filter-chip.active { background: var(--blue-600); color: white; border-color: var(--blue-600); }
+  .filter-select {
+    padding: 6px 12px; border-radius: var(--radius); font-size: 13px; font-weight: 500;
+    border: 1px solid var(--gray-300); background: white; color: var(--gray-700);
+    cursor: pointer; outline: none; appearance: auto;
+  }
+  .filter-select:focus { border-color: var(--blue-500); }
   .filter-divider { width: 1px; height: 24px; background: var(--gray-300); margin: 0 4px; }
 
   .tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 2px solid var(--gray-200); }
@@ -757,9 +763,11 @@ function renderFilters() {
     \`<span class="filter-chip \${state.statusFilter === 'enabled' ? 'active' : ''}" data-filter="status" data-value="enabled">Enabled</span>\` +
     \`<span class="filter-chip \${state.statusFilter === 'disabled' ? 'active' : ''}" data-filter="status" data-value="disabled">Disabled</span>\`;
 
-  document.getElementById("categoryFilters").innerHTML =
-    \`<span class="filter-chip \${state.categoryFilter === 'all' ? 'active' : ''}" data-filter="category" data-value="all">All</span>\` +
-    Object.keys(FLAG_DATA.flags).map(k => \`<span class="filter-chip \${state.categoryFilter === k ? 'active' : ''}" data-filter="category" data-value="\${k}">\${k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</span>\`).join("");
+  const catSelect = document.getElementById("categoryFilter");
+  catSelect.innerHTML =
+    \`<option value="all">All Categories</option>\` +
+    Object.keys(FLAG_DATA.flags).map(k => \`<option value="\${k}" \${state.categoryFilter === k ? 'selected' : ''}>\${k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</option>\`).join("");
+  catSelect.value = state.categoryFilter;
 }
 
 // ===== CUSTOMER VIEW =====
@@ -997,7 +1005,6 @@ document.addEventListener("click", (e) => {
     if (filter === "customer") state.customerFilter = value;
     if (filter === "product") state.productFilter = value;
     if (filter === "status") state.statusFilter = value;
-    if (filter === "category") state.categoryFilter = value;
     render();
   }
 
@@ -1018,6 +1025,11 @@ document.addEventListener("click", (e) => {
 
 document.getElementById("searchInput").addEventListener("input", (e) => {
   state.search = e.target.value;
+  render();
+});
+
+document.getElementById("categoryFilter").addEventListener("change", (e) => {
+  state.categoryFilter = e.target.value;
   render();
 });
 
