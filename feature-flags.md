@@ -68,6 +68,8 @@
 | `auto_obesity_contraindication` | Auto-Selection of Obesity Contraindication | boolean | Automatically selects obesity fluid contraindication when IBW criteria are met |
 | `focused_exam_writeback` | Focused Exam Writeback to Flowsheet Row | boolean | Writes focused exam data back to EHR flowsheet rows |
 | `focused_exam_read` | Focused Exam Read from Flowsheet | boolean | Reads focused exam data from existing EHR flowsheet values |
+| `prn_fluids` | PRN Fluids | boolean | Enables PRN fluids tracking within the bundle manager |
+| `prn_vasopressors` | PRN Vasopressors | boolean | Enables PRN vasopressors tracking within the bundle manager |
 
 ### Contributing Factors
 
@@ -100,6 +102,7 @@
 | Flag Key | Display Name | Type | Description |
 |----------|-------------|------|-------------|
 | `antibiotic_driven_suppression` | Antibiotic-Driven Suppression | boolean | Enables antibiotic-driven suppression of sepsis alerts |
+| `reset_suppression_on_admission` | Re-set Suppression on Admission (ED to IP) | boolean | Resets suppression state when patient is admitted from ED to inpatient |
 
 ---
 
@@ -137,6 +140,8 @@
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
 | Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
 | Focused Exam Read from Flowsheet |  | ✓ |  |
+| PRN Fluids |  | ✓ |  |
+| PRN Vasopressors |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -149,6 +154,7 @@
 | Instructions for Use (IFU) |  | ✓ |  |
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
+| Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
 
 ---
 
@@ -184,9 +190,11 @@
 | Auto-Selection of Obesity Contraindication | ✓ |  |  |
 | Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
 | Focused Exam Read from Flowsheet | ✓ |  |  |
+| PRN Fluids |  | ✓ |  |
+| PRN Vasopressors |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
-| Lactate Trending |  | ✓ |  |
+| Lactate Trending | ✓ |  |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -196,6 +204,7 @@
 | Instructions for Use (IFU) |  | ✓ |  |
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
+| Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
 
 ---
 
@@ -231,9 +240,11 @@
 | Auto-Selection of Obesity Contraindication | ✓ |  |  |
 | Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
 | Focused Exam Read from Flowsheet | ✓ |  |  |
+| PRN Fluids | ✓ |  |  |
+| PRN Vasopressors | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
-| Lactate Trending | ✓ |  |  |
+| Lactate Trending |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -243,6 +254,7 @@
 | Instructions for Use (IFU) |  | ✓ |  |
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression | ✓ |  |  |
+| Re-set Suppression on Admission (ED to IP) | ✓ |  |  |
 
 ---
 
@@ -278,6 +290,8 @@
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
 | Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
 | Focused Exam Read from Flowsheet |  | ✓ |  |
+| PRN Fluids |  | ✓ |  |
+| PRN Vasopressors |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA | ✓ |  | Nursing assessment Q2 drives scoring of modified qSOFA |
 | Lactate Trending |  | ✓ |  |
@@ -290,6 +304,7 @@
 | Instructions for Use (IFU) | ✓ |  | IFU required |
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
+| Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
 
 ---
 
@@ -336,6 +351,8 @@
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
 | Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
 | Focused Exam Read from Flowsheet |  | ✓ |  |
+| PRN Fluids |  | ✓ |  |
+| PRN Vasopressors |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -348,6 +365,7 @@
 | Instructions for Use (IFU) |  | ✓ |  |
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
+| Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
 
 ---
 
@@ -388,6 +406,8 @@
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
 | Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
 | Focused Exam Read from Flowsheet |  | ✓ |  |
+| PRN Fluids |  | ✓ |  |
+| PRN Vasopressors |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -400,6 +420,7 @@
 | Instructions for Use (IFU) |  | ✓ |  |
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
+| Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
 
 ---
 
@@ -435,6 +456,8 @@
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
 | Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
 | Focused Exam Read from Flowsheet |  | ✓ |  |
+| PRN Fluids |  | ✓ |  |
+| PRN Vasopressors |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -447,6 +470,7 @@
 | Instructions for Use (IFU) |  | ✓ |  |
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
+| Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
 
 ---
 
@@ -482,6 +506,8 @@
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
 | Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
 | Focused Exam Read from Flowsheet |  | ✓ |  |
+| PRN Fluids |  | ✓ |  |
+| PRN Vasopressors |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -494,6 +520,7 @@
 | Instructions for Use (IFU) |  | ✓ |  |
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
+| Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
 
 ---
 

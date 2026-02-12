@@ -45,7 +45,9 @@
       { "key": "ibw_calculation", "name": "Ideal Body Weight Calculation", "applicableProducts": ["sepsis"], "description": "Auto-calculates IBW in Bayesian for fluid contraindication when BMI > 30" },
       { "key": "auto_obesity_contraindication", "name": "Auto-Selection of Obesity Contraindication", "applicableProducts": ["sepsis"], "description": "Automatically selects obesity fluid contraindication when IBW criteria are met" },
       { "key": "focused_exam_writeback", "name": "Focused Exam Writeback to Flowsheet Row", "applicableProducts": ["sepsis"], "description": "Writes focused exam data back to EHR flowsheet rows" },
-      { "key": "focused_exam_read", "name": "Focused Exam Read from Flowsheet", "applicableProducts": ["sepsis"], "description": "Reads focused exam data from existing EHR flowsheet values" }
+      { "key": "focused_exam_read", "name": "Focused Exam Read from Flowsheet", "applicableProducts": ["sepsis"], "description": "Reads focused exam data from existing EHR flowsheet values" },
+      { "key": "prn_fluids", "name": "PRN Fluids", "applicableProducts": ["sepsis"], "description": "Enables PRN fluids tracking within the bundle manager" },
+      { "key": "prn_vasopressors", "name": "PRN Vasopressors", "applicableProducts": ["sepsis"], "description": "Enables PRN vasopressors tracking within the bundle manager" }
     ],
     "contributing_factors": [
       { "key": "qsofa", "name": "qSOFA", "applicableProducts": ["sepsis"], "description": "Enables qSOFA scoring driven by nursing assessment" },
@@ -62,7 +64,8 @@
       { "key": "ifu", "name": "Instructions for Use (IFU)", "applicableProducts": ["sepsis"], "description": "Displays IFU documentation link within the application" }
     ],
     "suppression": [
-      { "key": "antibiotic_driven_suppression", "name": "Antibiotic-Driven Suppression", "applicableProducts": ["sepsis"], "description": "Enables antibiotic-driven suppression of sepsis alerts" }
+      { "key": "antibiotic_driven_suppression", "name": "Antibiotic-Driven Suppression", "applicableProducts": ["sepsis"], "description": "Enables antibiotic-driven suppression of sepsis alerts" },
+      { "key": "reset_suppression_on_admission", "name": "Re-set Suppression on Admission (ED to IP)", "applicableProducts": ["sepsis"], "description": "Resets suppression state when patient is admitted from ED to inpatient" }
     ]
   },
   "configurations": {
@@ -96,7 +99,10 @@
           "bp_management": false,
           "investigational_banner": false,
           "ifu": false,
-          "antibiotic_driven_suppression": false
+          "prn_fluids": false,
+          "prn_vasopressors": false,
+          "antibiotic_driven_suppression": false,
+          "reset_suppression_on_admission": false
         },
         "notes": {
           "nurse_escalation_questions": "Unsure if they have provided the existing flowsheet",
@@ -133,12 +139,15 @@
           "focused_exam_writeback": true,
           "focused_exam_read": true,
           "qsofa": false,
-          "lactate_trending": false,
+          "lactate_trending": true,
           "redirect_to_treatment_management": false,
           "bp_management": true,
           "investigational_banner": false,
           "ifu": false,
-          "antibiotic_driven_suppression": false
+          "prn_fluids": false,
+          "prn_vasopressors": false,
+          "antibiotic_driven_suppression": false,
+          "reset_suppression_on_admission": false
         },
         "notes": {
           "create_new_note": "Still need to determine note type",
@@ -171,12 +180,15 @@
           "focused_exam_writeback": true,
           "focused_exam_read": true,
           "qsofa": false,
-          "lactate_trending": true,
+          "lactate_trending": false,
           "redirect_to_treatment_management": false,
           "bp_management": false,
           "investigational_banner": false,
           "ifu": false,
-          "antibiotic_driven_suppression": true
+          "prn_fluids": true,
+          "prn_vasopressors": true,
+          "antibiotic_driven_suppression": true,
+          "reset_suppression_on_admission": true
         },
         "notes": {
           "fluid_mod_ehr_order_set": "Not pulling fluid contraindication from EHR (only IBW derived from weight and height)",
@@ -219,7 +231,10 @@
           "bp_management": false,
           "investigational_banner": true,
           "ifu": true,
-          "antibiotic_driven_suppression": false
+          "prn_fluids": false,
+          "prn_vasopressors": false,
+          "antibiotic_driven_suppression": false,
+          "reset_suppression_on_admission": false
         },
         "notes": {
           "nursing_q1_not_diagnostic": "Not diagnostic tooltip displayed on Nursing Assessment Question 1",
@@ -263,7 +278,10 @@
           "bp_management": false,
           "investigational_banner": false,
           "ifu": false,
-          "antibiotic_driven_suppression": false
+          "prn_fluids": false,
+          "prn_vasopressors": false,
+          "antibiotic_driven_suppression": false,
+          "reset_suppression_on_admission": false
         },
         "notes": {}
       }
@@ -298,7 +316,10 @@
           "bp_management": false,
           "investigational_banner": false,
           "ifu": false,
-          "antibiotic_driven_suppression": false
+          "prn_fluids": false,
+          "prn_vasopressors": false,
+          "antibiotic_driven_suppression": false,
+          "reset_suppression_on_admission": false
         },
         "notes": {}
       }
@@ -333,7 +354,10 @@
           "bp_management": false,
           "investigational_banner": false,
           "ifu": false,
-          "antibiotic_driven_suppression": false
+          "prn_fluids": false,
+          "prn_vasopressors": false,
+          "antibiotic_driven_suppression": false,
+          "reset_suppression_on_admission": false
         },
         "notes": {}
       }
@@ -368,7 +392,10 @@
           "bp_management": false,
           "investigational_banner": false,
           "ifu": false,
-          "antibiotic_driven_suppression": false
+          "prn_fluids": false,
+          "prn_vasopressors": false,
+          "antibiotic_driven_suppression": false,
+          "reset_suppression_on_admission": false
         },
         "notes": {
           "bundle_tracking": "Planned for Phase 2",

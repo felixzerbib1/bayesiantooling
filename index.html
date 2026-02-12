@@ -503,6 +503,22 @@ const FLAG_DATA = {
         "products": [
           "Sepsis"
         ]
+      },
+      {
+        "key": "prn_fluids",
+        "name": "PRN Fluids",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "prn_vasopressors",
+        "name": "PRN Vasopressors",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
       }
     ],
     "contributing_factors": [
@@ -565,6 +581,14 @@ const FLAG_DATA = {
       {
         "key": "antibiotic_driven_suppression",
         "name": "Antibiotic-Driven Suppression",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "reset_suppression_on_admission",
+        "name": "Re-set Suppression on Admission (ED to IP)",
         "type": "boolean",
         "products": [
           "Sepsis"
@@ -651,7 +675,10 @@ const FLAG_DATA = {
         "bp_management": false,
         "investigational_banner": false,
         "ifu": false,
-        "antibiotic_driven_suppression": false
+        "prn_fluids": false,
+        "prn_vasopressors": false,
+        "antibiotic_driven_suppression": false,
+        "reset_suppression_on_admission": false
       }
     },
     "Inova Health": {
@@ -678,12 +705,15 @@ const FLAG_DATA = {
         "focused_exam_writeback": true,
         "focused_exam_read": true,
         "qsofa": false,
-        "lactate_trending": false,
+        "lactate_trending": true,
         "redirect_to_treatment_management": false,
         "bp_management": true,
         "investigational_banner": false,
         "ifu": false,
-        "antibiotic_driven_suppression": false
+        "prn_fluids": false,
+        "prn_vasopressors": false,
+        "antibiotic_driven_suppression": false,
+        "reset_suppression_on_admission": false
       }
     },
     "ThedaCare": {
@@ -710,12 +740,15 @@ const FLAG_DATA = {
         "focused_exam_writeback": true,
         "focused_exam_read": true,
         "qsofa": false,
-        "lactate_trending": true,
+        "lactate_trending": false,
         "redirect_to_treatment_management": false,
         "bp_management": false,
         "investigational_banner": false,
         "ifu": false,
-        "antibiotic_driven_suppression": true
+        "prn_fluids": true,
+        "prn_vasopressors": true,
+        "antibiotic_driven_suppression": true,
+        "reset_suppression_on_admission": true
       }
     },
     "MedStar Health": {
@@ -747,7 +780,10 @@ const FLAG_DATA = {
         "bp_management": false,
         "investigational_banner": true,
         "ifu": true,
-        "antibiotic_driven_suppression": false
+        "prn_fluids": false,
+        "prn_vasopressors": false,
+        "antibiotic_driven_suppression": false,
+        "reset_suppression_on_admission": false
       }
     },
     "Mayo Clinic": {},
@@ -780,7 +816,10 @@ const FLAG_DATA = {
         "bp_management": false,
         "investigational_banner": false,
         "ifu": false,
-        "antibiotic_driven_suppression": false
+        "prn_fluids": false,
+        "prn_vasopressors": false,
+        "antibiotic_driven_suppression": false,
+        "reset_suppression_on_admission": false
       }
     },
     "UChicago": {
@@ -812,7 +851,10 @@ const FLAG_DATA = {
         "bp_management": false,
         "investigational_banner": false,
         "ifu": false,
-        "antibiotic_driven_suppression": false
+        "prn_fluids": false,
+        "prn_vasopressors": false,
+        "antibiotic_driven_suppression": false,
+        "reset_suppression_on_admission": false
       }
     },
     "URMC": {
@@ -844,7 +886,10 @@ const FLAG_DATA = {
         "bp_management": false,
         "investigational_banner": false,
         "ifu": false,
-        "antibiotic_driven_suppression": false
+        "prn_fluids": false,
+        "prn_vasopressors": false,
+        "antibiotic_driven_suppression": false,
+        "reset_suppression_on_admission": false
       }
     },
     "Northwell": {
@@ -876,7 +921,10 @@ const FLAG_DATA = {
         "bp_management": false,
         "investigational_banner": false,
         "ifu": false,
-        "antibiotic_driven_suppression": false
+        "prn_fluids": false,
+        "prn_vasopressors": false,
+        "antibiotic_driven_suppression": false,
+        "reset_suppression_on_admission": false
       }
     }
   }
