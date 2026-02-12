@@ -140,12 +140,20 @@
   .matrix-table tbody td:first-child { position: sticky; left: 0; background: white; z-index: 5; font-weight: 500; color: var(--gray-800); min-width: 220px; }
   .matrix-table tbody tr:hover td { background: var(--blue-50); }
   .matrix-table tbody tr:hover td:first-child { background: var(--blue-50); }
+  .matrix-table .product-group-row { cursor: pointer; }
+  .matrix-table .product-group-row:hover td { background: var(--blue-100) !important; }
   .matrix-table .product-group-row td {
     background: var(--blue-50) !important; font-weight: 700; font-size: 13px;
     color: var(--blue-800); padding: 10px 16px; border-bottom: 2px solid var(--blue-100);
     border-top: 2px solid var(--gray-200);
   }
   .matrix-table .product-group-row td .product-badge { margin-right: 8px; vertical-align: middle; }
+  .matrix-table .product-group-row .toggle-arrow {
+    display: inline-block; width: 16px; font-size: 10px; color: var(--gray-400);
+    transition: transform 0.2s; margin-right: 4px; text-align: center;
+  }
+  .matrix-table .product-group-row.collapsed .toggle-arrow { transform: rotate(-90deg); }
+  .matrix-table .product-child-row.collapsed-child { display: none; }
   .matrix-table .category-row td {
     background: var(--gray-50) !important; font-weight: 700; font-size: 11px;
     text-transform: uppercase; letter-spacing: 0.8px; color: var(--gray-500);
@@ -736,7 +744,8 @@ const state = {
   customerFilter: "all",
   productFilter: "all",
   statusFilter: "all",
-  categoryFilter: "all"
+  categoryFilter: "all",
+  collapsedProducts: {}
 };
 
 // ===== HELPERS =====
@@ -1025,6 +1034,10 @@ function renderMatrixView() {
 
   // Rows grouped by Product → Category → Flag
   for (const product of products) {
+    const pgKey = product.replace(/\s+/g, '_');
+    const isCollapsed = state.collapsedProducts && state.collapsedProducts[product];
+    const childClass = 'product-child-row' + (isCollapsed ? ' collapsed-child' : '');
+
     // Collect all visible flags for this product
     let productHasFlags = false;
     let productRowsHtml = '';
@@ -1052,10 +1065,10 @@ function renderMatrixView() {
       if (visibleFlags.length === 0) continue;
       productHasFlags = true;
 
-      productRowsHtml += `<tr class="category-row"><td colspan="${customers.length + 1}">${cat.label}</td></tr>`;
+      productRowsHtml += `<tr class="category-row ${childClass}" data-product-group="${pgKey}"><td colspan="${customers.length + 1}">${cat.label}</td></tr>`;
 
       for (const flag of visibleFlags) {
-        productRowsHtml += `<tr><td style="font-weight:500">${flag.name}</td>`;
+        productRowsHtml += `<tr class="${childClass}" data-product-group="${pgKey}"><td style="font-weight:500">${flag.name}</td>`;
         for (const customer of customers) {
           const isNotLive = !FLAG_DATA.customers[customer].includes(product);
           const val = isNotLive ? undefined : getFlagValue(customer, product, flag.key);
@@ -1069,7 +1082,7 @@ function renderMatrixView() {
     if (productHasFlags) {
       hasVisibleRows = true;
       // Product group header row
-      html += `<tr class="product-group-row"><td colspan="${customers.length + 1}"><span class="product-badge ${productBadgeClass(product)}">${product}</span></td></tr>`;
+      html += `<tr class="product-group-row${isCollapsed ? ' collapsed' : ''}" data-product-toggle="${pgKey}"><td colspan="${customers.length + 1}"><span class="toggle-arrow">▼</span><span class="product-badge ${productBadgeClass(product)}">${product}</span></td></tr>`;
       html += productRowsHtml;
     }
   }
@@ -1112,6 +1125,20 @@ document.addEventListener("click", (e) => {
     if (filter === "status") state.statusFilter = value;
     if (filter === "category") state.categoryFilter = value;
     render();
+  }
+
+  // Product group collapse/expand
+  const pgRow = e.target.closest(".product-group-row");
+  if (pgRow) {
+    const pgKey = pgRow.dataset.productToggle;
+    const isCollapsed = pgRow.classList.toggle("collapsed");
+    // Find product name from the badge text
+    const badge = pgRow.querySelector(".product-badge");
+    if (badge) state.collapsedProducts[badge.textContent] = isCollapsed;
+    // Toggle child rows via DOM
+    document.querySelectorAll(`.product-child-row[data-product-group="${pgKey}"]`).forEach(row => {
+      row.classList.toggle("collapsed-child", isCollapsed);
+    });
   }
 });
 
