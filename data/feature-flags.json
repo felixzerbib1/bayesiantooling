@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastUpdated": "2026-02-11",
+    "lastUpdated": "2026-02-12",
     "description": "Single source of truth for all Bayesian Health feature flag configurations. Edit this file, then run 'node generate.js' to regenerate feature-flags.md and index.html."
   },
   "products": [
@@ -16,7 +16,8 @@
     { "key": "mayo_clinic", "name": "Mayo Clinic", "products": ["palliative_care"], "ehr": "Epic" },
     { "key": "ccf", "name": "CCF", "products": ["sepsis"], "ehr": "Epic" },
     { "key": "uchicago", "name": "UChicago", "products": ["palliative_care", "sepsis"], "ehr": "Epic" },
-    { "key": "urmc", "name": "URMC", "products": ["sepsis"], "ehr": "Epic" }
+    { "key": "urmc", "name": "URMC", "products": ["sepsis"], "ehr": "Epic" },
+    { "key": "northwell_mather", "name": "Northwell (Mather)", "products": ["sepsis"], "ehr": "Allscripts" }
   ],
   "flagDefinitions": {
     "general": [
@@ -277,10 +278,46 @@
         },
         "notes": {}
       }
+    },
+    "northwell_mather": {
+      "sepsis": {
+        "flags": {
+          "bundle_tracking": false,
+          "fluid_mod_bayesian_ui": true,
+          "fluid_mod_ehr_order_set": false,
+          "investigational_banner": false,
+          "ifu": false,
+          "nurse_escalation_questions": false,
+          "nurse_writeback_flowsheet": false,
+          "nurse_writeback_note": true,
+          "nurse_order_set": false,
+          "qsofa": false,
+          "provider_flowsheet_writeback": false,
+          "provider_doc_tab": true,
+          "provider_fluid_questions": true,
+          "create_new_note": true,
+          "add_to_existing_note": false,
+          "auto_writeback_note_type": false,
+          "focused_exam_writeback": false,
+          "focused_exam_read": false,
+          "provider_order_set": false,
+          "bundle_start_provider_trigger": false,
+          "ibw_calculation": false,
+          "auto_obesity_contraindication": false
+        },
+        "notes": {
+          "bundle_tracking": "Planned for Phase 2",
+          "nurse_escalation_questions": "Not implemented at go-live; consider timing for Phase 2 or earlier release",
+          "nurse_writeback_note": "Note name: Bayesian Sepsis Nursing Assessment; PDF format",
+          "create_new_note": "Note name: Bayesian Sepsis Provider Assessment; PDF format",
+          "provider_order_set": "Out of scope for Phase 1; need to scope tech feasibility for Phase 2"
+        }
+      }
     }
   },
   "changelog": [
     { "date": "2026-02-11", "author": "—", "change": "Initial feature flag configuration" },
-    { "date": "2026-02-11", "author": "—", "change": "Updated flags to match Bayesian Frontend Integration Checklist format (Memorial Care, Inova, ThedaCare, MedStar)" }
+    { "date": "2026-02-11", "author": "—", "change": "Updated flags to match Bayesian Frontend Integration Checklist format (Memorial Care, Inova, ThedaCare, MedStar)" },
+    { "date": "2026-02-12", "author": "—", "change": "Added Northwell (Mather) configuration from Frontend Integration document (Allscripts EHR)" }
   ]
 }

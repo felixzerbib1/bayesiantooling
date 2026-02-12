@@ -242,7 +242,7 @@
         <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="searchInput" placeholder="Search flags...">
       </div>
-      <span class="last-updated">Updated Feb 11, 2026</span>
+      <span class="last-updated">Updated Feb 12, 2026</span>
     </div>
   </div>
 </div>
@@ -324,6 +324,9 @@ const FLAG_DATA = {
       "Sepsis"
     ],
     "URMC": [
+      "Sepsis"
+    ],
+    "Northwell (Mather)": [
       "Sepsis"
     ]
   },
@@ -548,6 +551,15 @@ const FLAG_DATA = {
         "qsofa": "Nursing assessment Q2 drives scoring of modified qSOFA",
         "provider_order_set": "Clinicians manually navigate to orders; MedStar could not build MPage without hyperlink"
       }
+    },
+    "Northwell (Mather)": {
+      "Sepsis": {
+        "bundle_tracking": "Planned for Phase 2",
+        "nurse_escalation_questions": "Not implemented at go-live; consider timing for Phase 2 or earlier release",
+        "nurse_writeback_note": "Note name: Bayesian Sepsis Nursing Assessment; PDF format",
+        "create_new_note": "Note name: Bayesian Sepsis Provider Assessment; PDF format",
+        "provider_order_set": "Out of scope for Phase 1; need to scope tech feasibility for Phase 2"
+      }
     }
   },
   "configurations": {
@@ -729,6 +741,32 @@ const FLAG_DATA = {
         "focused_exam_writeback": false,
         "focused_exam_read": false,
         "provider_order_set": true,
+        "bundle_start_provider_trigger": false,
+        "ibw_calculation": false,
+        "auto_obesity_contraindication": false
+      }
+    },
+    "Northwell (Mather)": {
+      "Sepsis": {
+        "bundle_tracking": false,
+        "fluid_mod_bayesian_ui": true,
+        "fluid_mod_ehr_order_set": false,
+        "investigational_banner": false,
+        "ifu": false,
+        "nurse_escalation_questions": false,
+        "nurse_writeback_flowsheet": false,
+        "nurse_writeback_note": true,
+        "nurse_order_set": false,
+        "qsofa": false,
+        "provider_flowsheet_writeback": false,
+        "provider_doc_tab": true,
+        "provider_fluid_questions": true,
+        "create_new_note": true,
+        "add_to_existing_note": false,
+        "auto_writeback_note_type": false,
+        "focused_exam_writeback": false,
+        "focused_exam_read": false,
+        "provider_order_set": false,
         "bundle_start_provider_trigger": false,
         "ibw_calculation": false,
         "auto_obesity_contraindication": false
