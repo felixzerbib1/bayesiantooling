@@ -27,7 +27,7 @@
 | CCF | Sepsis | Epic |
 | UChicago | Palliative Care, Sepsis | Epic |
 | URMC | Sepsis | Epic |
-| Northwell (Mather) | Sepsis | Allscripts |
+| Northwell | Sepsis | Allscripts |
 
 ---
 
@@ -342,7 +342,7 @@
 
 ---
 
-### Northwell (Mather)
+### Northwell
 
 **Products:** Sepsis | **EHR:** Allscripts
 
@@ -384,4 +384,4 @@
 |------|--------|--------|
 | 2026-02-11 | — | Initial feature flag configuration |
 | 2026-02-11 | — | Updated flags to match Bayesian Frontend Integration Checklist format (Memorial Care, Inova, ThedaCare, MedStar) |
-| 2026-02-12 | — | Added Northwell (Mather) configuration from Frontend Integration document (Allscripts EHR) |
+| 2026-02-12 | — | Added Northwell configuration from Frontend Integration document (Allscripts EHR) |

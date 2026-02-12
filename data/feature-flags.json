@@ -17,7 +17,7 @@
     { "key": "ccf", "name": "CCF", "products": ["sepsis"], "ehr": "Epic" },
     { "key": "uchicago", "name": "UChicago", "products": ["palliative_care", "sepsis"], "ehr": "Epic" },
     { "key": "urmc", "name": "URMC", "products": ["sepsis"], "ehr": "Epic" },
-    { "key": "northwell_mather", "name": "Northwell (Mather)", "products": ["sepsis"], "ehr": "Allscripts" }
+    { "key": "northwell", "name": "Northwell", "products": ["sepsis"], "ehr": "Allscripts" }
   ],
   "flagDefinitions": {
     "general": [
@@ -279,7 +279,7 @@
         "notes": {}
       }
     },
-    "northwell_mather": {
+    "northwell": {
       "sepsis": {
         "flags": {
           "bundle_tracking": false,
@@ -318,6 +318,6 @@
   "changelog": [
     { "date": "2026-02-11", "author": "—", "change": "Initial feature flag configuration" },
     { "date": "2026-02-11", "author": "—", "change": "Updated flags to match Bayesian Frontend Integration Checklist format (Memorial Care, Inova, ThedaCare, MedStar)" },
-    { "date": "2026-02-12", "author": "—", "change": "Added Northwell (Mather) configuration from Frontend Integration document (Allscripts EHR)" }
+    { "date": "2026-02-12", "author": "—", "change": "Added Northwell configuration from Frontend Integration document (Allscripts EHR)" }
   ]
 }
