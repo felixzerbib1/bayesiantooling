@@ -76,7 +76,7 @@ function generateMarkdown() {
   ln("## Flag Definitions");
   ln();
 
-  const categoryLabels = { general: "General", nurses: "Nurses", providers: "Providers" };
+  const categoryLabels = buildCategoryLabels();
 
   for (const [catKey, catLabel] of Object.entries(categoryLabels)) {
     ln(`### ${catLabel}`);
@@ -115,9 +115,9 @@ function generateMarkdown() {
       ln("| Feature | Enabled | Disabled | Notes |");
       ln("|---------|---------|----------|-------|");
 
-      for (const [catKey, catLabel] of Object.entries(categoryLabels)) {
+      for (const [catKey, catLabel] of Object.entries(buildCategoryLabels())) {
         // Check if any flags in this category are applicable to this product
-        const applicableFlags = data.flagDefinitions[catKey].filter((flag) =>
+        const applicableFlags = (data.flagDefinitions[catKey] || []).filter((flag) =>
           isFlagApplicableToProduct(flag, productKey)
         );
         if (applicableFlags.length === 0) continue;
@@ -195,6 +195,18 @@ function generateMarkdown() {
 function isFlagApplicableToProduct(flag, productKey) {
   if (flag.applicableProducts === "all") return true;
   return flag.applicableProducts.includes(productKey);
+}
+
+function buildCategoryLabels() {
+  const labels = {};
+  for (const catKey of Object.keys(data.flagDefinitions)) {
+    // Convert snake_case key to Title Case label
+    labels[catKey] = catKey
+      .split("_")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  }
+  return labels;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -605,11 +617,13 @@ const state = {
 
 // ===== HELPERS =====
 function getAllFlags() {
-  return [
-    ...FLAG_DATA.flags.general.map(f => ({ ...f, category: "general" })),
-    ...FLAG_DATA.flags.nurses.map(f => ({ ...f, category: "nurses" })),
-    ...FLAG_DATA.flags.providers.map(f => ({ ...f, category: "providers" }))
-  ];
+  const all = [];
+  for (const [catKey, catFlags] of Object.entries(FLAG_DATA.flags)) {
+    for (const f of catFlags) {
+      all.push({ ...f, category: catKey });
+    }
+  }
+  return all;
 }
 
 function getFlagNote(customer, product, flagKey) {
@@ -696,7 +710,7 @@ function renderStats() {
     <div class="stat-card">
       <div class="stat-label">Flags Defined</div>
       <div class="stat-value">\${allFlags.length}</div>
-      <div class="stat-detail">\${FLAG_DATA.flags.general.length} general, \${FLAG_DATA.flags.nurses.length} nurses, \${FLAG_DATA.flags.providers.length} providers</div>
+      <div class="stat-detail">\${Object.entries(FLAG_DATA.flags).map(([k, v]) => v.length + ' ' + k.replace(/_/g, ' ')).join(', ')}</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Enabled / Disabled</div>
@@ -726,9 +740,7 @@ function renderFilters() {
 
   document.getElementById("categoryFilters").innerHTML =
     \`<span class="filter-chip \${state.categoryFilter === 'all' ? 'active' : ''}" data-filter="category" data-value="all">All</span>\` +
-    \`<span class="filter-chip \${state.categoryFilter === 'general' ? 'active' : ''}" data-filter="category" data-value="general">General</span>\` +
-    \`<span class="filter-chip \${state.categoryFilter === 'nurses' ? 'active' : ''}" data-filter="category" data-value="nurses">Nurses</span>\` +
-    \`<span class="filter-chip \${state.categoryFilter === 'providers' ? 'active' : ''}" data-filter="category" data-value="providers">Providers</span>\`;
+    Object.keys(FLAG_DATA.flags).map(k => \`<span class="filter-chip \${state.categoryFilter === k ? 'active' : ''}" data-filter="category" data-value="\${k}">\${k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</span>\`).join("");
 }
 
 // ===== CUSTOMER VIEW =====
@@ -761,11 +773,7 @@ function renderCustomerView() {
         html += \`<div class="card-product-title">\${product}</div>\`;
       }
       html += '<ul class="flag-list">';
-      const categories = [
-        { key: "general", label: "General" },
-        { key: "nurses", label: "Nurses" },
-        { key: "providers", label: "Providers" }
-      ];
+      const categories = Object.keys(FLAG_DATA.flags).map(k => ({ key: k, label: k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }));
       for (const cat of categories) {
         if (state.categoryFilter !== "all" && state.categoryFilter !== cat.key) continue;
         const catFlags = allFlags.filter(f => f.category === cat.key && isFlagApplicable(f, product));
@@ -812,11 +820,7 @@ function renderProductView() {
     }
     html += '</tr></thead><tbody>';
 
-    const categories = [
-      { key: "general", label: "General" },
-      { key: "nurses", label: "Nurses" },
-      { key: "providers", label: "Providers" }
-    ];
+    const categories = Object.keys(FLAG_DATA.flags).map(k => ({ key: k, label: k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }));
     for (const cat of categories) {
       if (state.categoryFilter !== "all" && state.categoryFilter !== cat.key) continue;
       const catFlags = allFlags.filter(f => f.category === cat.key && isFlagApplicable(f, product));
@@ -879,11 +883,7 @@ function renderMatrixView() {
   }
   html += '</tr></thead><tbody>';
 
-  const categories = [
-    { key: "general", label: "General" },
-    { key: "nurses", label: "Nurses" },
-    { key: "providers", label: "Providers" }
-  ];
+  const categories = Object.keys(FLAG_DATA.flags).map(k => ({ key: k, label: k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }));
 
   let hasVisibleRows = false;
 

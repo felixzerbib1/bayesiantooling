@@ -331,57 +331,7 @@ const FLAG_DATA = {
     ]
   },
   "flags": {
-    "general": [
-      {
-        "key": "bundle_tracking",
-        "name": "Bundle Tracking",
-        "type": "boolean",
-        "products": [
-          "Sepsis"
-        ]
-      },
-      {
-        "key": "fluid_mod_bayesian_ui",
-        "name": "Fluid Modification (Bayesian UI)",
-        "type": "boolean",
-        "products": [
-          "Sepsis"
-        ]
-      },
-      {
-        "key": "fluid_mod_ehr_order_set",
-        "name": "Fluid Modification (EHR Order Set)",
-        "type": "boolean",
-        "products": [
-          "Sepsis"
-        ]
-      },
-      {
-        "key": "investigational_banner",
-        "name": "Investigational Banner",
-        "type": "boolean",
-        "products": [
-          "Sepsis"
-        ]
-      },
-      {
-        "key": "ifu",
-        "name": "Instructions for Use (IFU)",
-        "type": "boolean",
-        "products": [
-          "Sepsis"
-        ]
-      }
-    ],
-    "nurses": [
-      {
-        "key": "nurse_escalation_questions",
-        "name": "Nurse Assessment - Provider Escalation Questions",
-        "type": "boolean",
-        "products": [
-          "Sepsis"
-        ]
-      },
+    "assessment_writeback": [
       {
         "key": "nurse_writeback_flowsheet",
         "name": "Nurse Assessment - Auto Writeback to Flowsheet Rows",
@@ -399,23 +349,21 @@ const FLAG_DATA = {
         ]
       },
       {
-        "key": "nurse_order_set",
-        "name": "Nurse Order Set Enabled",
+        "key": "nurse_escalation_questions",
+        "name": "Nurse Assessment - Provider Escalation Questions",
         "type": "boolean",
         "products": [
           "Sepsis"
         ]
       },
       {
-        "key": "qsofa",
-        "name": "qSOFA",
+        "key": "nursing_q1_not_diagnostic",
+        "name": "Nursing Question 1 - Not Diagnostic Tooltip",
         "type": "boolean",
         "products": [
           "Sepsis"
         ]
-      }
-    ],
-    "providers": [
+      },
       {
         "key": "provider_flowsheet_writeback",
         "name": "Provider Assessment - Auto Flowsheet Writeback",
@@ -425,21 +373,15 @@ const FLAG_DATA = {
         ]
       },
       {
-        "key": "provider_doc_tab",
-        "name": "Provider Documentation Tab in Treatment Management",
+        "key": "auto_writeback_note_type",
+        "name": "Automatic Flowsheet Writeback of Note Type",
         "type": "boolean",
         "products": [
           "Sepsis"
         ]
-      },
-      {
-        "key": "provider_fluid_questions",
-        "name": "Provider - Fluid Documentation Questions",
-        "type": "boolean",
-        "products": [
-          "Sepsis"
-        ]
-      },
+      }
+    ],
+    "documentation": [
       {
         "key": "create_new_note",
         "name": "Create a New Note Button",
@@ -457,24 +399,34 @@ const FLAG_DATA = {
         ]
       },
       {
-        "key": "auto_writeback_note_type",
-        "name": "Automatic Flowsheet Writeback of Note Type",
+        "key": "provider_doc_tab",
+        "name": "Provider Documentation Tab in Treatment Management",
         "type": "boolean",
         "products": [
           "Sepsis"
         ]
       },
       {
-        "key": "focused_exam_writeback",
-        "name": "Focused Exam Writeback to Flowsheet Row",
+        "key": "nursing_documentation",
+        "name": "Nursing Documentation",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      }
+    ],
+    "bundle_manager": [
+      {
+        "key": "bundle_tracking",
+        "name": "Bundle Tracking",
         "type": "boolean",
         "products": [
           "Sepsis"
         ]
       },
       {
-        "key": "focused_exam_read",
-        "name": "Focused Exam Read from Flowsheet",
+        "key": "nurse_order_set",
+        "name": "Nurse Order Set Enabled",
         "type": "boolean",
         "products": [
           "Sepsis"
@@ -497,6 +449,30 @@ const FLAG_DATA = {
         ]
       },
       {
+        "key": "fluid_mod_bayesian_ui",
+        "name": "Fluid Modification (Bayesian UI)",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "fluid_mod_ehr_order_set",
+        "name": "Fluid Modification (EHR Order Set)",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "provider_fluid_questions",
+        "name": "Provider - Fluid Documentation Questions",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
         "key": "ibw_calculation",
         "name": "Ideal Body Weight Calculation",
         "type": "boolean",
@@ -507,6 +483,88 @@ const FLAG_DATA = {
       {
         "key": "auto_obesity_contraindication",
         "name": "Auto-Selection of Obesity Contraindication",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "focused_exam_writeback",
+        "name": "Focused Exam Writeback to Flowsheet Row",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "focused_exam_read",
+        "name": "Focused Exam Read from Flowsheet",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      }
+    ],
+    "contributing_factors": [
+      {
+        "key": "qsofa",
+        "name": "qSOFA",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "lactate_trending",
+        "name": "Lactate Trending",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      }
+    ],
+    "clinical_workflow": [
+      {
+        "key": "redirect_to_treatment_management",
+        "name": "Redirect to Treatment Management",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      }
+    ],
+    "bp_management": [
+      {
+        "key": "bp_management",
+        "name": "BP Management",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      }
+    ],
+    "regulatory": [
+      {
+        "key": "investigational_banner",
+        "name": "Investigational Banner",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "ifu",
+        "name": "Instructions for Use (IFU)",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      }
+    ],
+    "suppression": [
+      {
+        "key": "antibiotic_driven_suppression",
+        "name": "Antibiotic-Driven Suppression",
         "type": "boolean",
         "products": [
           "Sepsis"
@@ -544,6 +602,7 @@ const FLAG_DATA = {
     },
     "MedStar Health": {
       "Sepsis": {
+        "nursing_q1_not_diagnostic": "Not diagnostic tooltip displayed on Nursing Assessment Question 1",
         "fluid_mod_ehr_order_set": "TBD if MedStar order set includes this data",
         "investigational_banner": "Active in all application screens",
         "ifu": "IFU required",
@@ -565,211 +624,259 @@ const FLAG_DATA = {
   "configurations": {
     "Memorial Care": {
       "Sepsis": {
-        "bundle_tracking": true,
-        "fluid_mod_bayesian_ui": false,
-        "fluid_mod_ehr_order_set": true,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": true,
         "nurse_writeback_flowsheet": true,
         "nurse_writeback_note": false,
-        "nurse_order_set": true,
-        "qsofa": false,
+        "nurse_escalation_questions": true,
+        "nursing_q1_not_diagnostic": false,
         "provider_flowsheet_writeback": false,
-        "provider_doc_tab": true,
-        "provider_fluid_questions": false,
+        "auto_writeback_note_type": true,
         "create_new_note": true,
         "add_to_existing_note": false,
-        "auto_writeback_note_type": true,
-        "focused_exam_writeback": false,
-        "focused_exam_read": false,
+        "provider_doc_tab": true,
+        "nursing_documentation": false,
+        "bundle_tracking": true,
+        "nurse_order_set": true,
         "provider_order_set": true,
         "bundle_start_provider_trigger": false,
+        "fluid_mod_bayesian_ui": false,
+        "fluid_mod_ehr_order_set": true,
+        "provider_fluid_questions": false,
         "ibw_calculation": false,
-        "auto_obesity_contraindication": false
+        "auto_obesity_contraindication": false,
+        "focused_exam_writeback": false,
+        "focused_exam_read": false,
+        "qsofa": false,
+        "lactate_trending": false,
+        "redirect_to_treatment_management": false,
+        "bp_management": false,
+        "investigational_banner": false,
+        "ifu": false,
+        "antibiotic_driven_suppression": false
       }
     },
     "Inova Health": {
       "Sepsis": {
-        "bundle_tracking": true,
-        "fluid_mod_bayesian_ui": true,
-        "fluid_mod_ehr_order_set": true,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": true,
         "nurse_writeback_flowsheet": true,
         "nurse_writeback_note": false,
-        "nurse_order_set": false,
-        "qsofa": false,
+        "nurse_escalation_questions": true,
+        "nursing_q1_not_diagnostic": false,
         "provider_flowsheet_writeback": true,
-        "provider_doc_tab": true,
-        "provider_fluid_questions": true,
+        "auto_writeback_note_type": true,
         "create_new_note": true,
         "add_to_existing_note": false,
-        "auto_writeback_note_type": true,
-        "focused_exam_writeback": true,
-        "focused_exam_read": true,
+        "provider_doc_tab": true,
+        "nursing_documentation": false,
+        "bundle_tracking": true,
+        "nurse_order_set": false,
         "provider_order_set": true,
         "bundle_start_provider_trigger": true,
+        "fluid_mod_bayesian_ui": true,
+        "fluid_mod_ehr_order_set": true,
+        "provider_fluid_questions": true,
         "ibw_calculation": true,
-        "auto_obesity_contraindication": true
+        "auto_obesity_contraindication": true,
+        "focused_exam_writeback": true,
+        "focused_exam_read": true,
+        "qsofa": false,
+        "lactate_trending": false,
+        "redirect_to_treatment_management": false,
+        "bp_management": true,
+        "investigational_banner": false,
+        "ifu": false,
+        "antibiotic_driven_suppression": false
       }
     },
     "ThedaCare": {
       "Sepsis": {
-        "bundle_tracking": true,
-        "fluid_mod_bayesian_ui": true,
-        "fluid_mod_ehr_order_set": true,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": true,
         "nurse_writeback_flowsheet": true,
         "nurse_writeback_note": false,
-        "nurse_order_set": false,
-        "qsofa": false,
+        "nurse_escalation_questions": true,
+        "nursing_q1_not_diagnostic": false,
         "provider_flowsheet_writeback": true,
-        "provider_doc_tab": true,
-        "provider_fluid_questions": true,
+        "auto_writeback_note_type": true,
         "create_new_note": true,
         "add_to_existing_note": true,
-        "auto_writeback_note_type": true,
-        "focused_exam_writeback": true,
-        "focused_exam_read": true,
+        "provider_doc_tab": true,
+        "nursing_documentation": false,
+        "bundle_tracking": true,
+        "nurse_order_set": false,
         "provider_order_set": true,
         "bundle_start_provider_trigger": true,
+        "fluid_mod_bayesian_ui": true,
+        "fluid_mod_ehr_order_set": true,
+        "provider_fluid_questions": true,
         "ibw_calculation": true,
-        "auto_obesity_contraindication": true
+        "auto_obesity_contraindication": true,
+        "focused_exam_writeback": true,
+        "focused_exam_read": true,
+        "qsofa": false,
+        "lactate_trending": true,
+        "redirect_to_treatment_management": false,
+        "bp_management": false,
+        "investigational_banner": false,
+        "ifu": false,
+        "antibiotic_driven_suppression": true
       }
     },
     "MedStar Health": {
       "Sepsis": {
-        "bundle_tracking": true,
-        "fluid_mod_bayesian_ui": true,
-        "fluid_mod_ehr_order_set": true,
-        "investigational_banner": true,
-        "ifu": true,
-        "nurse_escalation_questions": true,
         "nurse_writeback_flowsheet": true,
         "nurse_writeback_note": false,
-        "nurse_order_set": false,
-        "qsofa": true,
+        "nurse_escalation_questions": true,
+        "nursing_q1_not_diagnostic": true,
         "provider_flowsheet_writeback": true,
-        "provider_doc_tab": true,
-        "provider_fluid_questions": true,
+        "auto_writeback_note_type": true,
         "create_new_note": true,
         "add_to_existing_note": true,
-        "auto_writeback_note_type": true,
-        "focused_exam_writeback": true,
-        "focused_exam_read": false,
+        "provider_doc_tab": true,
+        "nursing_documentation": true,
+        "bundle_tracking": true,
+        "nurse_order_set": false,
         "provider_order_set": false,
         "bundle_start_provider_trigger": false,
+        "fluid_mod_bayesian_ui": true,
+        "fluid_mod_ehr_order_set": true,
+        "provider_fluid_questions": true,
         "ibw_calculation": false,
-        "auto_obesity_contraindication": false
+        "auto_obesity_contraindication": false,
+        "focused_exam_writeback": true,
+        "focused_exam_read": false,
+        "qsofa": true,
+        "lactate_trending": false,
+        "redirect_to_treatment_management": false,
+        "bp_management": false,
+        "investigational_banner": true,
+        "ifu": true,
+        "antibiotic_driven_suppression": false
       }
     },
     "Mayo Clinic": {},
     "CCF": {
       "Sepsis": {
-        "bundle_tracking": true,
-        "fluid_mod_bayesian_ui": true,
-        "fluid_mod_ehr_order_set": true,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": true,
         "nurse_writeback_flowsheet": true,
         "nurse_writeback_note": false,
-        "nurse_order_set": true,
-        "qsofa": false,
+        "nurse_escalation_questions": true,
+        "nursing_q1_not_diagnostic": false,
         "provider_flowsheet_writeback": true,
-        "provider_doc_tab": true,
-        "provider_fluid_questions": true,
+        "auto_writeback_note_type": true,
         "create_new_note": true,
         "add_to_existing_note": true,
-        "auto_writeback_note_type": true,
-        "focused_exam_writeback": true,
-        "focused_exam_read": false,
+        "provider_doc_tab": true,
+        "nursing_documentation": false,
+        "bundle_tracking": true,
+        "nurse_order_set": true,
         "provider_order_set": true,
         "bundle_start_provider_trigger": false,
+        "fluid_mod_bayesian_ui": true,
+        "fluid_mod_ehr_order_set": true,
+        "provider_fluid_questions": true,
         "ibw_calculation": false,
-        "auto_obesity_contraindication": false
+        "auto_obesity_contraindication": false,
+        "focused_exam_writeback": true,
+        "focused_exam_read": false,
+        "qsofa": false,
+        "lactate_trending": false,
+        "redirect_to_treatment_management": false,
+        "bp_management": false,
+        "investigational_banner": false,
+        "ifu": false,
+        "antibiotic_driven_suppression": false
       }
     },
     "UChicago": {
       "Sepsis": {
-        "bundle_tracking": true,
-        "fluid_mod_bayesian_ui": true,
-        "fluid_mod_ehr_order_set": false,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": true,
         "nurse_writeback_flowsheet": true,
         "nurse_writeback_note": false,
-        "nurse_order_set": false,
-        "qsofa": false,
+        "nurse_escalation_questions": true,
+        "nursing_q1_not_diagnostic": false,
         "provider_flowsheet_writeback": true,
-        "provider_doc_tab": true,
-        "provider_fluid_questions": true,
+        "auto_writeback_note_type": true,
         "create_new_note": true,
         "add_to_existing_note": false,
-        "auto_writeback_note_type": true,
-        "focused_exam_writeback": false,
-        "focused_exam_read": false,
+        "provider_doc_tab": true,
+        "nursing_documentation": false,
+        "bundle_tracking": true,
+        "nurse_order_set": false,
         "provider_order_set": true,
         "bundle_start_provider_trigger": false,
+        "fluid_mod_bayesian_ui": true,
+        "fluid_mod_ehr_order_set": false,
+        "provider_fluid_questions": true,
         "ibw_calculation": false,
-        "auto_obesity_contraindication": false
+        "auto_obesity_contraindication": false,
+        "focused_exam_writeback": false,
+        "focused_exam_read": false,
+        "qsofa": false,
+        "lactate_trending": false,
+        "redirect_to_treatment_management": false,
+        "bp_management": false,
+        "investigational_banner": false,
+        "ifu": false,
+        "antibiotic_driven_suppression": false
       }
     },
     "URMC": {
       "Sepsis": {
-        "bundle_tracking": true,
-        "fluid_mod_bayesian_ui": false,
-        "fluid_mod_ehr_order_set": false,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": true,
         "nurse_writeback_flowsheet": true,
         "nurse_writeback_note": false,
-        "nurse_order_set": false,
-        "qsofa": false,
+        "nurse_escalation_questions": true,
+        "nursing_q1_not_diagnostic": false,
         "provider_flowsheet_writeback": true,
-        "provider_doc_tab": true,
-        "provider_fluid_questions": false,
+        "auto_writeback_note_type": true,
         "create_new_note": true,
         "add_to_existing_note": false,
-        "auto_writeback_note_type": true,
-        "focused_exam_writeback": false,
-        "focused_exam_read": false,
+        "provider_doc_tab": true,
+        "nursing_documentation": false,
+        "bundle_tracking": true,
+        "nurse_order_set": false,
         "provider_order_set": true,
         "bundle_start_provider_trigger": false,
+        "fluid_mod_bayesian_ui": false,
+        "fluid_mod_ehr_order_set": false,
+        "provider_fluid_questions": false,
         "ibw_calculation": false,
-        "auto_obesity_contraindication": false
+        "auto_obesity_contraindication": false,
+        "focused_exam_writeback": false,
+        "focused_exam_read": false,
+        "qsofa": false,
+        "lactate_trending": false,
+        "redirect_to_treatment_management": false,
+        "bp_management": false,
+        "investigational_banner": false,
+        "ifu": false,
+        "antibiotic_driven_suppression": false
       }
     },
     "Northwell": {
       "Sepsis": {
-        "bundle_tracking": false,
-        "fluid_mod_bayesian_ui": true,
-        "fluid_mod_ehr_order_set": false,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": false,
         "nurse_writeback_flowsheet": false,
         "nurse_writeback_note": true,
-        "nurse_order_set": false,
-        "qsofa": false,
+        "nurse_escalation_questions": false,
+        "nursing_q1_not_diagnostic": false,
         "provider_flowsheet_writeback": false,
-        "provider_doc_tab": true,
-        "provider_fluid_questions": true,
+        "auto_writeback_note_type": false,
         "create_new_note": true,
         "add_to_existing_note": false,
-        "auto_writeback_note_type": false,
-        "focused_exam_writeback": false,
-        "focused_exam_read": false,
+        "provider_doc_tab": true,
+        "nursing_documentation": false,
+        "bundle_tracking": false,
+        "nurse_order_set": false,
         "provider_order_set": false,
         "bundle_start_provider_trigger": false,
+        "fluid_mod_bayesian_ui": true,
+        "fluid_mod_ehr_order_set": false,
+        "provider_fluid_questions": true,
         "ibw_calculation": false,
-        "auto_obesity_contraindication": false
+        "auto_obesity_contraindication": false,
+        "focused_exam_writeback": false,
+        "focused_exam_read": false,
+        "qsofa": false,
+        "lactate_trending": false,
+        "redirect_to_treatment_management": false,
+        "bp_management": false,
+        "investigational_banner": false,
+        "ifu": false,
+        "antibiotic_driven_suppression": false
       }
     }
   }
@@ -788,11 +895,13 @@ const state = {
 
 // ===== HELPERS =====
 function getAllFlags() {
-  return [
-    ...FLAG_DATA.flags.general.map(f => ({ ...f, category: "general" })),
-    ...FLAG_DATA.flags.nurses.map(f => ({ ...f, category: "nurses" })),
-    ...FLAG_DATA.flags.providers.map(f => ({ ...f, category: "providers" }))
-  ];
+  const all = [];
+  for (const [catKey, catFlags] of Object.entries(FLAG_DATA.flags)) {
+    for (const f of catFlags) {
+      all.push({ ...f, category: catKey });
+    }
+  }
+  return all;
 }
 
 function getFlagNote(customer, product, flagKey) {
@@ -879,7 +988,7 @@ function renderStats() {
     <div class="stat-card">
       <div class="stat-label">Flags Defined</div>
       <div class="stat-value">${allFlags.length}</div>
-      <div class="stat-detail">${FLAG_DATA.flags.general.length} general, ${FLAG_DATA.flags.nurses.length} nurses, ${FLAG_DATA.flags.providers.length} providers</div>
+      <div class="stat-detail">${Object.entries(FLAG_DATA.flags).map(([k, v]) => v.length + ' ' + k.replace(/_/g, ' ')).join(', ')}</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Enabled / Disabled</div>
@@ -909,9 +1018,7 @@ function renderFilters() {
 
   document.getElementById("categoryFilters").innerHTML =
     `<span class="filter-chip ${state.categoryFilter === 'all' ? 'active' : ''}" data-filter="category" data-value="all">All</span>` +
-    `<span class="filter-chip ${state.categoryFilter === 'general' ? 'active' : ''}" data-filter="category" data-value="general">General</span>` +
-    `<span class="filter-chip ${state.categoryFilter === 'nurses' ? 'active' : ''}" data-filter="category" data-value="nurses">Nurses</span>` +
-    `<span class="filter-chip ${state.categoryFilter === 'providers' ? 'active' : ''}" data-filter="category" data-value="providers">Providers</span>`;
+    Object.keys(FLAG_DATA.flags).map(k => `<span class="filter-chip ${state.categoryFilter === k ? 'active' : ''}" data-filter="category" data-value="${k}">${k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</span>`).join("");
 }
 
 // ===== CUSTOMER VIEW =====
@@ -944,11 +1051,7 @@ function renderCustomerView() {
         html += `<div class="card-product-title">${product}</div>`;
       }
       html += '<ul class="flag-list">';
-      const categories = [
-        { key: "general", label: "General" },
-        { key: "nurses", label: "Nurses" },
-        { key: "providers", label: "Providers" }
-      ];
+      const categories = Object.keys(FLAG_DATA.flags).map(k => ({ key: k, label: k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }));
       for (const cat of categories) {
         if (state.categoryFilter !== "all" && state.categoryFilter !== cat.key) continue;
         const catFlags = allFlags.filter(f => f.category === cat.key && isFlagApplicable(f, product));
@@ -995,11 +1098,7 @@ function renderProductView() {
     }
     html += '</tr></thead><tbody>';
 
-    const categories = [
-      { key: "general", label: "General" },
-      { key: "nurses", label: "Nurses" },
-      { key: "providers", label: "Providers" }
-    ];
+    const categories = Object.keys(FLAG_DATA.flags).map(k => ({ key: k, label: k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }));
     for (const cat of categories) {
       if (state.categoryFilter !== "all" && state.categoryFilter !== cat.key) continue;
       const catFlags = allFlags.filter(f => f.category === cat.key && isFlagApplicable(f, product));
@@ -1062,11 +1161,7 @@ function renderMatrixView() {
   }
   html += '</tr></thead><tbody>';
 
-  const categories = [
-    { key: "general", label: "General" },
-    { key: "nurses", label: "Nurses" },
-    { key: "providers", label: "Providers" }
-  ];
+  const categories = Object.keys(FLAG_DATA.flags).map(k => ({ key: k, label: k.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }));
 
   let hasVisibleRows = false;
 

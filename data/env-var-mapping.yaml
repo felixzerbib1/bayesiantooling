@@ -8,7 +8,78 @@
 #   composite     - multiple env vars must be checked together
 #   unmapped      - no known env var; controlled elsewhere (form schema, DB, etc.)
 
-general:
+assessment_writeback:
+
+  nurse_writeback_flowsheet:
+    type: boolean
+    envVars:
+      - name: ENABLE_NURSE_ASSESSMENT_WRITEBACK
+        configMaps: [trews-api-v3-config]
+      - name: ASSESSMENT_WRITEBACK_ENABLED
+        configMaps: [ui-config]
+
+  nurse_writeback_note:
+    type: boolean
+    envVars:
+      - name: ENABLE_NURSE_DOCUMENTATION_NOTE_WRITEBACK_ON_ASSESSMENT_SUBMISSION
+        configMaps: [trews-api-v3-config]
+
+  nurse_escalation_questions:
+    type: boolean
+    envVars:
+      - name: ENABLE_PROVIDER_ESCALATED_QUESTION_IN_SEPSIS_NURSE_ASSESSMENT
+        configMaps: [trews-api-v3-config]
+
+  nursing_q1_not_diagnostic:
+    type: unmapped
+    note: "New flag. No env var identified yet. Needs engineering input on how this tooltip is controlled."
+    envVars: []
+
+  provider_flowsheet_writeback:
+    type: boolean
+    envVars:
+      - name: ENABLE_PROVIDER_ASSESSMENT_WRITEBACK
+        configMaps: [trews-api-v3-config]
+
+  auto_writeback_note_type:
+    type: boolean
+    envVars:
+      - name: ENABLE_DOCUMENTATION_FORM_WRITEBACK
+        configMaps: [trews-api-v3-config]
+
+documentation:
+
+  create_new_note:
+    type: composite
+    note: "Requires both the API-side writeback toggle and the UI auto-generated note toggle."
+    envVars:
+      - name: ENABLE_PROVIDER_DOCUMENTATION_NOTE_WRITEBACK
+        configMaps: [trews-api-v3-config]
+      - name: DOCUMENTATION_AUTO_GENERATED_NOTE_ENABLED
+        configMaps: [ui-config]
+
+  add_to_existing_note:
+    type: boolean
+    note: "DOCUMENTATION_FHIR_WRITEBACK_ENABLED may be a broader gate for all note writeback, not just add-to-existing. Needs engineering confirmation."
+    envVars:
+      - name: DOCUMENTATION_FHIR_WRITEBACK_ENABLED
+        configMaps: [ui-config]
+
+  provider_doc_tab:
+    type: boolean
+    note: "SHOW_SEPSIS_PROVIDER_DOCUMENTATION controls visibility. ENABLE_REDIRECT_TO_TREATMENT_MANAGEMENT may also interact with this flag."
+    envVars:
+      - name: SHOW_SEPSIS_PROVIDER_DOCUMENTATION
+        configMaps: [ui-config]
+      - name: ENABLE_REDIRECT_TO_TREATMENT_MANAGEMENT
+        configMaps: [ui-config]
+
+  nursing_documentation:
+    type: unmapped
+    note: "New flag. No env var identified yet. Currently enabled for MedStar only."
+    envVars: []
+
+bundle_manager:
 
   bundle_tracking:
     type: boolean
@@ -17,6 +88,27 @@ general:
         configMaps: [trews-api-v3-config, notification-service-config, bundle-manager-config]
       - name: SHOW_BUNDLE_TRACKING
         configMaps: [ui-config]
+
+  nurse_order_set:
+    type: boolean
+    note: "ORDER_SET_ENABLED is a single toggle shared with provider_order_set. Cannot be independently controlled via env var alone."
+    envVars:
+      - name: ORDER_SET_ENABLED
+        configMaps: [trews-api-v3-config]
+        shared_with: provider_order_set
+
+  provider_order_set:
+    type: boolean
+    note: "ORDER_SET_ENABLED is a single toggle shared with nurse_order_set. Cannot be independently controlled via env var alone."
+    envVars:
+      - name: ORDER_SET_ENABLED
+        configMaps: [trews-api-v3-config]
+        shared_with: nurse_order_set
+
+  bundle_start_provider_trigger:
+    type: unmapped
+    note: "No env var found. May be controlled via bundle-manager or form schema config."
+    envVars: []
 
   fluid_mod_bayesian_ui:
     type: boolean
@@ -29,6 +121,69 @@ general:
     envVars:
       - name: ENABLE_FLUIDS_CONTRAINDICATION_REASON_FID
         configMaps: [etl-server-config]
+
+  provider_fluid_questions:
+    type: boolean
+    envVars:
+      - name: FLUIDS_CONTRAINDICATION_AVAILABLE_IN_DOCUMENTATION
+        configMaps: [bundle-manager-config]
+
+  ibw_calculation:
+    type: value_present
+    note: "True when ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID = 'ideal_body_weight'. Shared env var with auto_obesity_contraindication — both are enabled/disabled together."
+    envVars:
+      - name: ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID
+        configMaps: [trews-api-v3-config]
+        shared_with: auto_obesity_contraindication
+        true_when: "ideal_body_weight"
+
+  auto_obesity_contraindication:
+    type: value_present
+    note: "True when ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID = 'ideal_body_weight'. Shared env var with ibw_calculation — both are enabled/disabled together."
+    envVars:
+      - name: ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID
+        configMaps: [trews-api-v3-config]
+        shared_with: ibw_calculation
+        true_when: "ideal_body_weight"
+
+  focused_exam_writeback:
+    type: unmapped
+    note: "No env var found. May be controlled via form schema in S3 or database config."
+    envVars: []
+
+  focused_exam_read:
+    type: unmapped
+    note: "No env var found. May be controlled via form schema in S3 or database config."
+    envVars: []
+
+contributing_factors:
+
+  qsofa:
+    type: unmapped
+    note: "No env var found in config-patch.yaml. Likely controlled via form schema configuration in S3 or database-level config."
+    envVars: []
+
+  lactate_trending:
+    type: unmapped
+    note: "New flag. No env var identified yet. Currently enabled for ThedaCare only."
+    envVars: []
+
+clinical_workflow:
+
+  redirect_to_treatment_management:
+    type: boolean
+    envVars:
+      - name: ENABLE_REDIRECT_TO_TREATMENT_MANAGEMENT
+        configMaps: [ui-config]
+
+bp_management:
+
+  bp_management:
+    type: unmapped
+    note: "New flag. No env var identified yet. Currently enabled for Inova only."
+    envVars: []
+
+regulatory:
 
   investigational_banner:
     type: composite
@@ -48,123 +203,9 @@ general:
       - name: REGULATED_PRODUCT_IFU_BUCKET
         configMaps: [trews-api-v3-config]
 
-nurses:
+suppression:
 
-  nurse_escalation_questions:
-    type: boolean
-    envVars:
-      - name: ENABLE_PROVIDER_ESCALATED_QUESTION_IN_SEPSIS_NURSE_ASSESSMENT
-        configMaps: [trews-api-v3-config]
-
-  nurse_writeback_flowsheet:
-    type: boolean
-    envVars:
-      - name: ENABLE_NURSE_ASSESSMENT_WRITEBACK
-        configMaps: [trews-api-v3-config]
-      - name: ASSESSMENT_WRITEBACK_ENABLED
-        configMaps: [ui-config]
-
-  nurse_writeback_note:
-    type: boolean
-    envVars:
-      - name: ENABLE_NURSE_DOCUMENTATION_NOTE_WRITEBACK_ON_ASSESSMENT_SUBMISSION
-        configMaps: [trews-api-v3-config]
-
-  nurse_order_set:
-    type: boolean
-    note: "ORDER_SET_ENABLED is a single toggle shared with provider_order_set. Cannot be independently controlled via env var alone."
-    envVars:
-      - name: ORDER_SET_ENABLED
-        configMaps: [trews-api-v3-config]
-        shared_with: provider_order_set
-
-  qsofa:
+  antibiotic_driven_suppression:
     type: unmapped
-    note: "No env var found in config-patch.yaml. Likely controlled via form schema configuration in S3 or database-level config."
+    note: "New flag. No env var identified yet. Currently enabled for ThedaCare only."
     envVars: []
-
-providers:
-
-  provider_flowsheet_writeback:
-    type: boolean
-    envVars:
-      - name: ENABLE_PROVIDER_ASSESSMENT_WRITEBACK
-        configMaps: [trews-api-v3-config]
-
-  provider_doc_tab:
-    type: boolean
-    note: "SHOW_SEPSIS_PROVIDER_DOCUMENTATION controls visibility. ENABLE_REDIRECT_TO_TREATMENT_MANAGEMENT may also interact with this flag."
-    envVars:
-      - name: SHOW_SEPSIS_PROVIDER_DOCUMENTATION
-        configMaps: [ui-config]
-      - name: ENABLE_REDIRECT_TO_TREATMENT_MANAGEMENT
-        configMaps: [ui-config]
-
-  provider_fluid_questions:
-    type: boolean
-    envVars:
-      - name: FLUIDS_CONTRAINDICATION_AVAILABLE_IN_DOCUMENTATION
-        configMaps: [bundle-manager-config]
-
-  create_new_note:
-    type: composite
-    note: "Requires both the API-side writeback toggle and the UI auto-generated note toggle."
-    envVars:
-      - name: ENABLE_PROVIDER_DOCUMENTATION_NOTE_WRITEBACK
-        configMaps: [trews-api-v3-config]
-      - name: DOCUMENTATION_AUTO_GENERATED_NOTE_ENABLED
-        configMaps: [ui-config]
-
-  add_to_existing_note:
-    type: boolean
-    note: "DOCUMENTATION_FHIR_WRITEBACK_ENABLED may be a broader gate for all note writeback, not just add-to-existing. Needs engineering confirmation."
-    envVars:
-      - name: DOCUMENTATION_FHIR_WRITEBACK_ENABLED
-        configMaps: [ui-config]
-
-  auto_writeback_note_type:
-    type: boolean
-    envVars:
-      - name: ENABLE_DOCUMENTATION_FORM_WRITEBACK
-        configMaps: [trews-api-v3-config]
-
-  focused_exam_writeback:
-    type: unmapped
-    note: "No env var found. May be controlled via form schema in S3 or database config."
-    envVars: []
-
-  focused_exam_read:
-    type: unmapped
-    note: "No env var found. May be controlled via form schema in S3 or database config."
-    envVars: []
-
-  provider_order_set:
-    type: boolean
-    note: "ORDER_SET_ENABLED is a single toggle shared with nurse_order_set. Cannot be independently controlled via env var alone."
-    envVars:
-      - name: ORDER_SET_ENABLED
-        configMaps: [trews-api-v3-config]
-        shared_with: nurse_order_set
-
-  bundle_start_provider_trigger:
-    type: unmapped
-    note: "No env var found. May be controlled via bundle-manager or form schema config."
-    envVars: []
-
-  ibw_calculation:
-    type: value_present
-    note: "True when ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID = 'ideal_body_weight'. Shared env var with auto_obesity_contraindication — both are enabled/disabled together."
-    envVars:
-      - name: ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID
-        configMaps: [trews-api-v3-config]
-        shared_with: auto_obesity_contraindication
-        true_when: "ideal_body_weight"
-
-  auto_obesity_contraindication:
-    type: value_present
-    note: "True when ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID = 'ideal_body_weight'. Shared env var with ibw_calculation — both are enabled/disabled together."
-    envVars:
-      - name: ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID
-        configMaps: [trews-api-v3-config]
-        shared_with: ibw_calculation
-        true_when: "ideal_body_weight"

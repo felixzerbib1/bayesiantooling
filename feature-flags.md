@@ -33,42 +33,73 @@
 
 ## Flag Definitions
 
-### General
+### Assessment Writeback
+
+| Flag Key | Display Name | Type | Description |
+|----------|-------------|------|-------------|
+| `nurse_writeback_flowsheet` | Nurse Assessment - Auto Writeback to Flowsheet Rows | boolean | Automatically writes nurse assessment answers back to EHR flowsheet rows |
+| `nurse_writeback_note` | Nurse Assessment - Auto Writeback as Clinical Note | boolean | Writes nurse assessment as a separate clinical note instead of flowsheet rows |
+| `nurse_escalation_questions` | Nurse Assessment - Provider Escalation Questions | boolean | Enables provider escalation questions within the nurse assessment workflow |
+| `nursing_q1_not_diagnostic` | Nursing Question 1 - Not Diagnostic Tooltip | boolean | Displays a 'Not diagnostic' tooltip on Nursing Assessment Question 1 |
+| `provider_flowsheet_writeback` | Provider Assessment - Auto Flowsheet Writeback | boolean | Automatically writes provider assessment answers to EHR flowsheet rows |
+| `auto_writeback_note_type` | Automatic Flowsheet Writeback of Note Type | boolean | Automatically writes back the note type answer to a flowsheet row |
+
+### Documentation
+
+| Flag Key | Display Name | Type | Description |
+|----------|-------------|------|-------------|
+| `create_new_note` | Create a New Note Button | boolean | Enables the Create New Note button for providers to generate a clinical note |
+| `add_to_existing_note` | Add to Existing Note Button | boolean | Enables the Add to Existing Note button to append to an open note |
+| `provider_doc_tab` | Provider Documentation Tab in Treatment Management | boolean | Enables the provider documentation tab within the treatment management view |
+| `nursing_documentation` | Nursing Documentation | boolean | Enables nursing documentation capabilities within the application |
+
+### Bundle Manager
 
 | Flag Key | Display Name | Type | Description |
 |----------|-------------|------|-------------|
 | `bundle_tracking` | Bundle Tracking | boolean | Enables the sepsis bundle tracking workflow with time-based compliance monitoring |
+| `nurse_order_set` | Nurse Order Set Enabled | boolean | Enables the nurse order set link (e.g., Rapid Response Sepsis Set) within the application |
+| `provider_order_set` | Provider Order Set Enabled | boolean | Enables the provider order set link within the bundle tracking page |
+| `bundle_start_provider_trigger` | Bundle Start Time by Provider Trigger | boolean | Bundle timer starts when the provider triggers the order set |
 | `fluid_mod_bayesian_ui` | Fluid Modification (Bayesian UI) | boolean | Fluid contraindication/modification questions surfaced within the Bayesian application UI |
 | `fluid_mod_ehr_order_set` | Fluid Modification (EHR Order Set) | boolean | Fluid contraindication data pulled from the EHR order set rather than Bayesian UI |
+| `provider_fluid_questions` | Provider - Fluid Documentation Questions | boolean | Enables fluid documentation questions in the provider assessment workflow |
+| `ibw_calculation` | Ideal Body Weight Calculation | boolean | Auto-calculates IBW in Bayesian for fluid contraindication when BMI > 30 |
+| `auto_obesity_contraindication` | Auto-Selection of Obesity Contraindication | boolean | Automatically selects obesity fluid contraindication when IBW criteria are met |
+| `focused_exam_writeback` | Focused Exam Writeback to Flowsheet Row | boolean | Writes focused exam data back to EHR flowsheet rows |
+| `focused_exam_read` | Focused Exam Read from Flowsheet | boolean | Reads focused exam data from existing EHR flowsheet values |
+
+### Contributing Factors
+
+| Flag Key | Display Name | Type | Description |
+|----------|-------------|------|-------------|
+| `qsofa` | qSOFA | boolean | Enables qSOFA scoring driven by nursing assessment |
+| `lactate_trending` | Lactate Trending | boolean | Enables lactate trending display in contributing factors |
+
+### Clinical Workflow
+
+| Flag Key | Display Name | Type | Description |
+|----------|-------------|------|-------------|
+| `redirect_to_treatment_management` | Redirect to Treatment Management | boolean | Automatically redirects clinicians to the treatment management view |
+
+### Bp Management
+
+| Flag Key | Display Name | Type | Description |
+|----------|-------------|------|-------------|
+| `bp_management` | BP Management | boolean | Enables blood pressure management workflow and monitoring |
+
+### Regulatory
+
+| Flag Key | Display Name | Type | Description |
+|----------|-------------|------|-------------|
 | `investigational_banner` | Investigational Banner | boolean | Displays an investigational use banner across all application screens |
 | `ifu` | Instructions for Use (IFU) | boolean | Displays IFU documentation link within the application |
 
-### Nurses
+### Suppression
 
 | Flag Key | Display Name | Type | Description |
 |----------|-------------|------|-------------|
-| `nurse_escalation_questions` | Nurse Assessment - Provider Escalation Questions | boolean | Enables provider escalation questions within the nurse assessment workflow |
-| `nurse_writeback_flowsheet` | Nurse Assessment - Auto Writeback to Flowsheet Rows | boolean | Automatically writes nurse assessment answers back to EHR flowsheet rows |
-| `nurse_writeback_note` | Nurse Assessment - Auto Writeback as Clinical Note | boolean | Writes nurse assessment as a separate clinical note instead of flowsheet rows |
-| `nurse_order_set` | Nurse Order Set Enabled | boolean | Enables the nurse order set link (e.g., Rapid Response Sepsis Set) within the application |
-| `qsofa` | qSOFA | boolean | Enables qSOFA scoring driven by nursing assessment |
-
-### Providers
-
-| Flag Key | Display Name | Type | Description |
-|----------|-------------|------|-------------|
-| `provider_flowsheet_writeback` | Provider Assessment - Auto Flowsheet Writeback | boolean | Automatically writes provider assessment answers to EHR flowsheet rows |
-| `provider_doc_tab` | Provider Documentation Tab in Treatment Management | boolean | Enables the provider documentation tab within the treatment management view |
-| `provider_fluid_questions` | Provider - Fluid Documentation Questions | boolean | Enables fluid documentation questions in the provider assessment workflow |
-| `create_new_note` | Create a New Note Button | boolean | Enables the Create New Note button for providers to generate a clinical note |
-| `add_to_existing_note` | Add to Existing Note Button | boolean | Enables the Add to Existing Note button to append to an open note |
-| `auto_writeback_note_type` | Automatic Flowsheet Writeback of Note Type | boolean | Automatically writes back the note type answer to a flowsheet row |
-| `focused_exam_writeback` | Focused Exam Writeback to Flowsheet Row | boolean | Writes focused exam data back to EHR flowsheet rows |
-| `focused_exam_read` | Focused Exam Read from Flowsheet | boolean | Reads focused exam data from existing EHR flowsheet values |
-| `provider_order_set` | Provider Order Set Enabled | boolean | Enables the provider order set link within the bundle tracking page |
-| `bundle_start_provider_trigger` | Bundle Start Time by Provider Trigger | boolean | Bundle timer starts when the provider triggers the order set |
-| `ibw_calculation` | Ideal Body Weight Calculation | boolean | Auto-calculates IBW in Bayesian for fluid contraindication when BMI > 30 |
-| `auto_obesity_contraindication` | Auto-Selection of Obesity Contraindication | boolean | Automatically selects obesity fluid contraindication when IBW criteria are met |
+| `antibiotic_driven_suppression` | Antibiotic-Driven Suppression | boolean | Enables antibiotic-driven suppression of sepsis alerts |
 
 ---
 
@@ -82,31 +113,42 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking | ✓ |  |  |
-| Fluid Modification (Bayesian UI) |  | ✓ |  |
-| Fluid Modification (EHR Order Set) | ✓ |  |  |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  | Unsure if they have provided the existing flowsheet |
+| **Assessment Writeback** | | | |
 | Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
 | Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| Nurse Order Set Enabled | ✓ |  | Primary user is rapid response nurses; managed through education |
-| qSOFA |  | ✓ |  |
-| **Providers** | | | |
+| Nurse Assessment - Provider Escalation Questions | ✓ |  | Unsure if they have provided the existing flowsheet |
+| Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback |  | ✓ |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Provider - Fluid Documentation Questions |  | ✓ | Fluid reason question is in the orderset; Bayesian pulls from flowsheets |
+| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| **Documentation** | | | |
 | Create a New Note Button | ✓ |  | "Chg in Clinical Condition" note |
 | Add to Existing Note Button |  | ✓ | Dot-phrase name TBD; build by ClinDoc team |
-| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
-| Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
-| Focused Exam Read from Flowsheet |  | ✓ |  |
+| Provider Documentation Tab in Treatment Management | ✓ |  |  |
+| Nursing Documentation |  | ✓ |  |
+| **Bundle Manager** | | | |
+| Bundle Tracking | ✓ |  |  |
+| Nurse Order Set Enabled | ✓ |  | Primary user is rapid response nurses; managed through education |
 | Provider Order Set Enabled | ✓ |  | Order Panel ID varies between ED and inpatient locations |
 | Bundle Start Time by Provider Trigger |  | ✓ |  |
+| Fluid Modification (Bayesian UI) |  | ✓ |  |
+| Fluid Modification (EHR Order Set) | ✓ |  |  |
+| Provider - Fluid Documentation Questions |  | ✓ | Fluid reason question is in the orderset; Bayesian pulls from flowsheets |
 | Ideal Body Weight Calculation |  | ✓ |  |
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
+| Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
+| Focused Exam Read from Flowsheet |  | ✓ |  |
+| **Contributing Factors** | | | |
+| qSOFA |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
+| **Clinical Workflow** | | | |
+| Redirect to Treatment Management |  | ✓ |  |
+| **Bp Management** | | | |
+| BP Management |  | ✓ |  |
+| **Regulatory** | | | |
+| Investigational Banner |  | ✓ |  |
+| Instructions for Use (IFU) |  | ✓ |  |
+| **Suppression** | | | |
+| Antibiotic-Driven Suppression |  | ✓ |  |
 
 ---
 
@@ -118,31 +160,42 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking | ✓ |  |  |
-| Fluid Modification (Bayesian UI) | ✓ |  |  |
-| Fluid Modification (EHR Order Set) | ✓ |  |  |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| **Assessment Writeback** | | | |
 | Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
 | Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| Nurse Order Set Enabled |  | ✓ |  |
-| qSOFA |  | ✓ |  |
-| **Providers** | | | |
+| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Provider - Fluid Documentation Questions | ✓ |  |  |
+| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| **Documentation** | | | |
 | Create a New Note Button | ✓ |  | Still need to determine note type |
 | Add to Existing Note Button |  | ✓ |  |
-| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
-| Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
-| Focused Exam Read from Flowsheet | ✓ |  |  |
+| Provider Documentation Tab in Treatment Management | ✓ |  |  |
+| Nursing Documentation |  | ✓ |  |
+| **Bundle Manager** | | | |
+| Bundle Tracking | ✓ |  |  |
+| Nurse Order Set Enabled |  | ✓ |  |
 | Provider Order Set Enabled | ✓ |  | Order set button navigates to Managed Orders in Epic |
 | Bundle Start Time by Provider Trigger | ✓ |  |  |
+| Fluid Modification (Bayesian UI) | ✓ |  |  |
+| Fluid Modification (EHR Order Set) | ✓ |  |  |
+| Provider - Fluid Documentation Questions | ✓ |  |  |
 | Ideal Body Weight Calculation | ✓ |  |  |
 | Auto-Selection of Obesity Contraindication | ✓ |  |  |
+| Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
+| Focused Exam Read from Flowsheet | ✓ |  |  |
+| **Contributing Factors** | | | |
+| qSOFA |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
+| **Clinical Workflow** | | | |
+| Redirect to Treatment Management |  | ✓ |  |
+| **Bp Management** | | | |
+| BP Management | ✓ |  |  |
+| **Regulatory** | | | |
+| Investigational Banner |  | ✓ |  |
+| Instructions for Use (IFU) |  | ✓ |  |
+| **Suppression** | | | |
+| Antibiotic-Driven Suppression |  | ✓ |  |
 
 ---
 
@@ -154,31 +207,42 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking | ✓ |  |  |
-| Fluid Modification (Bayesian UI) | ✓ |  |  |
-| Fluid Modification (EHR Order Set) | ✓ | ✓ | Not pulling fluid contraindication from EHR (only IBW derived from weight and height) |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  | Unsure if they have provided the existing flowsheet |
+| **Assessment Writeback** | | | |
 | Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
 | Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| Nurse Order Set Enabled |  | ✓ | Currently enabled (can turn off later) |
-| qSOFA |  | ✓ |  |
-| **Providers** | | | |
+| Nurse Assessment - Provider Escalation Questions | ✓ |  | Unsure if they have provided the existing flowsheet |
+| Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Provider - Fluid Documentation Questions | ✓ |  | Fluid orders in order set but no reasoning for contraindications |
+| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| **Documentation** | | | |
 | Create a New Note Button | ✓ |  | Progress note |
 | Add to Existing Note Button | ✓ |  | ThedaCare built smartphrase integration using Bayesian flowsheet data |
-| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
-| Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
-| Focused Exam Read from Flowsheet | ✓ |  |  |
+| Provider Documentation Tab in Treatment Management | ✓ |  |  |
+| Nursing Documentation |  | ✓ |  |
+| **Bundle Manager** | | | |
+| Bundle Tracking | ✓ |  |  |
+| Nurse Order Set Enabled |  | ✓ | Currently enabled (can turn off later) |
 | Provider Order Set Enabled | ✓ |  | Order Panel ID varies between ED and inpatient locations |
 | Bundle Start Time by Provider Trigger | ✓ |  |  |
+| Fluid Modification (Bayesian UI) | ✓ |  |  |
+| Fluid Modification (EHR Order Set) | ✓ | ✓ | Not pulling fluid contraindication from EHR (only IBW derived from weight and height) |
+| Provider - Fluid Documentation Questions | ✓ |  | Fluid orders in order set but no reasoning for contraindications |
 | Ideal Body Weight Calculation | ✓ |  |  |
 | Auto-Selection of Obesity Contraindication | ✓ |  |  |
+| Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
+| Focused Exam Read from Flowsheet | ✓ |  |  |
+| **Contributing Factors** | | | |
+| qSOFA |  | ✓ |  |
+| Lactate Trending | ✓ |  |  |
+| **Clinical Workflow** | | | |
+| Redirect to Treatment Management |  | ✓ |  |
+| **Bp Management** | | | |
+| BP Management |  | ✓ |  |
+| **Regulatory** | | | |
+| Investigational Banner |  | ✓ |  |
+| Instructions for Use (IFU) |  | ✓ |  |
+| **Suppression** | | | |
+| Antibiotic-Driven Suppression | ✓ |  |  |
 
 ---
 
@@ -190,31 +254,42 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking | ✓ |  |  |
-| Fluid Modification (Bayesian UI) | ✓ |  |  |
-| Fluid Modification (EHR Order Set) | ✓ |  | TBD if MedStar order set includes this data |
-| Investigational Banner | ✓ |  | Active in all application screens |
-| Instructions for Use (IFU) | ✓ |  | IFU required |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| **Assessment Writeback** | | | |
 | Nurse Assessment - Auto Writeback to Flowsheet Rows (Cerner iCare) | ✓ |  |  |
 | Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| Nurse Order Set Enabled |  | ✓ | qSOFA score will auto order lactate |
-| qSOFA | ✓ |  | Nursing assessment Q2 drives scoring of modified qSOFA |
-| **Providers** | | | |
+| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| Nursing Question 1 - Not Diagnostic Tooltip | ✓ |  | Not diagnostic tooltip displayed on Nursing Assessment Question 1 |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Provider - Fluid Documentation Questions | ✓ |  |  |
+| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| **Documentation** | | | |
 | Create a New Note Button | ✓ |  |  |
 | Add to Existing Note Button | ✓ |  |  |
-| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
-| Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
-| Focused Exam Read from Flowsheet |  | ✓ |  |
+| Provider Documentation Tab in Treatment Management | ✓ |  |  |
+| Nursing Documentation | ✓ |  |  |
+| **Bundle Manager** | | | |
+| Bundle Tracking | ✓ |  |  |
+| Nurse Order Set Enabled |  | ✓ | qSOFA score will auto order lactate |
 | Provider Order Set Enabled |  | ✓ | Clinicians manually navigate to orders; MedStar could not build MPage without hyperlink |
 | Bundle Start Time by Provider Trigger |  | ✓ |  |
+| Fluid Modification (Bayesian UI) | ✓ |  |  |
+| Fluid Modification (EHR Order Set) | ✓ |  | TBD if MedStar order set includes this data |
+| Provider - Fluid Documentation Questions | ✓ |  |  |
 | Ideal Body Weight Calculation |  | ✓ |  |
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
+| Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
+| Focused Exam Read from Flowsheet |  | ✓ |  |
+| **Contributing Factors** | | | |
+| qSOFA | ✓ |  | Nursing assessment Q2 drives scoring of modified qSOFA |
+| Lactate Trending |  | ✓ |  |
+| **Clinical Workflow** | | | |
+| Redirect to Treatment Management |  | ✓ |  |
+| **Bp Management** | | | |
+| BP Management |  | ✓ |  |
+| **Regulatory** | | | |
+| Investigational Banner | ✓ |  | Active in all application screens |
+| Instructions for Use (IFU) | ✓ |  | IFU required |
+| **Suppression** | | | |
+| Antibiotic-Driven Suppression |  | ✓ |  |
 
 ---
 
@@ -237,31 +312,42 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking | ✓ |  |  |
-| Fluid Modification (Bayesian UI) | ✓ |  |  |
-| Fluid Modification (EHR Order Set) | ✓ |  |  |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| **Assessment Writeback** | | | |
 | Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
 | Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| Nurse Order Set Enabled | ✓ |  |  |
-| qSOFA |  | ✓ |  |
-| **Providers** | | | |
+| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Provider - Fluid Documentation Questions | ✓ |  |  |
+| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| **Documentation** | | | |
 | Create a New Note Button | ✓ |  |  |
 | Add to Existing Note Button | ✓ |  |  |
-| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
-| Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
-| Focused Exam Read from Flowsheet |  | ✓ |  |
+| Provider Documentation Tab in Treatment Management | ✓ |  |  |
+| Nursing Documentation |  | ✓ |  |
+| **Bundle Manager** | | | |
+| Bundle Tracking | ✓ |  |  |
+| Nurse Order Set Enabled | ✓ |  |  |
 | Provider Order Set Enabled | ✓ |  |  |
 | Bundle Start Time by Provider Trigger |  | ✓ |  |
+| Fluid Modification (Bayesian UI) | ✓ |  |  |
+| Fluid Modification (EHR Order Set) | ✓ |  |  |
+| Provider - Fluid Documentation Questions | ✓ |  |  |
 | Ideal Body Weight Calculation |  | ✓ |  |
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
+| Focused Exam Writeback to Flowsheet Row | ✓ |  |  |
+| Focused Exam Read from Flowsheet |  | ✓ |  |
+| **Contributing Factors** | | | |
+| qSOFA |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
+| **Clinical Workflow** | | | |
+| Redirect to Treatment Management |  | ✓ |  |
+| **Bp Management** | | | |
+| BP Management |  | ✓ |  |
+| **Regulatory** | | | |
+| Investigational Banner |  | ✓ |  |
+| Instructions for Use (IFU) |  | ✓ |  |
+| **Suppression** | | | |
+| Antibiotic-Driven Suppression |  | ✓ |  |
 
 ---
 
@@ -278,31 +364,42 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking | ✓ |  |  |
-| Fluid Modification (Bayesian UI) | ✓ |  |  |
-| Fluid Modification (EHR Order Set) |  | ✓ |  |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| **Assessment Writeback** | | | |
 | Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
 | Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| Nurse Order Set Enabled |  | ✓ |  |
-| qSOFA |  | ✓ |  |
-| **Providers** | | | |
+| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Provider - Fluid Documentation Questions | ✓ |  |  |
+| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| **Documentation** | | | |
 | Create a New Note Button | ✓ |  |  |
 | Add to Existing Note Button |  | ✓ |  |
-| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
-| Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
-| Focused Exam Read from Flowsheet |  | ✓ |  |
+| Provider Documentation Tab in Treatment Management | ✓ |  |  |
+| Nursing Documentation |  | ✓ |  |
+| **Bundle Manager** | | | |
+| Bundle Tracking | ✓ |  |  |
+| Nurse Order Set Enabled |  | ✓ |  |
 | Provider Order Set Enabled | ✓ |  |  |
 | Bundle Start Time by Provider Trigger |  | ✓ |  |
+| Fluid Modification (Bayesian UI) | ✓ |  |  |
+| Fluid Modification (EHR Order Set) |  | ✓ |  |
+| Provider - Fluid Documentation Questions | ✓ |  |  |
 | Ideal Body Weight Calculation |  | ✓ |  |
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
+| Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
+| Focused Exam Read from Flowsheet |  | ✓ |  |
+| **Contributing Factors** | | | |
+| qSOFA |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
+| **Clinical Workflow** | | | |
+| Redirect to Treatment Management |  | ✓ |  |
+| **Bp Management** | | | |
+| BP Management |  | ✓ |  |
+| **Regulatory** | | | |
+| Investigational Banner |  | ✓ |  |
+| Instructions for Use (IFU) |  | ✓ |  |
+| **Suppression** | | | |
+| Antibiotic-Driven Suppression |  | ✓ |  |
 
 ---
 
@@ -314,31 +411,42 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking | ✓ |  |  |
-| Fluid Modification (Bayesian UI) |  | ✓ |  |
-| Fluid Modification (EHR Order Set) |  | ✓ |  |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| **Assessment Writeback** | | | |
 | Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
 | Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| Nurse Order Set Enabled |  | ✓ |  |
-| qSOFA |  | ✓ |  |
-| **Providers** | | | |
+| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Provider - Fluid Documentation Questions |  | ✓ |  |
+| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| **Documentation** | | | |
 | Create a New Note Button | ✓ |  |  |
 | Add to Existing Note Button |  | ✓ |  |
-| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
-| Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
-| Focused Exam Read from Flowsheet |  | ✓ |  |
+| Provider Documentation Tab in Treatment Management | ✓ |  |  |
+| Nursing Documentation |  | ✓ |  |
+| **Bundle Manager** | | | |
+| Bundle Tracking | ✓ |  |  |
+| Nurse Order Set Enabled |  | ✓ |  |
 | Provider Order Set Enabled | ✓ |  |  |
 | Bundle Start Time by Provider Trigger |  | ✓ |  |
+| Fluid Modification (Bayesian UI) |  | ✓ |  |
+| Fluid Modification (EHR Order Set) |  | ✓ |  |
+| Provider - Fluid Documentation Questions |  | ✓ |  |
 | Ideal Body Weight Calculation |  | ✓ |  |
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
+| Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
+| Focused Exam Read from Flowsheet |  | ✓ |  |
+| **Contributing Factors** | | | |
+| qSOFA |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
+| **Clinical Workflow** | | | |
+| Redirect to Treatment Management |  | ✓ |  |
+| **Bp Management** | | | |
+| BP Management |  | ✓ |  |
+| **Regulatory** | | | |
+| Investigational Banner |  | ✓ |  |
+| Instructions for Use (IFU) |  | ✓ |  |
+| **Suppression** | | | |
+| Antibiotic-Driven Suppression |  | ✓ |  |
 
 ---
 
@@ -350,31 +458,42 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking |  | ✓ | Planned for Phase 2 |
-| Fluid Modification (Bayesian UI) | ✓ |  |  |
-| Fluid Modification (EHR Order Set) |  | ✓ |  |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions |  | ✓ | Not implemented at go-live; consider timing for Phase 2 or earlier release |
+| **Assessment Writeback** | | | |
 | Nurse Assessment - Auto Writeback to Flowsheet Rows |  | ✓ |  |
 | Nurse Assessment - Auto Writeback as Clinical Note | ✓ |  | Note name: Bayesian Sepsis Nursing Assessment; PDF format |
-| Nurse Order Set Enabled |  | ✓ |  |
-| qSOFA |  | ✓ |  |
-| **Providers** | | | |
+| Nurse Assessment - Provider Escalation Questions |  | ✓ | Not implemented at go-live; consider timing for Phase 2 or earlier release |
+| Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback |  | ✓ |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Provider - Fluid Documentation Questions | ✓ |  |  |
+| Automatic Flowsheet Writeback of Note Type |  | ✓ |  |
+| **Documentation** | | | |
 | Create a New Note Button | ✓ |  | Note name: Bayesian Sepsis Provider Assessment; PDF format |
 | Add to Existing Note Button |  | ✓ |  |
-| Automatic Flowsheet Writeback of Note Type |  | ✓ |  |
-| Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
-| Focused Exam Read from Flowsheet |  | ✓ |  |
+| Provider Documentation Tab in Treatment Management | ✓ |  |  |
+| Nursing Documentation |  | ✓ |  |
+| **Bundle Manager** | | | |
+| Bundle Tracking |  | ✓ | Planned for Phase 2 |
+| Nurse Order Set Enabled |  | ✓ |  |
 | Provider Order Set Enabled |  | ✓ | Out of scope for Phase 1; need to scope tech feasibility for Phase 2 |
 | Bundle Start Time by Provider Trigger |  | ✓ |  |
+| Fluid Modification (Bayesian UI) | ✓ |  |  |
+| Fluid Modification (EHR Order Set) |  | ✓ |  |
+| Provider - Fluid Documentation Questions | ✓ |  |  |
 | Ideal Body Weight Calculation |  | ✓ |  |
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
+| Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
+| Focused Exam Read from Flowsheet |  | ✓ |  |
+| **Contributing Factors** | | | |
+| qSOFA |  | ✓ |  |
+| Lactate Trending |  | ✓ |  |
+| **Clinical Workflow** | | | |
+| Redirect to Treatment Management |  | ✓ |  |
+| **Bp Management** | | | |
+| BP Management |  | ✓ |  |
+| **Regulatory** | | | |
+| Investigational Banner |  | ✓ |  |
+| Instructions for Use (IFU) |  | ✓ |  |
+| **Suppression** | | | |
+| Antibiotic-Driven Suppression |  | ✓ |  |
 
 ---
 
@@ -385,3 +504,4 @@
 | 2026-02-11 | — | Initial feature flag configuration |
 | 2026-02-11 | — | Updated flags to match Bayesian Frontend Integration Checklist format (Memorial Care, Inova, ThedaCare, MedStar) |
 | 2026-02-12 | — | Added Northwell configuration from Frontend Integration document (Allscripts EHR) |
+| 2026-02-12 | — | Restructured flag categories (Assessment & Writeback, Documentation, Bundle Manager, Contributing Factors, Clinical Workflow, BP Management, Regulatory, Suppression). Added 6 new flags: nursing_q1_not_diagnostic, nursing_documentation, lactate_trending, redirect_to_treatment_management, bp_management, antibiotic_driven_suppression. |
