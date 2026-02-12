@@ -1,0 +1,5 @@
+Category,Flag Key,Feature Name,Description,Enabled (Y/N),Notes
+--- Palliative Care ---,,,,,
+Bedside Workflow,initiated_by_bedside_workflow,Initiated by Bedside Workflow,Enables palliative care initiation through the bedside clinical workflow,N,
+Bedside Workflow,storyboard_alert,Storyboard Alert,Enables palliative care alert within the EHR storyboard view,N,
+Palliative Care Workflow,initiated_by_palliative_care_team,Initiated by Palliative Care Team,Enables palliative care initiation by the palliative care team directly,N,

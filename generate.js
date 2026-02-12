@@ -4,8 +4,10 @@
  * generate.js — Single source of truth → output files
  *
  * Reads:   data/feature-flags.json
- * Writes:  feature-flags.md   (engineering reference)
- *          index.html          (clinical team viewer)
+ * Writes:  feature-flags.md                              (engineering reference)
+ *          index.html                                     (clinical team viewer)
+ *          templates/integration-template-{product}.csv   (blank templates per product)
+ *          templates/prefilled-{customer}.csv             (pre-filled per customer)
  *
  * Usage:   node generate.js
  */
@@ -18,6 +20,7 @@ const ROOT = __dirname;
 const JSON_PATH = path.join(ROOT, "data", "feature-flags.json");
 const MD_PATH = path.join(ROOT, "feature-flags.md");
 const HTML_PATH = path.join(ROOT, "index.html");
+const TEMPLATES_DIR = path.join(ROOT, "templates");
 
 // ─── Load data ────────────────────────────────────────────────────────────────
 let data;
@@ -1104,11 +1107,164 @@ render();`;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+//  CSV TEMPLATE GENERATION
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Escape a value for CSV (handles commas, quotes, newlines)
+ */
+function csvEscape(val) {
+  if (val === null || val === undefined) return "";
+  const s = String(val);
+  if (s.includes(",") || s.includes('"') || s.includes("\n")) {
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  return s;
+}
+
+/**
+ * Build a CSV row from an array of values
+ */
+function csvRow(values) {
+  return values.map(csvEscape).join(",");
+}
+
+/**
+ * Generate a blank integration template CSV for a given product.
+ * Columns: Category, Flag Key, Flag Name, Description, Enabled (Y/N), Notes
+ */
+function generateBlankTemplate(productKey) {
+  const product = data.products.find((p) => p.key === productKey);
+  if (!product) return null;
+
+  const rows = [];
+
+  // Header row
+  rows.push(
+    csvRow([
+      "Category",
+      "Flag Key",
+      "Feature Name",
+      "Description",
+      "Enabled (Y/N)",
+      "Notes",
+    ])
+  );
+
+  const categoryLabels = buildCategoryLabels();
+
+  for (const [catKey, catLabel] of Object.entries(categoryLabels)) {
+    const catFlags = (data.flagDefinitions[catKey] || []).filter((flag) =>
+      isFlagApplicableToProduct(flag, productKey)
+    );
+    if (catFlags.length === 0) continue;
+
+    for (const flag of catFlags) {
+      rows.push(
+        csvRow([catLabel, flag.key, flag.name, flag.description, "", ""])
+      );
+    }
+  }
+
+  return rows.join("\n");
+}
+
+/**
+ * Generate a pre-filled CSV for an existing customer.
+ * One section per product they have.
+ * Columns: Category, Flag Key, Flag Name, Description, Enabled (Y/N), Notes
+ */
+function generatePrefilledTemplate(customer) {
+  const rows = [];
+
+  // Header row
+  rows.push(
+    csvRow([
+      "Category",
+      "Flag Key",
+      "Feature Name",
+      "Description",
+      "Enabled (Y/N)",
+      "Notes",
+    ])
+  );
+
+  const categoryLabels = buildCategoryLabels();
+
+  for (const productKey of customer.products) {
+    const product = data.products.find((p) => p.key === productKey);
+    const productName = product ? product.name : productKey;
+    const config = data.configurations[customer.key]?.[productKey];
+
+    // Product separator row
+    rows.push(csvRow([`--- ${productName} ---`, "", "", "", "", ""]));
+
+    for (const [catKey, catLabel] of Object.entries(categoryLabels)) {
+      const catFlags = (data.flagDefinitions[catKey] || []).filter((flag) =>
+        isFlagApplicableToProduct(flag, productKey)
+      );
+      if (catFlags.length === 0) continue;
+
+      for (const flag of catFlags) {
+        const value = config?.flags?.[flag.key];
+        const note = config?.notes?.[flag.key] || "";
+        let enabledStr = "";
+        if (value === true) enabledStr = "Y";
+        else if (value === false) enabledStr = "N";
+        else if (typeof value === "string") enabledStr = value;
+
+        rows.push(
+          csvRow([catLabel, flag.key, flag.name, flag.description, enabledStr, note])
+        );
+      }
+    }
+  }
+
+  return rows.join("\n");
+}
+
+/**
+ * Generate all CSV templates into the templates/ directory.
+ */
+function generateCSVTemplates() {
+  // Ensure templates directory exists
+  if (!fs.existsSync(TEMPLATES_DIR)) {
+    fs.mkdirSync(TEMPLATES_DIR, { recursive: true });
+  }
+
+  let count = 0;
+
+  // 1. Blank templates — one per product
+  for (const product of data.products) {
+    const csv = generateBlankTemplate(product.key);
+    if (!csv) continue;
+    const filename = `integration-template-${product.key}.csv`;
+    const filepath = path.join(TEMPLATES_DIR, filename);
+    fs.writeFileSync(filepath, csv, "utf-8");
+    console.log(`  ✓ ${filename}`);
+    count++;
+  }
+
+  // 2. Pre-filled templates — one per customer
+  for (const customer of data.customers) {
+    const csv = generatePrefilledTemplate(customer);
+    if (!csv) continue;
+    const filename = `prefilled-${customer.key}.csv`;
+    const filepath = path.join(TEMPLATES_DIR, filename);
+    fs.writeFileSync(filepath, csv, "utf-8");
+    console.log(`  ✓ ${filename}`);
+    count++;
+  }
+
+  return count;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 //  MAIN
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function main() {
-  console.log("Reading data/feature-flags.json ...");
+  console.log("Reading data/feature-flags.json ...\n");
 
   // Generate markdown
   const md = generateMarkdown();
@@ -1120,7 +1276,12 @@ function main() {
   fs.writeFileSync(HTML_PATH, html, "utf-8");
   console.log(`✓ Generated index.html        (${html.length.toLocaleString()} chars)`);
 
-  console.log("\nDone! Both files are up to date with data/feature-flags.json.");
+  // Generate CSV templates
+  console.log("\n📋 Generating CSV templates ...");
+  const csvCount = generateCSVTemplates();
+  console.log(`✓ Generated ${csvCount} CSV templates in templates/`);
+
+  console.log("\nDone! All files are up to date with data/feature-flags.json.");
 }
 
 main();
