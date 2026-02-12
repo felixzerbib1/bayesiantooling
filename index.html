@@ -310,7 +310,6 @@ const FLAG_DATA = {
       "Sepsis"
     ],
     "URMC": [
-      "Deterioration",
       "Sepsis"
     ]
   },
@@ -320,7 +319,9 @@ const FLAG_DATA = {
         "key": "bundle_tracking",
         "name": "Bundle Tracking",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       },
       {
         "key": "fluid_mod_bayesian_ui",
@@ -342,13 +343,17 @@ const FLAG_DATA = {
         "key": "investigational_banner",
         "name": "Investigational Banner",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       },
       {
         "key": "ifu",
         "name": "Instructions for Use (IFU)",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       }
     ],
     "nurses": [
@@ -356,19 +361,25 @@ const FLAG_DATA = {
         "key": "nurse_escalation_questions",
         "name": "Nurse Assessment - Provider Escalation Questions",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       },
       {
         "key": "nurse_writeback_flowsheet",
         "name": "Nurse Assessment - Auto Writeback to Flowsheet Rows",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       },
       {
         "key": "nurse_writeback_note",
         "name": "Nurse Assessment - Auto Writeback as Clinical Note",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       },
       {
         "key": "nurse_order_set",
@@ -392,13 +403,17 @@ const FLAG_DATA = {
         "key": "provider_flowsheet_writeback",
         "name": "Provider Assessment - Auto Flowsheet Writeback",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       },
       {
         "key": "provider_doc_tab",
         "name": "Provider Documentation Tab in Treatment Management",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       },
       {
         "key": "provider_fluid_questions",
@@ -412,13 +427,17 @@ const FLAG_DATA = {
         "key": "create_new_note",
         "name": "Create a New Note Button",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       },
       {
         "key": "add_to_existing_note",
         "name": "Add to Existing Note Button",
         "type": "boolean",
-        "products": "all"
+        "products": [
+          "Sepsis"
+        ]
       },
       {
         "key": "auto_writeback_note_type",
@@ -622,20 +641,7 @@ const FLAG_DATA = {
         "auto_obesity_contraindication": false
       }
     },
-    "Mayo Clinic": {
-      "Palliative Care": {
-        "bundle_tracking": false,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": true,
-        "nurse_writeback_flowsheet": true,
-        "nurse_writeback_note": false,
-        "provider_flowsheet_writeback": true,
-        "provider_doc_tab": true,
-        "create_new_note": true,
-        "add_to_existing_note": false
-      }
-    },
+    "Mayo Clinic": {},
     "CCF": {
       "Sepsis": {
         "bundle_tracking": true,
@@ -663,18 +669,6 @@ const FLAG_DATA = {
       }
     },
     "UChicago": {
-      "Palliative Care": {
-        "bundle_tracking": false,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": true,
-        "nurse_writeback_flowsheet": true,
-        "nurse_writeback_note": false,
-        "provider_flowsheet_writeback": false,
-        "provider_doc_tab": true,
-        "create_new_note": true,
-        "add_to_existing_note": false
-      },
       "Sepsis": {
         "bundle_tracking": true,
         "fluid_mod_bayesian_ui": true,
@@ -701,18 +695,6 @@ const FLAG_DATA = {
       }
     },
     "URMC": {
-      "Deterioration": {
-        "bundle_tracking": false,
-        "investigational_banner": false,
-        "ifu": false,
-        "nurse_escalation_questions": true,
-        "nurse_writeback_flowsheet": true,
-        "nurse_writeback_note": false,
-        "provider_flowsheet_writeback": true,
-        "provider_doc_tab": true,
-        "create_new_note": true,
-        "add_to_existing_note": false
-      },
       "Sepsis": {
         "bundle_tracking": true,
         "fluid_mod_bayesian_ui": false,

@@ -16,29 +16,29 @@
     { "key": "mayo_clinic", "name": "Mayo Clinic", "products": ["palliative_care"], "ehr": "Epic" },
     { "key": "ccf", "name": "CCF", "products": ["sepsis"], "ehr": "Epic" },
     { "key": "uchicago", "name": "UChicago", "products": ["palliative_care", "sepsis"], "ehr": "Epic" },
-    { "key": "urmc", "name": "URMC", "products": ["deterioration", "sepsis"], "ehr": "Epic" }
+    { "key": "urmc", "name": "URMC", "products": ["sepsis"], "ehr": "Epic" }
   ],
   "flagDefinitions": {
     "general": [
-      { "key": "bundle_tracking", "name": "Bundle Tracking", "applicableProducts": "all", "description": "Enables the sepsis bundle tracking workflow with time-based compliance monitoring" },
+      { "key": "bundle_tracking", "name": "Bundle Tracking", "applicableProducts": ["sepsis"], "description": "Enables the sepsis bundle tracking workflow with time-based compliance monitoring" },
       { "key": "fluid_mod_bayesian_ui", "name": "Fluid Modification (Bayesian UI)", "applicableProducts": ["sepsis"], "description": "Fluid contraindication/modification questions surfaced within the Bayesian application UI" },
       { "key": "fluid_mod_ehr_order_set", "name": "Fluid Modification (EHR Order Set)", "applicableProducts": ["sepsis"], "description": "Fluid contraindication data pulled from the EHR order set rather than Bayesian UI" },
-      { "key": "investigational_banner", "name": "Investigational Banner", "applicableProducts": "all", "description": "Displays an investigational use banner across all application screens" },
-      { "key": "ifu", "name": "Instructions for Use (IFU)", "applicableProducts": "all", "description": "Displays IFU documentation link within the application" }
+      { "key": "investigational_banner", "name": "Investigational Banner", "applicableProducts": ["sepsis"], "description": "Displays an investigational use banner across all application screens" },
+      { "key": "ifu", "name": "Instructions for Use (IFU)", "applicableProducts": ["sepsis"], "description": "Displays IFU documentation link within the application" }
     ],
     "nurses": [
-      { "key": "nurse_escalation_questions", "name": "Nurse Assessment - Provider Escalation Questions", "applicableProducts": "all", "description": "Enables provider escalation questions within the nurse assessment workflow" },
-      { "key": "nurse_writeback_flowsheet", "name": "Nurse Assessment - Auto Writeback to Flowsheet Rows", "applicableProducts": "all", "description": "Automatically writes nurse assessment answers back to EHR flowsheet rows" },
-      { "key": "nurse_writeback_note", "name": "Nurse Assessment - Auto Writeback as Clinical Note", "applicableProducts": "all", "description": "Writes nurse assessment as a separate clinical note instead of flowsheet rows" },
+      { "key": "nurse_escalation_questions", "name": "Nurse Assessment - Provider Escalation Questions", "applicableProducts": ["sepsis"], "description": "Enables provider escalation questions within the nurse assessment workflow" },
+      { "key": "nurse_writeback_flowsheet", "name": "Nurse Assessment - Auto Writeback to Flowsheet Rows", "applicableProducts": ["sepsis"], "description": "Automatically writes nurse assessment answers back to EHR flowsheet rows" },
+      { "key": "nurse_writeback_note", "name": "Nurse Assessment - Auto Writeback as Clinical Note", "applicableProducts": ["sepsis"], "description": "Writes nurse assessment as a separate clinical note instead of flowsheet rows" },
       { "key": "nurse_order_set", "name": "Nurse Order Set Enabled", "applicableProducts": ["sepsis"], "description": "Enables the nurse order set link (e.g., Rapid Response Sepsis Set) within the application" },
       { "key": "qsofa", "name": "qSOFA", "applicableProducts": ["sepsis"], "description": "Enables qSOFA scoring driven by nursing assessment" }
     ],
     "providers": [
-      { "key": "provider_flowsheet_writeback", "name": "Provider Assessment - Auto Flowsheet Writeback", "applicableProducts": "all", "description": "Automatically writes provider assessment answers to EHR flowsheet rows" },
-      { "key": "provider_doc_tab", "name": "Provider Documentation Tab in Treatment Management", "applicableProducts": "all", "description": "Enables the provider documentation tab within the treatment management view" },
+      { "key": "provider_flowsheet_writeback", "name": "Provider Assessment - Auto Flowsheet Writeback", "applicableProducts": ["sepsis"], "description": "Automatically writes provider assessment answers to EHR flowsheet rows" },
+      { "key": "provider_doc_tab", "name": "Provider Documentation Tab in Treatment Management", "applicableProducts": ["sepsis"], "description": "Enables the provider documentation tab within the treatment management view" },
       { "key": "provider_fluid_questions", "name": "Provider - Fluid Documentation Questions", "applicableProducts": ["sepsis"], "description": "Enables fluid documentation questions in the provider assessment workflow" },
-      { "key": "create_new_note", "name": "Create a New Note Button", "applicableProducts": "all", "description": "Enables the Create New Note button for providers to generate a clinical note" },
-      { "key": "add_to_existing_note", "name": "Add to Existing Note Button", "applicableProducts": "all", "description": "Enables the Add to Existing Note button to append to an open note" },
+      { "key": "create_new_note", "name": "Create a New Note Button", "applicableProducts": ["sepsis"], "description": "Enables the Create New Note button for providers to generate a clinical note" },
+      { "key": "add_to_existing_note", "name": "Add to Existing Note Button", "applicableProducts": ["sepsis"], "description": "Enables the Add to Existing Note button to append to an open note" },
       { "key": "auto_writeback_note_type", "name": "Automatic Flowsheet Writeback of Note Type", "applicableProducts": ["sepsis"], "description": "Automatically writes back the note type answer to a flowsheet row" },
       { "key": "focused_exam_writeback", "name": "Focused Exam Writeback to Flowsheet Row", "applicableProducts": ["sepsis"], "description": "Writes focused exam data back to EHR flowsheet rows" },
       { "key": "focused_exam_read", "name": "Focused Exam Read from Flowsheet", "applicableProducts": ["sepsis"], "description": "Reads focused exam data from existing EHR flowsheet values" },
@@ -190,23 +190,7 @@
         }
       }
     },
-    "mayo_clinic": {
-      "palliative_care": {
-        "flags": {
-          "bundle_tracking": false,
-          "investigational_banner": false,
-          "ifu": false,
-          "nurse_escalation_questions": true,
-          "nurse_writeback_flowsheet": true,
-          "nurse_writeback_note": false,
-          "provider_flowsheet_writeback": true,
-          "provider_doc_tab": true,
-          "create_new_note": true,
-          "add_to_existing_note": false
-        },
-        "notes": {}
-      }
-    },
+    "mayo_clinic": {},
     "ccf": {
       "sepsis": {
         "flags": {
@@ -237,21 +221,6 @@
       }
     },
     "uchicago": {
-      "palliative_care": {
-        "flags": {
-          "bundle_tracking": false,
-          "investigational_banner": false,
-          "ifu": false,
-          "nurse_escalation_questions": true,
-          "nurse_writeback_flowsheet": true,
-          "nurse_writeback_note": false,
-          "provider_flowsheet_writeback": false,
-          "provider_doc_tab": true,
-          "create_new_note": true,
-          "add_to_existing_note": false
-        },
-        "notes": {}
-      },
       "sepsis": {
         "flags": {
           "bundle_tracking": true,
@@ -281,21 +250,6 @@
       }
     },
     "urmc": {
-      "deterioration": {
-        "flags": {
-          "bundle_tracking": false,
-          "investigational_banner": false,
-          "ifu": false,
-          "nurse_escalation_questions": true,
-          "nurse_writeback_flowsheet": true,
-          "nurse_writeback_note": false,
-          "provider_flowsheet_writeback": true,
-          "provider_doc_tab": true,
-          "create_new_note": true,
-          "add_to_existing_note": false
-        },
-        "notes": {}
-      },
       "sepsis": {
         "flags": {
           "bundle_tracking": true,

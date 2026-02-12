@@ -26,7 +26,7 @@
 | Mayo Clinic | Palliative Care | Epic |
 | CCF | Sepsis | Epic |
 | UChicago | Palliative Care, Sepsis | Epic |
-| URMC | Deterioration, Sepsis | Epic |
+| URMC | Sepsis | Epic |
 
 ---
 
@@ -225,19 +225,6 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking |  | ✓ | Not applicable for Palliative Care |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
-| Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
-| Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| **Providers** | | | |
-| Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Create a New Note Button | ✓ |  |  |
-| Add to Existing Note Button |  | ✓ |  |
 
 ---
 
@@ -285,19 +272,6 @@
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking |  | ✓ | Not applicable for Palliative Care |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
-| Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
-| Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| **Providers** | | | |
-| Provider Assessment - Auto Flowsheet Writeback |  | ✓ |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Create a New Note Button | ✓ |  |  |
-| Add to Existing Note Button |  | ✓ |  |
 
 #### Sepsis
 
@@ -333,25 +307,7 @@
 
 ### URMC
 
-**Products:** Deterioration, Sepsis | **EHR:** Epic
-
-#### Deterioration
-
-| Feature | Enabled | Disabled | Notes |
-|---------|---------|----------|-------|
-| **General** | | | |
-| Bundle Tracking |  | ✓ | Not applicable for Deterioration |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Nurses** | | | |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
-| Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
-| Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| **Providers** | | | |
-| Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Create a New Note Button | ✓ |  |  |
-| Add to Existing Note Button |  | ✓ |  |
+**Products:** Sepsis | **EHR:** Epic
 
 #### Sepsis
 
