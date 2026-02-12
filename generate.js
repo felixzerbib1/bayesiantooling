@@ -499,14 +499,33 @@ function getCSS() {
   .tab:hover { color: var(--gray-700); }
   .tab.active { color: var(--blue-600); border-bottom-color: var(--blue-600); }
 
-  .matrix-container { overflow-x: auto; background: white; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--gray-200); max-height: calc(100vh - 80px); overflow-y: auto; }
+  .matrix-container { overflow-x: auto; background: white; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--gray-200); }
   .matrix-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .matrix-table thead th {
     background: var(--gray-50); padding: 12px 16px; text-align: left; font-weight: 600;
     color: var(--gray-700); border-bottom: 2px solid var(--gray-200); white-space: nowrap;
-    position: sticky; top: 0; z-index: 10;
   }
-  .matrix-table thead th:first-child { position: sticky; left: 0; z-index: 20; background: var(--gray-50); min-width: 220px; }
+
+  .sticky-header-clone {
+    position: fixed;
+    top: 0;
+    z-index: 90;
+    background: var(--gray-50);
+    box-shadow: var(--shadow-md);
+    border-bottom: 2px solid var(--gray-200);
+    overflow: hidden;
+    pointer-events: none;
+    display: none;
+  }
+  .sticky-header-clone table {
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .sticky-header-clone th {
+    background: var(--gray-50); padding: 12px 16px; text-align: left; font-weight: 600;
+    color: var(--gray-700); white-space: nowrap;
+  }
+  .matrix-table thead th:first-child { min-width: 220px; }
   .matrix-table thead .col-header-customer { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-400); }
   .matrix-table thead .col-header-product { font-size: 13px; font-weight: 600; color: var(--gray-700); }
   .matrix-table tbody td { padding: 10px 16px; border-bottom: 1px solid var(--gray-100); vertical-align: middle; }
@@ -1001,6 +1020,72 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
   state.search = e.target.value;
   render();
 });
+
+// ===== STICKY HEADER CLONE =====
+let stickyClone = null;
+
+function setupStickyHeader() {
+  // Remove old clone if any
+  if (stickyClone) { stickyClone.remove(); stickyClone = null; }
+
+  const container = document.querySelector(".matrix-container");
+  const table = document.querySelector(".matrix-table");
+  if (!container || !table) return;
+  const thead = table.querySelector("thead");
+  if (!thead) return;
+
+  // Create fixed clone container
+  stickyClone = document.createElement("div");
+  stickyClone.className = "sticky-header-clone";
+  document.body.appendChild(stickyClone);
+
+  function syncClone() {
+    if (!document.querySelector(".matrix-table")) { stickyClone.style.display = "none"; return; }
+
+    const headerBar = document.querySelector(".header");
+    const headerBottom = headerBar ? headerBar.getBoundingClientRect().bottom : 0;
+    const containerRect = container.getBoundingClientRect();
+    const theadRect = thead.getBoundingClientRect();
+
+    // Show clone when the original thead is scrolled above the header bar
+    // but the table is still partially visible
+    const shouldShow = theadRect.top < headerBottom && containerRect.bottom > headerBottom + 60;
+
+    if (!shouldShow) { stickyClone.style.display = "none"; return; }
+
+    stickyClone.style.display = "block";
+    stickyClone.style.top = headerBottom + "px";
+    stickyClone.style.left = containerRect.left + "px";
+    stickyClone.style.width = containerRect.width + "px";
+
+    // Clone the thead with current column widths
+    const ths = thead.querySelectorAll("th");
+    let cloneHTML = '<table><thead><tr>';
+    ths.forEach(th => {
+      const w = th.getBoundingClientRect().width;
+      cloneHTML += '<th style="min-width:' + w + 'px;max-width:' + w + 'px;text-align:' + getComputedStyle(th).textAlign + ';border-left:' + getComputedStyle(th).borderLeft + '">' + th.innerHTML + '</th>';
+    });
+    cloneHTML += '</tr></thead></table>';
+    stickyClone.innerHTML = cloneHTML;
+
+    // Sync horizontal scroll
+    stickyClone.scrollLeft = container.scrollLeft;
+  }
+
+  window.addEventListener("scroll", syncClone, { passive: true });
+  container.addEventListener("scroll", () => { if (stickyClone) stickyClone.scrollLeft = container.scrollLeft; }, { passive: true });
+  window.addEventListener("resize", syncClone, { passive: true });
+
+  // Store cleanup references
+  stickyClone._cleanup = () => {
+    window.removeEventListener("scroll", syncClone);
+    window.removeEventListener("resize", syncClone);
+  };
+}
+
+// Re-setup sticky header after each render
+const _origRender = render;
+render = function() { _origRender(); if (state.view === "matrix") setTimeout(setupStickyHeader, 0); else if (stickyClone) stickyClone.style.display = "none"; };
 
 // Initial render
 render();`;
