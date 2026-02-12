@@ -25,7 +25,7 @@
 | MedStar Health | Sepsis | Cerner |
 | Mayo Clinic | Palliative Care | Epic |
 | CCF | Sepsis | Epic |
-| UChicago | Palliative Care, Sepsis | Epic |
+| UChicago | Palliative Care | Epic |
 | URMC | Sepsis | Epic |
 | Northwell | Sepsis | Allscripts |
 
@@ -423,64 +423,12 @@
 
 ### UChicago
 
-**Products:** Palliative Care, Sepsis | **EHR:** Epic
+**Products:** Palliative Care | **EHR:** Epic
 
 #### Palliative Care
 
 | Feature | Enabled | Disabled | Notes |
 |---------|---------|----------|-------|
-
-#### Sepsis
-
-| Feature | Enabled | Disabled | Notes |
-|---------|---------|----------|-------|
-| **Assessment Writeback** | | | |
-| Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
-| Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
-| Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
-| Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
-| Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
-| Provider Follow-Up on Unsure Response |  | ✓ |  |
-| Sepsis De-escalation |  | ✓ |  |
-| **Documentation** | | | |
-| Create a New Note Button | ✓ |  |  |
-| Add to Existing Note Button |  | ✓ |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
-| Nursing Documentation |  | ✓ |  |
-| **Bundle Manager** | | | |
-| Bundle Tracking | ✓ |  |  |
-| Nurse Order Set Enabled |  | ✓ |  |
-| Provider Order Set Enabled | ✓ |  |  |
-| Bundle Start Time by Provider Trigger |  | ✓ |  |
-| Fluid Modification (Bayesian UI) | ✓ |  |  |
-| Fluid Modification (EHR Order Set) |  | ✓ |  |
-| Provider - Fluid Documentation Questions | ✓ |  |  |
-| Ideal Body Weight Calculation |  | ✓ |  |
-| Auto-Selection of Obesity Contraindication |  | ✓ |  |
-| Focused Exam Writeback to Flowsheet Row |  | ✓ |  |
-| Focused Exam Read from Flowsheet |  | ✓ |  |
-| PRN Fluids |  | ✓ |  |
-| PRN Vasopressors |  | ✓ |  |
-| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
-| **Contributing Factors** | | | |
-| qSOFA |  | ✓ |  |
-| Lactate Trending |  | ✓ |  |
-| Historical Contributing Factors |  | ✓ |  |
-| **Clinical Workflow** | | | |
-| Redirect to Treatment Management |  | ✓ |  |
-| **Bp Management** | | | |
-| BP Management |  | ✓ |  |
-| **Regulatory** | | | |
-| Investigational Banner |  | ✓ |  |
-| Instructions for Use (IFU) |  | ✓ |  |
-| **Suppression** | | | |
-| Antibiotic-Driven Suppression |  | ✓ |  |
-| Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
-| Code Status Suppression |  | ✓ |  |
-| **Other** | | | |
-| Neutropenic Fever Model |  | ✓ |  |
-| Neutropenic Fever Notifications |  | ✓ |  |
 
 ---
 
