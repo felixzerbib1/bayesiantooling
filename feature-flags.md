@@ -43,6 +43,8 @@
 | `nursing_q1_not_diagnostic` | Nursing Question 1 - Not Diagnostic Tooltip | boolean | Displays a 'Not diagnostic' tooltip on Nursing Assessment Question 1 |
 | `provider_flowsheet_writeback` | Provider Assessment - Auto Flowsheet Writeback | boolean | Automatically writes provider assessment answers to EHR flowsheet rows |
 | `auto_writeback_note_type` | Automatic Flowsheet Writeback of Note Type | boolean | Automatically writes back the note type answer to a flowsheet row |
+| `provider_unsure_followup` | Provider Follow-Up on Unsure Response | boolean | Enables a follow-up question when the provider selects 'unsure' on assessment responses |
+| `sepsis_deescalation` | Sepsis De-escalation | boolean | Enables the sepsis de-escalation workflow for step-down from active alerts |
 
 ### Documentation
 
@@ -70,6 +72,7 @@
 | `focused_exam_read` | Focused Exam Read from Flowsheet | boolean | Reads focused exam data from existing EHR flowsheet values |
 | `prn_fluids` | PRN Fluids | boolean | Enables PRN fluids tracking within the bundle manager |
 | `prn_vasopressors` | PRN Vasopressors | boolean | Enables PRN vasopressors tracking within the bundle manager |
+| `redirect_on_active_bundles` | Redirect to Treatment Management on Active Bundles | boolean | Redirects clinicians to treatment management view only when active bundles exist |
 
 ### Contributing Factors
 
@@ -77,6 +80,7 @@
 |----------|-------------|------|-------------|
 | `qsofa` | qSOFA | boolean | Enables qSOFA scoring driven by nursing assessment |
 | `lactate_trending` | Lactate Trending | boolean | Enables lactate trending display in contributing factors |
+| `historical_contributing_factors` | Historical Contributing Factors | boolean | Displays historical contributing factor data alongside current values |
 
 ### Clinical Workflow
 
@@ -103,6 +107,14 @@
 |----------|-------------|------|-------------|
 | `antibiotic_driven_suppression` | Antibiotic-Driven Suppression | boolean | Enables antibiotic-driven suppression of sepsis alerts |
 | `reset_suppression_on_admission` | Re-set Suppression on Admission (ED to IP) | boolean | Resets suppression state when patient is admitted from ED to inpatient |
+| `code_status_suppression` | Code Status Suppression | boolean | Suppresses sepsis alerts for patients with comfort-care or DNR code status |
+
+### Other
+
+| Flag Key | Display Name | Type | Description |
+|----------|-------------|------|-------------|
+| `neutropenic_fever_enabled` | Neutropenic Fever Model | boolean | Enables the neutropenic fever detection model |
+| `neutropenic_fever_notifications` | Neutropenic Fever Notifications | boolean | Enables clinical notifications for neutropenic fever alerts |
 
 ---
 
@@ -123,6 +135,8 @@
 | Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback |  | ✓ |  |
 | Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| Provider Follow-Up on Unsure Response | ✓ |  |  |
+| Sepsis De-escalation | ✓ |  |  |
 | **Documentation** | | | |
 | Create a New Note Button | ✓ |  | "Chg in Clinical Condition" note |
 | Add to Existing Note Button |  | ✓ | Dot-phrase name TBD; build by ClinDoc team |
@@ -142,9 +156,11 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
+| Historical Contributing Factors | ✓ |  |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -155,6 +171,10 @@
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
 | Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
+| Code Status Suppression | ✓ |  |  |
+| **Other** | | | |
+| Neutropenic Fever Model |  | ✓ |  |
+| Neutropenic Fever Notifications |  | ✓ |  |
 
 ---
 
@@ -173,6 +193,8 @@
 | Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
 | Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| Provider Follow-Up on Unsure Response |  | ✓ |  |
+| Sepsis De-escalation |  | ✓ |  |
 | **Documentation** | | | |
 | Create a New Note Button | ✓ |  | Still need to determine note type |
 | Add to Existing Note Button |  | ✓ |  |
@@ -192,9 +214,11 @@
 | Focused Exam Read from Flowsheet | ✓ |  |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending | ✓ |  |  |
+| Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -205,6 +229,10 @@
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
 | Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
+| Code Status Suppression | ✓ |  |  |
+| **Other** | | | |
+| Neutropenic Fever Model |  | ✓ |  |
+| Neutropenic Fever Notifications |  | ✓ |  |
 
 ---
 
@@ -223,6 +251,8 @@
 | Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
 | Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| Provider Follow-Up on Unsure Response |  | ✓ |  |
+| Sepsis De-escalation |  | ✓ |  |
 | **Documentation** | | | |
 | Create a New Note Button | ✓ |  | Progress note |
 | Add to Existing Note Button | ✓ |  | ThedaCare built smartphrase integration using Bayesian flowsheet data |
@@ -242,9 +272,11 @@
 | Focused Exam Read from Flowsheet | ✓ |  |  |
 | PRN Fluids | ✓ |  |  |
 | PRN Vasopressors | ✓ |  |  |
+| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
+| Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -255,6 +287,10 @@
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression | ✓ |  |  |
 | Re-set Suppression on Admission (ED to IP) | ✓ |  |  |
+| Code Status Suppression |  | ✓ |  |
+| **Other** | | | |
+| Neutropenic Fever Model |  | ✓ |  |
+| Neutropenic Fever Notifications |  | ✓ |  |
 
 ---
 
@@ -273,6 +309,8 @@
 | Nursing Question 1 - Not Diagnostic Tooltip | ✓ |  | Not diagnostic tooltip displayed on Nursing Assessment Question 1 |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
 | Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| Provider Follow-Up on Unsure Response |  | ✓ |  |
+| Sepsis De-escalation |  | ✓ |  |
 | **Documentation** | | | |
 | Create a New Note Button | ✓ |  |  |
 | Add to Existing Note Button | ✓ |  |  |
@@ -292,9 +330,11 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA | ✓ |  | Nursing assessment Q2 drives scoring of modified qSOFA |
 | Lactate Trending |  | ✓ |  |
+| Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -305,6 +345,10 @@
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
 | Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
+| Code Status Suppression |  | ✓ |  |
+| **Other** | | | |
+| Neutropenic Fever Model |  | ✓ |  |
+| Neutropenic Fever Notifications |  | ✓ |  |
 
 ---
 
@@ -334,6 +378,8 @@
 | Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
 | Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| Provider Follow-Up on Unsure Response | ✓ |  |  |
+| Sepsis De-escalation | ✓ |  |  |
 | **Documentation** | | | |
 | Create a New Note Button | ✓ |  |  |
 | Add to Existing Note Button | ✓ |  |  |
@@ -353,9 +399,11 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
+| Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -366,6 +414,10 @@
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
 | Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
+| Code Status Suppression | ✓ |  |  |
+| **Other** | | | |
+| Neutropenic Fever Model | ✓ |  |  |
+| Neutropenic Fever Notifications | ✓ |  |  |
 
 ---
 
@@ -389,6 +441,8 @@
 | Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
 | Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| Provider Follow-Up on Unsure Response |  | ✓ |  |
+| Sepsis De-escalation |  | ✓ |  |
 | **Documentation** | | | |
 | Create a New Note Button | ✓ |  |  |
 | Add to Existing Note Button |  | ✓ |  |
@@ -408,9 +462,11 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
+| Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -421,6 +477,10 @@
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
 | Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
+| Code Status Suppression |  | ✓ |  |
+| **Other** | | | |
+| Neutropenic Fever Model |  | ✓ |  |
+| Neutropenic Fever Notifications |  | ✓ |  |
 
 ---
 
@@ -439,6 +499,8 @@
 | Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
 | Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
+| Provider Follow-Up on Unsure Response |  | ✓ |  |
+| Sepsis De-escalation | ✓ |  |  |
 | **Documentation** | | | |
 | Create a New Note Button | ✓ |  |  |
 | Add to Existing Note Button |  | ✓ |  |
@@ -458,9 +520,11 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
+| Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -471,6 +535,10 @@
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
 | Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
+| Code Status Suppression |  | ✓ |  |
+| **Other** | | | |
+| Neutropenic Fever Model |  | ✓ |  |
+| Neutropenic Fever Notifications |  | ✓ |  |
 
 ---
 
@@ -489,6 +557,8 @@
 | Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback |  | ✓ |  |
 | Automatic Flowsheet Writeback of Note Type |  | ✓ |  |
+| Provider Follow-Up on Unsure Response |  | ✓ |  |
+| Sepsis De-escalation |  | ✓ |  |
 | **Documentation** | | | |
 | Create a New Note Button | ✓ |  | Note name: Bayesian Sepsis Provider Assessment; PDF format |
 | Add to Existing Note Button |  | ✓ |  |
@@ -508,9 +578,11 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
+| Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
 | **Bp Management** | | | |
@@ -521,6 +593,10 @@
 | **Suppression** | | | |
 | Antibiotic-Driven Suppression |  | ✓ |  |
 | Re-set Suppression on Admission (ED to IP) |  | ✓ |  |
+| Code Status Suppression |  | ✓ |  |
+| **Other** | | | |
+| Neutropenic Fever Model |  | ✓ |  |
+| Neutropenic Fever Notifications |  | ✓ |  |
 
 ---
 
@@ -532,3 +608,4 @@
 | 2026-02-11 | — | Updated flags to match Bayesian Frontend Integration Checklist format (Memorial Care, Inova, ThedaCare, MedStar) |
 | 2026-02-12 | — | Added Northwell configuration from Frontend Integration document (Allscripts EHR) |
 | 2026-02-12 | — | Restructured flag categories (Assessment & Writeback, Documentation, Bundle Manager, Contributing Factors, Clinical Workflow, BP Management, Regulatory, Suppression). Added 6 new flags: nursing_q1_not_diagnostic, nursing_documentation, lactate_trending, redirect_to_treatment_management, bp_management, antibiotic_driven_suppression. |
+| 2026-02-12 | — | Added 7 new flags from cross-customer YAML analysis: sepsis_deescalation, provider_unsure_followup (assessment), redirect_on_active_bundles (bundle manager), historical_contributing_factors (contributing factors), code_status_suppression (suppression), neutropenic_fever_enabled, neutropenic_fever_notifications (new 'other' category). Sourced from Memorial Care, URMC, Inova, CCF config-patch YAMLs. |

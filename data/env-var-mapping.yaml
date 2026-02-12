@@ -47,6 +47,19 @@ assessment_writeback:
       - name: ENABLE_DOCUMENTATION_FORM_WRITEBACK
         configMaps: [trews-api-v3-config]
 
+  provider_unsure_followup:
+    type: boolean
+    envVars:
+      - name: ENABLE_PROVIDER_QUESTION_ON_UNSURE_RESPONSE
+        configMaps: [trews-api-v3-config]
+
+  sepsis_deescalation:
+    type: boolean
+    note: "Present across multiple ConfigMaps (ui-config, trews-api-v3-config, notification-service-config, alert-state-manager-config, bundle-manager-config). All must be aligned."
+    envVars:
+      - name: SEPSIS_DEESCALATION_ENABLED
+        configMaps: [ui-config, trews-api-v3-config, notification-service-config, alert-state-manager-config, bundle-manager-config]
+
 documentation:
 
   create_new_note:
@@ -156,6 +169,12 @@ bundle_manager:
     note: "No env var found. May be controlled via form schema in S3 or database config."
     envVars: []
 
+  redirect_on_active_bundles:
+    type: boolean
+    envVars:
+      - name: ENABLE_REDIRECT_TO_TREATMENT_MANAGEMENT_ON_ACTIVE_BUNDLES
+        configMaps: [ui-config]
+
 contributing_factors:
 
   qsofa:
@@ -165,8 +184,14 @@ contributing_factors:
 
   lactate_trending:
     type: unmapped
-    note: "New flag. No env var identified yet. Currently enabled for ThedaCare only."
+    note: "New flag. No env var identified yet. Currently enabled for Inova only."
     envVars: []
+
+  historical_contributing_factors:
+    type: boolean
+    envVars:
+      - name: HISTORICAL_CONTRIBUTING_FACTORS
+        configMaps: [trews-api-v3-config]
 
 clinical_workflow:
 
@@ -209,3 +234,23 @@ suppression:
     type: unmapped
     note: "New flag. No env var identified yet. Currently enabled for ThedaCare only."
     envVars: []
+
+  code_status_suppression:
+    type: boolean
+    envVars:
+      - name: ENABLE_CODE_STATUS_SUPPRESSION
+        configMaps: [alert-state-manager-config]
+
+other:
+
+  neutropenic_fever_enabled:
+    type: boolean
+    envVars:
+      - name: NEUTROPENIC_FEVER_ENABLED
+        configMaps: [notification-service-config]
+
+  neutropenic_fever_notifications:
+    type: boolean
+    envVars:
+      - name: ENABLE_NEUTROPENIC_FEVER_NOTIFICATIONS
+        configMaps: [notification-service-config]

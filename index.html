@@ -398,6 +398,22 @@ const FLAG_DATA = {
         "products": [
           "Sepsis"
         ]
+      },
+      {
+        "key": "provider_unsure_followup",
+        "name": "Provider Follow-Up on Unsure Response",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "sepsis_deescalation",
+        "name": "Sepsis De-escalation",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
       }
     ],
     "documentation": [
@@ -538,6 +554,14 @@ const FLAG_DATA = {
         "products": [
           "Sepsis"
         ]
+      },
+      {
+        "key": "redirect_on_active_bundles",
+        "name": "Redirect to Treatment Management on Active Bundles",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
       }
     ],
     "contributing_factors": [
@@ -552,6 +576,14 @@ const FLAG_DATA = {
       {
         "key": "lactate_trending",
         "name": "Lactate Trending",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "historical_contributing_factors",
+        "name": "Historical Contributing Factors",
         "type": "boolean",
         "products": [
           "Sepsis"
@@ -608,6 +640,32 @@ const FLAG_DATA = {
       {
         "key": "reset_suppression_on_admission",
         "name": "Re-set Suppression on Admission (ED to IP)",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "code_status_suppression",
+        "name": "Code Status Suppression",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      }
+    ],
+    "other": [
+      {
+        "key": "neutropenic_fever_enabled",
+        "name": "Neutropenic Fever Model",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "neutropenic_fever_notifications",
+        "name": "Neutropenic Fever Notifications",
         "type": "boolean",
         "products": [
           "Sepsis"
@@ -697,7 +755,14 @@ const FLAG_DATA = {
         "prn_fluids": false,
         "prn_vasopressors": false,
         "antibiotic_driven_suppression": false,
-        "reset_suppression_on_admission": false
+        "reset_suppression_on_admission": false,
+        "code_status_suppression": true,
+        "provider_unsure_followup": true,
+        "sepsis_deescalation": true,
+        "redirect_on_active_bundles": true,
+        "historical_contributing_factors": true,
+        "neutropenic_fever_enabled": false,
+        "neutropenic_fever_notifications": false
       }
     },
     "Inova Health": {
@@ -732,7 +797,14 @@ const FLAG_DATA = {
         "prn_fluids": false,
         "prn_vasopressors": false,
         "antibiotic_driven_suppression": false,
-        "reset_suppression_on_admission": false
+        "reset_suppression_on_admission": false,
+        "code_status_suppression": true,
+        "provider_unsure_followup": false,
+        "sepsis_deescalation": false,
+        "redirect_on_active_bundles": false,
+        "historical_contributing_factors": false,
+        "neutropenic_fever_enabled": false,
+        "neutropenic_fever_notifications": false
       }
     },
     "ThedaCare": {
@@ -767,7 +839,14 @@ const FLAG_DATA = {
         "prn_fluids": true,
         "prn_vasopressors": true,
         "antibiotic_driven_suppression": true,
-        "reset_suppression_on_admission": true
+        "reset_suppression_on_admission": true,
+        "code_status_suppression": false,
+        "provider_unsure_followup": false,
+        "sepsis_deescalation": false,
+        "redirect_on_active_bundles": false,
+        "historical_contributing_factors": false,
+        "neutropenic_fever_enabled": false,
+        "neutropenic_fever_notifications": false
       }
     },
     "MedStar Health": {
@@ -802,7 +881,14 @@ const FLAG_DATA = {
         "prn_fluids": false,
         "prn_vasopressors": false,
         "antibiotic_driven_suppression": false,
-        "reset_suppression_on_admission": false
+        "reset_suppression_on_admission": false,
+        "code_status_suppression": false,
+        "provider_unsure_followup": false,
+        "sepsis_deescalation": false,
+        "redirect_on_active_bundles": false,
+        "historical_contributing_factors": false,
+        "neutropenic_fever_enabled": false,
+        "neutropenic_fever_notifications": false
       }
     },
     "Mayo Clinic": {},
@@ -838,7 +924,14 @@ const FLAG_DATA = {
         "prn_fluids": false,
         "prn_vasopressors": false,
         "antibiotic_driven_suppression": false,
-        "reset_suppression_on_admission": false
+        "reset_suppression_on_admission": false,
+        "code_status_suppression": true,
+        "provider_unsure_followup": true,
+        "sepsis_deescalation": true,
+        "redirect_on_active_bundles": true,
+        "historical_contributing_factors": false,
+        "neutropenic_fever_enabled": true,
+        "neutropenic_fever_notifications": true
       }
     },
     "UChicago": {
@@ -873,7 +966,14 @@ const FLAG_DATA = {
         "prn_fluids": false,
         "prn_vasopressors": false,
         "antibiotic_driven_suppression": false,
-        "reset_suppression_on_admission": false
+        "reset_suppression_on_admission": false,
+        "code_status_suppression": false,
+        "provider_unsure_followup": false,
+        "sepsis_deescalation": false,
+        "redirect_on_active_bundles": false,
+        "historical_contributing_factors": false,
+        "neutropenic_fever_enabled": false,
+        "neutropenic_fever_notifications": false
       }
     },
     "URMC": {
@@ -908,7 +1008,14 @@ const FLAG_DATA = {
         "prn_fluids": false,
         "prn_vasopressors": false,
         "antibiotic_driven_suppression": false,
-        "reset_suppression_on_admission": false
+        "reset_suppression_on_admission": false,
+        "code_status_suppression": false,
+        "provider_unsure_followup": false,
+        "sepsis_deescalation": true,
+        "redirect_on_active_bundles": true,
+        "historical_contributing_factors": false,
+        "neutropenic_fever_enabled": false,
+        "neutropenic_fever_notifications": false
       }
     },
     "Northwell": {
@@ -943,7 +1050,14 @@ const FLAG_DATA = {
         "prn_fluids": false,
         "prn_vasopressors": false,
         "antibiotic_driven_suppression": false,
-        "reset_suppression_on_admission": false
+        "reset_suppression_on_admission": false,
+        "code_status_suppression": false,
+        "provider_unsure_followup": false,
+        "sepsis_deescalation": false,
+        "redirect_on_active_bundles": false,
+        "historical_contributing_factors": false,
+        "neutropenic_fever_enabled": false,
+        "neutropenic_fever_notifications": false
       }
     }
   }

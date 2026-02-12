@@ -26,7 +26,9 @@
       { "key": "nurse_escalation_questions", "name": "Nurse Assessment - Provider Escalation Questions", "applicableProducts": ["sepsis"], "description": "Enables provider escalation questions within the nurse assessment workflow" },
       { "key": "nursing_q1_not_diagnostic", "name": "Nursing Question 1 - Not Diagnostic Tooltip", "applicableProducts": ["sepsis"], "description": "Displays a 'Not diagnostic' tooltip on Nursing Assessment Question 1" },
       { "key": "provider_flowsheet_writeback", "name": "Provider Assessment - Auto Flowsheet Writeback", "applicableProducts": ["sepsis"], "description": "Automatically writes provider assessment answers to EHR flowsheet rows" },
-      { "key": "auto_writeback_note_type", "name": "Automatic Flowsheet Writeback of Note Type", "applicableProducts": ["sepsis"], "description": "Automatically writes back the note type answer to a flowsheet row" }
+      { "key": "auto_writeback_note_type", "name": "Automatic Flowsheet Writeback of Note Type", "applicableProducts": ["sepsis"], "description": "Automatically writes back the note type answer to a flowsheet row" },
+      { "key": "provider_unsure_followup", "name": "Provider Follow-Up on Unsure Response", "applicableProducts": ["sepsis"], "description": "Enables a follow-up question when the provider selects 'unsure' on assessment responses" },
+      { "key": "sepsis_deescalation", "name": "Sepsis De-escalation", "applicableProducts": ["sepsis"], "description": "Enables the sepsis de-escalation workflow for step-down from active alerts" }
     ],
     "documentation": [
       { "key": "create_new_note", "name": "Create a New Note Button", "applicableProducts": ["sepsis"], "description": "Enables the Create New Note button for providers to generate a clinical note" },
@@ -47,11 +49,13 @@
       { "key": "focused_exam_writeback", "name": "Focused Exam Writeback to Flowsheet Row", "applicableProducts": ["sepsis"], "description": "Writes focused exam data back to EHR flowsheet rows" },
       { "key": "focused_exam_read", "name": "Focused Exam Read from Flowsheet", "applicableProducts": ["sepsis"], "description": "Reads focused exam data from existing EHR flowsheet values" },
       { "key": "prn_fluids", "name": "PRN Fluids", "applicableProducts": ["sepsis"], "description": "Enables PRN fluids tracking within the bundle manager" },
-      { "key": "prn_vasopressors", "name": "PRN Vasopressors", "applicableProducts": ["sepsis"], "description": "Enables PRN vasopressors tracking within the bundle manager" }
+      { "key": "prn_vasopressors", "name": "PRN Vasopressors", "applicableProducts": ["sepsis"], "description": "Enables PRN vasopressors tracking within the bundle manager" },
+      { "key": "redirect_on_active_bundles", "name": "Redirect to Treatment Management on Active Bundles", "applicableProducts": ["sepsis"], "description": "Redirects clinicians to treatment management view only when active bundles exist" }
     ],
     "contributing_factors": [
       { "key": "qsofa", "name": "qSOFA", "applicableProducts": ["sepsis"], "description": "Enables qSOFA scoring driven by nursing assessment" },
-      { "key": "lactate_trending", "name": "Lactate Trending", "applicableProducts": ["sepsis"], "description": "Enables lactate trending display in contributing factors" }
+      { "key": "lactate_trending", "name": "Lactate Trending", "applicableProducts": ["sepsis"], "description": "Enables lactate trending display in contributing factors" },
+      { "key": "historical_contributing_factors", "name": "Historical Contributing Factors", "applicableProducts": ["sepsis"], "description": "Displays historical contributing factor data alongside current values" }
     ],
     "clinical_workflow": [
       { "key": "redirect_to_treatment_management", "name": "Redirect to Treatment Management", "applicableProducts": ["sepsis"], "description": "Automatically redirects clinicians to the treatment management view" }
@@ -65,7 +69,12 @@
     ],
     "suppression": [
       { "key": "antibiotic_driven_suppression", "name": "Antibiotic-Driven Suppression", "applicableProducts": ["sepsis"], "description": "Enables antibiotic-driven suppression of sepsis alerts" },
-      { "key": "reset_suppression_on_admission", "name": "Re-set Suppression on Admission (ED to IP)", "applicableProducts": ["sepsis"], "description": "Resets suppression state when patient is admitted from ED to inpatient" }
+      { "key": "reset_suppression_on_admission", "name": "Re-set Suppression on Admission (ED to IP)", "applicableProducts": ["sepsis"], "description": "Resets suppression state when patient is admitted from ED to inpatient" },
+      { "key": "code_status_suppression", "name": "Code Status Suppression", "applicableProducts": ["sepsis"], "description": "Suppresses sepsis alerts for patients with comfort-care or DNR code status" }
+    ],
+    "other": [
+      { "key": "neutropenic_fever_enabled", "name": "Neutropenic Fever Model", "applicableProducts": ["sepsis"], "description": "Enables the neutropenic fever detection model" },
+      { "key": "neutropenic_fever_notifications", "name": "Neutropenic Fever Notifications", "applicableProducts": ["sepsis"], "description": "Enables clinical notifications for neutropenic fever alerts" }
     ]
   },
   "configurations": {
@@ -102,7 +111,14 @@
           "prn_fluids": false,
           "prn_vasopressors": false,
           "antibiotic_driven_suppression": false,
-          "reset_suppression_on_admission": false
+          "reset_suppression_on_admission": false,
+          "code_status_suppression": true,
+          "provider_unsure_followup": true,
+          "sepsis_deescalation": true,
+          "redirect_on_active_bundles": true,
+          "historical_contributing_factors": true,
+          "neutropenic_fever_enabled": false,
+          "neutropenic_fever_notifications": false
         },
         "notes": {
           "nurse_escalation_questions": "Unsure if they have provided the existing flowsheet",
@@ -147,7 +163,14 @@
           "prn_fluids": false,
           "prn_vasopressors": false,
           "antibiotic_driven_suppression": false,
-          "reset_suppression_on_admission": false
+          "reset_suppression_on_admission": false,
+          "code_status_suppression": true,
+          "provider_unsure_followup": false,
+          "sepsis_deescalation": false,
+          "redirect_on_active_bundles": false,
+          "historical_contributing_factors": false,
+          "neutropenic_fever_enabled": false,
+          "neutropenic_fever_notifications": false
         },
         "notes": {
           "create_new_note": "Still need to determine note type",
@@ -188,7 +211,14 @@
           "prn_fluids": true,
           "prn_vasopressors": true,
           "antibiotic_driven_suppression": true,
-          "reset_suppression_on_admission": true
+          "reset_suppression_on_admission": true,
+          "code_status_suppression": false,
+          "provider_unsure_followup": false,
+          "sepsis_deescalation": false,
+          "redirect_on_active_bundles": false,
+          "historical_contributing_factors": false,
+          "neutropenic_fever_enabled": false,
+          "neutropenic_fever_notifications": false
         },
         "notes": {
           "fluid_mod_ehr_order_set": "Not pulling fluid contraindication from EHR (only IBW derived from weight and height)",
@@ -234,7 +264,14 @@
           "prn_fluids": false,
           "prn_vasopressors": false,
           "antibiotic_driven_suppression": false,
-          "reset_suppression_on_admission": false
+          "reset_suppression_on_admission": false,
+          "code_status_suppression": false,
+          "provider_unsure_followup": false,
+          "sepsis_deescalation": false,
+          "redirect_on_active_bundles": false,
+          "historical_contributing_factors": false,
+          "neutropenic_fever_enabled": false,
+          "neutropenic_fever_notifications": false
         },
         "notes": {
           "nursing_q1_not_diagnostic": "Not diagnostic tooltip displayed on Nursing Assessment Question 1",
@@ -281,7 +318,14 @@
           "prn_fluids": false,
           "prn_vasopressors": false,
           "antibiotic_driven_suppression": false,
-          "reset_suppression_on_admission": false
+          "reset_suppression_on_admission": false,
+          "code_status_suppression": true,
+          "provider_unsure_followup": true,
+          "sepsis_deescalation": true,
+          "redirect_on_active_bundles": true,
+          "historical_contributing_factors": false,
+          "neutropenic_fever_enabled": true,
+          "neutropenic_fever_notifications": true
         },
         "notes": {}
       }
@@ -319,7 +363,14 @@
           "prn_fluids": false,
           "prn_vasopressors": false,
           "antibiotic_driven_suppression": false,
-          "reset_suppression_on_admission": false
+          "reset_suppression_on_admission": false,
+          "code_status_suppression": false,
+          "provider_unsure_followup": false,
+          "sepsis_deescalation": false,
+          "redirect_on_active_bundles": false,
+          "historical_contributing_factors": false,
+          "neutropenic_fever_enabled": false,
+          "neutropenic_fever_notifications": false
         },
         "notes": {}
       }
@@ -357,7 +408,14 @@
           "prn_fluids": false,
           "prn_vasopressors": false,
           "antibiotic_driven_suppression": false,
-          "reset_suppression_on_admission": false
+          "reset_suppression_on_admission": false,
+          "code_status_suppression": false,
+          "provider_unsure_followup": false,
+          "sepsis_deescalation": true,
+          "redirect_on_active_bundles": true,
+          "historical_contributing_factors": false,
+          "neutropenic_fever_enabled": false,
+          "neutropenic_fever_notifications": false
         },
         "notes": {}
       }
@@ -395,7 +453,14 @@
           "prn_fluids": false,
           "prn_vasopressors": false,
           "antibiotic_driven_suppression": false,
-          "reset_suppression_on_admission": false
+          "reset_suppression_on_admission": false,
+          "code_status_suppression": false,
+          "provider_unsure_followup": false,
+          "sepsis_deescalation": false,
+          "redirect_on_active_bundles": false,
+          "historical_contributing_factors": false,
+          "neutropenic_fever_enabled": false,
+          "neutropenic_fever_notifications": false
         },
         "notes": {
           "bundle_tracking": "Planned for Phase 2",
@@ -411,6 +476,7 @@
     { "date": "2026-02-11", "author": "—", "change": "Initial feature flag configuration" },
     { "date": "2026-02-11", "author": "—", "change": "Updated flags to match Bayesian Frontend Integration Checklist format (Memorial Care, Inova, ThedaCare, MedStar)" },
     { "date": "2026-02-12", "author": "—", "change": "Added Northwell configuration from Frontend Integration document (Allscripts EHR)" },
-    { "date": "2026-02-12", "author": "—", "change": "Restructured flag categories (Assessment & Writeback, Documentation, Bundle Manager, Contributing Factors, Clinical Workflow, BP Management, Regulatory, Suppression). Added 6 new flags: nursing_q1_not_diagnostic, nursing_documentation, lactate_trending, redirect_to_treatment_management, bp_management, antibiotic_driven_suppression." }
+    { "date": "2026-02-12", "author": "—", "change": "Restructured flag categories (Assessment & Writeback, Documentation, Bundle Manager, Contributing Factors, Clinical Workflow, BP Management, Regulatory, Suppression). Added 6 new flags: nursing_q1_not_diagnostic, nursing_documentation, lactate_trending, redirect_to_treatment_management, bp_management, antibiotic_driven_suppression." },
+    { "date": "2026-02-12", "author": "—", "change": "Added 7 new flags from cross-customer YAML analysis: sepsis_deescalation, provider_unsure_followup (assessment), redirect_on_active_bundles (bundle manager), historical_contributing_factors (contributing factors), code_status_suppression (suppression), neutropenic_fever_enabled, neutropenic_fever_notifications (new 'other' category). Sourced from Memorial Care, URMC, Inova, CCF config-patch YAMLs." }
   ]
 }
