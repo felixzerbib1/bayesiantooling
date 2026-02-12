@@ -160,9 +160,10 @@ bundle_manager:
         true_when: "ideal_body_weight"
 
   focused_exam_writeback:
-    type: unmapped
-    note: "No env var found. May be controlled via form schema in S3 or database config."
-    envVars: []
+    type: boolean
+    envVars:
+      - name: ENABLE_FOCUSED_EXAM_WRITEBACK
+        configMaps: [trews-api-v3-config]
 
   focused_exam_read:
     type: unmapped
@@ -180,11 +181,6 @@ contributing_factors:
   qsofa:
     type: unmapped
     note: "No env var found in config-patch.yaml. Likely controlled via form schema configuration in S3 or database-level config."
-    envVars: []
-
-  lactate_trending:
-    type: unmapped
-    note: "New flag. No env var identified yet. Currently enabled for Inova only."
     envVars: []
 
   historical_contributing_factors:
@@ -206,6 +202,11 @@ bp_management:
   bp_management:
     type: unmapped
     note: "New flag. No env var identified yet. Currently enabled for Inova only."
+    envVars: []
+
+  lactate_trending:
+    type: unmapped
+    note: "No env var identified yet. Currently enabled for Inova only."
     envVars: []
 
 regulatory:

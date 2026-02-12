@@ -16,7 +16,7 @@ We have built a feature flag configuration viewer (`index.html`) that gives cust
 
 To build this, we sourced flag data from:
 - **Frontend Integration Checklists** (PDFs) — Memorial Care, Inova, ThedaCare, MedStar, Northwell
-- **Kubernetes config-patch YAMLs** — LifeBridge (staging), Memorial Care (production), URMC (staging), Inova (staging), CCF (staging)
+- **Kubernetes config-patch YAMLs** — LifeBridge (staging), Memorial Care (production), URMC (staging), Inova (staging), CCF (staging), ThedaCare (staging)
 - **Tribal knowledge** — product/engineering conversations
 
 This document captures the current taxonomy, identifies gaps between the YAML configs and the JSON schema, and proposes a set of decisions for the team to make.
@@ -60,7 +60,7 @@ This document captures the current taxonomy, identifies gaps between the YAML co
 | 19 | `provider_fluid_questions` | Provider - Fluid Documentation Questions | `FLUIDS_CONTRAINDICATION_AVAILABLE_IN_DOCUMENTATION` | Mapped |
 | 20 | `ibw_calculation` | Ideal Body Weight Calculation | `ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID` (shared) | Shared toggle |
 | 21 | `auto_obesity_contraindication` | Auto-Selection of Obesity Contraindication | `ENABLE_FLUIDS_CONTRAINDICATION_AUTO_SELECT_FID` (shared) | Shared toggle |
-| 22 | `focused_exam_writeback` | Focused Exam Writeback to Flowsheet Row | — | **Unmapped** |
+| 22 | `focused_exam_writeback` | Focused Exam Writeback to Flowsheet Row | `ENABLE_FOCUSED_EXAM_WRITEBACK` | Mapped |
 | 23 | `focused_exam_read` | Focused Exam Read from Flowsheet | — | **Unmapped** |
 | 24 | `prn_fluids` | PRN Fluids | — | **Unmapped** |
 | 25 | `prn_vasopressors` | PRN Vasopressors | — | **Unmapped** |
@@ -114,27 +114,26 @@ This document captures the current taxonomy, identifies gaps between the YAML co
 
 | Status | Count | Flags |
 |--------|-------|-------|
-| **Mapped** (1:1 boolean) | 17 | nurse_writeback_flowsheet, nurse_writeback_note, nurse_escalation_questions, provider_flowsheet_writeback, auto_writeback_note_type, provider_unsure_followup, sepsis_deescalation, add_to_existing_note, provider_doc_tab, bundle_tracking, fluid_mod_bayesian_ui, fluid_mod_ehr_order_set, provider_fluid_questions, redirect_on_active_bundles, historical_contributing_factors, redirect_to_treatment_management, code_status_suppression |
+| **Mapped** (1:1 boolean) | 18 | nurse_writeback_flowsheet, nurse_writeback_note, nurse_escalation_questions, provider_flowsheet_writeback, auto_writeback_note_type, provider_unsure_followup, sepsis_deescalation, add_to_existing_note, provider_doc_tab, bundle_tracking, fluid_mod_bayesian_ui, fluid_mod_ehr_order_set, provider_fluid_questions, focused_exam_writeback, redirect_on_active_bundles, historical_contributing_factors, redirect_to_treatment_management, code_status_suppression |
 | **Mapped** (composite) | 3 | create_new_note, investigational_banner, ifu |
 | **Mapped** (shared toggle) | 4 | nurse_order_set, provider_order_set, ibw_calculation, auto_obesity_contraindication |
 | **Mapped** (new, from YAML) | 2 | neutropenic_fever_enabled, neutropenic_fever_notifications |
-| **Unmapped** | 12 | nursing_q1_not_diagnostic, nursing_documentation, bundle_start_provider_trigger, focused_exam_writeback, focused_exam_read, prn_fluids, prn_vasopressors, qsofa, lactate_trending, bp_management, antibiotic_driven_suppression, reset_suppression_on_admission |
+| **Unmapped** | 11 | nursing_q1_not_diagnostic, nursing_documentation, bundle_start_provider_trigger, focused_exam_read, prn_fluids, prn_vasopressors, qsofa, lactate_trending, bp_management, antibiotic_driven_suppression, reset_suppression_on_admission |
 
 ---
 
 ## 4. Outstanding Gaps
 
-### Gap 1: 12 Flags with No Known Env Var
+### Gap 1: 11 Flags with No Known Env Var
 
-These flags exist in the JSON (sourced from PDFs or product knowledge) but have never appeared in any config-patch YAML across 5 customers.
+These flags exist in the JSON (sourced from PDFs or product knowledge) but have never appeared in any config-patch YAML across 6 customers.
 
 | Flag | Current Category | Question for Engineering |
 |------|-----------------|------------------------|
 | `nursing_q1_not_diagnostic` | Assessment | How is this tooltip controlled? Form schema? Frontend code? |
 | `nursing_documentation` | Documentation | MedStar-only. Is this a Cerner-specific feature? Where is it toggled? |
 | `bundle_start_provider_trigger` | Bundle Manager | Is this bundle-manager config, form schema, or DB-level? |
-| `focused_exam_writeback` | Bundle Manager | Form schema in S3? Database config? |
-| `focused_exam_read` | Bundle Manager | Same question as above |
+| `focused_exam_read` | Bundle Manager | Form schema in S3? Database config? |
 | `prn_fluids` | Bundle Manager | ThedaCare-only. How is this controlled? |
 | `prn_vasopressors` | Bundle Manager | ThedaCare-only. Same question. |
 | `qsofa` | Contributing Factors | MedStar-only. Form schema? |
@@ -226,6 +225,7 @@ The YAMLs are a mix of environments:
 | Customer | YAML Environment |
 |----------|-----------------|
 | Memorial Care | **Production** |
+| ThedaCare | Staging |
 | URMC | Staging |
 | Inova | Staging |
 | CCF | Staging |
@@ -280,8 +280,8 @@ Current state of all 38 flags across 9 customers (Sepsis product only):
 | | nursing_q1_not_diagnostic | off | off | off | on | off | off | off | off | — |
 | | provider_flowsheet_writeback | off | on | on | on | on | on | on | off | — |
 | | auto_writeback_note_type | on | on | on | on | on | on | on | off | — |
-| | provider_unsure_followup | on | off | off | off | on | off | off | off | — |
-| | sepsis_deescalation | on | off | off | off | on | off | on | off | — |
+| | provider_unsure_followup | on | off | on | off | on | off | off | off | — |
+| | sepsis_deescalation | on | off | on | off | on | off | on | off | — |
 | **Documentation** | create_new_note | on | on | on | on | on | on | on | on | — |
 | | add_to_existing_note | off | off | on | on | on | off | off | off | — |
 | | provider_doc_tab | on | on | on | on | on | on | on | on | — |
@@ -299,17 +299,17 @@ Current state of all 38 flags across 9 customers (Sepsis product only):
 | | focused_exam_read | off | on | on | off | off | off | off | off | — |
 | | prn_fluids | off | off | on | off | off | off | off | off | — |
 | | prn_vasopressors | off | off | on | off | off | off | off | off | — |
-| | redirect_on_active_bundles | on | off | off | off | on | off | on | off | — |
+| | redirect_on_active_bundles | on | off | on | off | on | off | on | off | — |
 | **Contrib. Factors** | qsofa | off | off | off | on | off | off | off | off | — |
 | | lactate_trending | off | on | off | off | off | off | off | off | — |
-| | historical_contributing_factors | on | off | off | off | off | off | off | off | — |
-| **Clinical WF** | redirect_to_treatment_mgmt | off | off | off | off | off | off | off | off | — |
+| | historical_contributing_factors | on | off | on | off | off | off | off | off | — |
+| **Clinical WF** | redirect_to_treatment_mgmt | off | off | on | off | off | off | off | off | — |
 | **BP Mgmt** | bp_management | off | on | off | off | off | off | off | off | — |
 | **Regulatory** | investigational_banner | off | off | off | on | off | off | off | off | — |
 | | ifu | off | off | off | on | off | off | off | off | — |
 | **Suppression** | antibiotic_driven_suppression | off | off | on | off | off | off | off | off | — |
 | | reset_suppression_on_admission | off | off | on | off | off | off | off | off | — |
-| | code_status_suppression | on | on | off | off | on | off | off | off | — |
+| | code_status_suppression | on | on | on | off | on | off | off | off | — |
 | **Other** | neutropenic_fever_enabled | off | off | off | off | on | off | off | off | — |
 | | neutropenic_fever_notifications | off | off | off | off | on | off | off | off | — |
 
