@@ -499,7 +499,7 @@ function getCSS() {
   .tab:hover { color: var(--gray-700); }
   .tab.active { color: var(--blue-600); border-bottom-color: var(--blue-600); }
 
-  .matrix-container { overflow-x: auto; background: white; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--gray-200); }
+  .matrix-container { overflow-x: auto; background: white; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--gray-200); max-height: calc(100vh - 80px); overflow-y: auto; }
   .matrix-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .matrix-table thead th {
     background: var(--gray-50); padding: 12px 16px; text-align: left; font-weight: 600;
