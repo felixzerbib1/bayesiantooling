@@ -333,7 +333,39 @@ Current state of all 38 flags across 9 customers (Sepsis product only):
 
 ---
 
-## 8. Post-Call Actions
+## 8. Business Value
+
+### Time Saved
+
+**CS: ~120 hrs/yr recovered.** Every flag question today follows the same loop: CS pings engineering in Slack, waits 30 min–4 hrs, gets the answer, relays to customer. This happens 2–3x/week. With self-service, the answer takes 15 seconds.
+
+**Engineering: ~80 hrs/yr of interrupts eliminated.** Flag questions are low-complexity but high-interrupt — open the repo, find the YAML, find the ConfigMap, read the value, respond. Each one costs 5–10 min plus context-switch overhead. 3–4/week across all requesting teams.
+
+**Production Support: ~15 min saved per incident.** Flag misconfiguration is a common first hypothesis during triage. Today that means repo access and YAML literacy. With the viewer, flag state is confirmed in 30 seconds instead of 15 minutes. Across ~50 incidents/year, that's ~12 hrs — and 15 min closer to resolution every time.
+
+**Product Ops: ~10 hrs saved per new customer onboarding.** Building a new customer's integration checklist currently starts with copying another customer's and manually diffing. The matrix view gives an instant cross-customer comparison — which config to start from, what's different — replacing institutional memory with a live reference.
+
+### Risk Prevention
+
+**Miscommunication.** Without a single view, flag state answers depend on who you ask. CS might reference an old PDF. Engineering might reference staging. Product might reference what was scoped, not what shipped. One viewer, one answer.
+
+**Go-live gaps.** No systematic way to verify that what's deployed matches what was agreed. A red pill where there should be green is visible instantly. Catching a missing writeback config before go-live vs. after the first clinical shift is the difference between a config change and an incident.
+
+**Key-person risk.** The complete picture of "what's enabled where and why" lives in 2–3 heads. The JSON with notes and the mapping file make that knowledge durable, version-controlled, and searchable.
+
+**Audit trail.** Investigational banner and IFU flags have compliance implications. Git history provides an immutable record of which customers had which flags at any point — something a spreadsheet or Confluence page cannot.
+
+### Strategic Value
+
+**Zero marginal cost to scale.** Works the same for 9 customers or 30. Manual processes (Slack questions, YAML lookups) scale linearly with customer count. This doesn't.
+
+**Foundation for automation.** The JSON schema, env var mapping, and generation pipeline are the building blocks for automated YAML-to-viewer sync (V1). V0 isn't throwaway — it's the data model V1 builds on.
+
+**Alignment without meetings.** Replaces the "let's go through each customer's config" meeting. All teams see the same view independently. Conversations shift from "what is the state?" to "what should we change?"
+
+---
+
+## 9. Post-Call Actions
 
 Depending on decisions made, the following updates will be needed:
 
