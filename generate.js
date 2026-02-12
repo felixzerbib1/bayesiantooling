@@ -263,9 +263,8 @@ ${getCSS()}
   </div>
 
   <div class="tabs">
-    <div class="tab active" data-view="matrix">Matrix View</div>
+    <div class="tab active" data-view="product">By Product</div>
     <div class="tab" data-view="customer">By Customer</div>
-    <div class="tab" data-view="product">By Product</div>
   </div>
 
   <div class="legend">
@@ -276,9 +275,8 @@ ${getCSS()}
     <span class="legend-item"><span class="pill pill-na">N/A</span></span>
   </div>
 
-  <div id="matrixView"></div>
+  <div id="productView"></div>
   <div id="customerView" class="hidden"></div>
-  <div id="productView" class="hidden"></div>
 </div>
 
 <script>
@@ -578,7 +576,7 @@ function getCSS() {
 function getAppJS() {
   return `// ===== STATE =====
 const state = {
-  view: "matrix",
+  view: "product",
   search: "",
   customerFilter: "all",
   productFilter: "all",
@@ -713,82 +711,6 @@ function renderFilters() {
     \`<span class="filter-chip \${state.categoryFilter === 'providers' ? 'active' : ''}" data-filter="category" data-value="providers">Providers</span>\`;
 }
 
-// ===== MATRIX VIEW =====
-function renderMatrixView() {
-  // Matrix view requires a specific product — auto-select the first one if "all"
-  const selectedProduct = state.productFilter === "all" ? FLAG_DATA.products[0] : state.productFilter;
-
-  // Get customers that have this product
-  const customers = Object.entries(FLAG_DATA.customers)
-    .filter(([c, prods]) => prods.includes(selectedProduct) && (state.customerFilter === "all" || state.customerFilter === c))
-    .map(([c]) => c);
-
-  const allFlags = getAllFlags();
-  const categories = [
-    { key: "general", label: "General" },
-    { key: "nurses", label: "Nurses" },
-    { key: "providers", label: "Providers" }
-  ];
-
-  if (customers.length === 0) {
-    document.getElementById("matrixView").innerHTML = \`<div class="no-results"><span class="no-results-icon">&#128269;</span><div class="no-results-text">No customers match filters for \${selectedProduct}</div><div class="no-results-sub">Try adjusting your filters</div></div>\`;
-    return;
-  }
-
-  // Product selector pills above the table
-  let html = '<div style="margin-bottom:12px;display:flex;align-items:center;gap:8px;">';
-  html += '<span style="font-size:12px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.5px;">Comparing:</span>';
-  html += \`<span class="product-badge \${productBadgeClass(selectedProduct)}" style="font-size:13px;padding:5px 14px;">\${selectedProduct}</span>\`;
-  html += \`<span style="font-size:12px;color:var(--gray-400);">\${customers.length} customer\${customers.length > 1 ? 's' : ''}</span>\`;
-  html += '</div>';
-
-  html += '<div class="matrix-container"><table class="matrix-table"><thead><tr><th>Feature Flag</th>';
-  for (const c of customers) {
-    html += \`<th>\${c}</th>\`;
-  }
-  html += '</tr></thead><tbody>';
-
-  let hasVisibleRows = false;
-  for (const cat of categories) {
-    if (state.categoryFilter !== "all" && state.categoryFilter !== cat.key) continue;
-    // Only show flags applicable to the selected product
-    const catFlags = allFlags.filter(f => f.category === cat.key && isFlagApplicable(f, selectedProduct));
-    const visibleFlags = catFlags.filter(f => {
-      if (!matchesSearch(f.name)) return false;
-      if (state.statusFilter !== "all") {
-        const anyMatch = customers.some(c => {
-          const val = getFlagValue(c, selectedProduct, f.key);
-          if (state.statusFilter === "enabled") return val === true || typeof val === "string";
-          if (state.statusFilter === "disabled") return val === false;
-          return true;
-        });
-        if (!anyMatch) return false;
-      }
-      return true;
-    });
-    if (visibleFlags.length === 0) continue;
-    hasVisibleRows = true;
-    html += \`<tr class="category-row"><td colspan="\${customers.length + 1}">\${cat.label}</td></tr>\`;
-    for (const flag of visibleFlags) {
-      html += \`<tr><td>\${flag.name}</td>\`;
-      for (const c of customers) {
-        const val = getFlagValue(c, selectedProduct, flag.key);
-        const note = getFlagNote(c, selectedProduct, flag.key);
-        html += \`<td>\${renderPill(val, flag, true)}\${note ? '<span class="note-text">' + note + '</span>' : ''}</td>\`;
-      }
-      html += '</tr>';
-    }
-  }
-
-  if (!hasVisibleRows) {
-    document.getElementById("matrixView").innerHTML = \`<div class="no-results"><span class="no-results-icon">&#128269;</span><div class="no-results-text">No flags match your search</div><div class="no-results-sub">Try a different search term or filter</div></div>\`;
-    return;
-  }
-
-  html += '</tbody></table></div>';
-  document.getElementById("matrixView").innerHTML = html;
-}
-
 // ===== CUSTOMER VIEW =====
 function renderCustomerView() {
   const customers = Object.entries(FLAG_DATA.customers).filter(([c]) =>
@@ -914,13 +836,11 @@ function render() {
   renderStats();
   renderFilters();
 
-  document.getElementById("matrixView").classList.toggle("hidden", state.view !== "matrix");
-  document.getElementById("customerView").classList.toggle("hidden", state.view !== "customer");
   document.getElementById("productView").classList.toggle("hidden", state.view !== "product");
+  document.getElementById("customerView").classList.toggle("hidden", state.view !== "customer");
 
-  if (state.view === "matrix") renderMatrixView();
+  if (state.view === "product") renderProductView();
   else if (state.view === "customer") renderCustomerView();
-  else if (state.view === "product") renderProductView();
 }
 
 // ===== EVENTS =====
