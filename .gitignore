@@ -13,3 +13,9 @@ node_modules/
 
 # PDFs (source documents — don't commit to public repo)
 *.pdf
+
+# Generated outputs (built by Vercel / `npm run build`)
+public/
+index.html
+feature-flags.md
+templates/

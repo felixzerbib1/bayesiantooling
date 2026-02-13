@@ -1,0 +1,11 @@
+{
+  "name": "bayesian-feature-flags",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bayesian Health feature flag configuration viewer",
+  "scripts": {
+    "build": "BUILD_OUTPUT=public node generate.js",
+    "generate": "node generate.js",
+    "test-plans": "cd test-suite && node generate-tests.js"
+  }
+}

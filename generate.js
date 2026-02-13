@@ -18,9 +18,15 @@ const path = require("path");
 // ─── Paths ────────────────────────────────────────────────────────────────────
 const ROOT = __dirname;
 const JSON_PATH = path.join(ROOT, "data", "feature-flags.json");
-const MD_PATH = path.join(ROOT, "feature-flags.md");
-const HTML_PATH = path.join(ROOT, "index.html");
-const TEMPLATES_DIR = path.join(ROOT, "templates");
+
+// Output directory: defaults to project root (local dev), or "public/" for Vercel builds
+const OUT_DIR = process.env.BUILD_OUTPUT
+  ? path.join(ROOT, process.env.BUILD_OUTPUT)
+  : ROOT;
+
+const MD_PATH = path.join(OUT_DIR, "feature-flags.md");
+const HTML_PATH = path.join(OUT_DIR, "index.html");
+const TEMPLATES_DIR = path.join(OUT_DIR, "templates");
 
 // ─── Load data ────────────────────────────────────────────────────────────────
 let data;
@@ -1266,6 +1272,12 @@ function generateCSVTemplates() {
 async function main() {
   console.log("Reading data/feature-flags.json ...\n");
 
+  // Ensure output directory exists (for Vercel builds to public/)
+  if (OUT_DIR !== ROOT && !fs.existsSync(OUT_DIR)) {
+    fs.mkdirSync(OUT_DIR, { recursive: true });
+    console.log(`📁 Created output directory: ${path.relative(ROOT, OUT_DIR)}/`);
+  }
+
   // Generate markdown
   const md = generateMarkdown();
   fs.writeFileSync(MD_PATH, md, "utf-8");
@@ -1308,9 +1320,12 @@ async function main() {
         // Slack notification if webhook URL is set
         const webhookUrl = process.env.SLACK_WEBHOOK_URL;
         if (webhookUrl) {
+          const dashboardUrl =
+            process.env.DASHBOARD_URL ||
+            "https://felixzerbib1.github.io/bayesiantooling/";
           const slackMsg = changelog.formatSlackMessage(
             changes,
-            "https://felixzerbib1.github.io/bayesiantooling/"
+            dashboardUrl
           );
           await changelog.postToSlack(webhookUrl, slackMsg);
           console.log("✅ Slack notification sent.");
