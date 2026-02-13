@@ -466,7 +466,7 @@
 | **Assessment Writeback** | | | |
 | Nurse Assessment - Auto Writeback to Flowsheet Rows | ✓ |  |  |
 | Nurse Assessment - Auto Writeback as Clinical Note |  | ✓ |  |
-| Nurse Assessment - Provider Escalation Questions | ✓ |  |  |
+| Nurse Assessment - Provider Escalation Questions |  | ✓ |  |
 | Nursing Question 1 - Not Diagnostic Tooltip |  | ✓ |  |
 | Provider Assessment - Auto Flowsheet Writeback | ✓ |  |  |
 | Automatic Flowsheet Writeback of Note Type | ✓ |  |  |
@@ -479,11 +479,11 @@
 | Nursing Documentation |  | ✓ |  |
 | **Bundle Manager** | | | |
 | Bundle Tracking | ✓ |  |  |
-| Nurse Order Set Enabled |  | ✓ |  |
+| Nurse Order Set Enabled | ✓ |  |  |
 | Provider Order Set Enabled | ✓ |  |  |
 | Bundle Start Time by Provider Trigger |  | ✓ |  |
 | Fluid Modification (Bayesian UI) |  | ✓ |  |
-| Fluid Modification (EHR Order Set) |  | ✓ |  |
+| Fluid Modification (EHR Order Set) | ✓ |  |  |
 | Provider - Fluid Documentation Questions |  | ✓ |  |
 | Ideal Body Weight Calculation |  | ✓ |  |
 | Auto-Selection of Obesity Contraindication |  | ✓ |  |
@@ -496,7 +496,7 @@
 | qSOFA |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
-| Redirect to Treatment Management |  | ✓ |  |
+| Redirect to Treatment Management | ✓ |  |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
