@@ -34,7 +34,9 @@
       { "key": "create_new_note", "name": "Create a New Note Button", "applicableProducts": ["sepsis"], "description": "Enables the Create New Note button for providers to generate a clinical note" },
       { "key": "add_to_existing_note", "name": "Add to Existing Note Button", "applicableProducts": ["sepsis"], "description": "Enables the Add to Existing Note button to append to an open note" },
       { "key": "provider_doc_tab", "name": "Provider Documentation Tab in Treatment Management", "applicableProducts": ["sepsis"], "description": "Enables the provider documentation tab within the treatment management view" },
-      { "key": "nursing_documentation", "name": "Nursing Documentation", "applicableProducts": ["sepsis"], "description": "Enables nursing documentation capabilities within the application" }
+      { "key": "nursing_documentation", "name": "Nursing Documentation", "applicableProducts": ["sepsis"], "description": "Enables nursing documentation capabilities within the application" },
+      { "key": "provider_assessment_pdf_writeback", "name": "Provider Assessment - PDF Writeback", "applicableProducts": ["sepsis"], "description": "Writes provider assessment as a PDF document back to the EHR" },
+      { "key": "provider_note_pdf_writeback", "name": "Provider Note - PDF Writeback", "applicableProducts": ["sepsis"], "description": "Writes provider clinical note as a PDF document back to the EHR" }
     ],
     "bundle_manager": [
       { "key": "bundle_tracking", "name": "Bundle Tracking", "applicableProducts": ["sepsis"], "description": "Enables the sepsis bundle tracking workflow with time-based compliance monitoring" },
@@ -125,7 +127,9 @@
           "redirect_on_active_bundles": true,
           "historical_contributing_factors": true,
           "neutropenic_fever_enabled": false,
-          "neutropenic_fever_notifications": false
+          "neutropenic_fever_notifications": false,
+          "provider_assessment_pdf_writeback": false,
+          "provider_note_pdf_writeback": false
         },
         "notes": {
           "nurse_escalation_questions": "Unsure if they have provided the existing flowsheet",
@@ -177,7 +181,9 @@
           "redirect_on_active_bundles": false,
           "historical_contributing_factors": false,
           "neutropenic_fever_enabled": false,
-          "neutropenic_fever_notifications": false
+          "neutropenic_fever_notifications": false,
+          "provider_assessment_pdf_writeback": false,
+          "provider_note_pdf_writeback": false
         },
         "notes": {
           "create_new_note": "Still need to determine note type",
@@ -225,7 +231,9 @@
           "redirect_on_active_bundles": true,
           "historical_contributing_factors": true,
           "neutropenic_fever_enabled": false,
-          "neutropenic_fever_notifications": false
+          "neutropenic_fever_notifications": false,
+          "provider_assessment_pdf_writeback": false,
+          "provider_note_pdf_writeback": false
         },
         "notes": {
           "fluid_mod_ehr_order_set": "Not pulling fluid contraindication from EHR (only IBW derived from weight and height)",
@@ -278,7 +286,9 @@
           "redirect_on_active_bundles": false,
           "historical_contributing_factors": false,
           "neutropenic_fever_enabled": false,
-          "neutropenic_fever_notifications": false
+          "neutropenic_fever_notifications": false,
+          "provider_assessment_pdf_writeback": false,
+          "provider_note_pdf_writeback": false
         },
         "notes": {
           "nursing_q1_not_diagnostic": "Not diagnostic tooltip displayed on Nursing Assessment Question 1",
@@ -341,7 +351,9 @@
           "redirect_on_active_bundles": true,
           "historical_contributing_factors": false,
           "neutropenic_fever_enabled": true,
-          "neutropenic_fever_notifications": true
+          "neutropenic_fever_notifications": true,
+          "provider_assessment_pdf_writeback": false,
+          "provider_note_pdf_writeback": false
         },
         "notes": {}
       }
@@ -365,9 +377,9 @@
           "nursing_q1_not_diagnostic": false,
           "provider_flowsheet_writeback": true,
           "auto_writeback_note_type": true,
-          "create_new_note": true,
+          "create_new_note": false,
           "add_to_existing_note": false,
-          "provider_doc_tab": true,
+          "provider_doc_tab": false,
           "nursing_documentation": false,
           "bundle_tracking": true,
           "nurse_order_set": true,
@@ -396,7 +408,9 @@
           "redirect_on_active_bundles": true,
           "historical_contributing_factors": false,
           "neutropenic_fever_enabled": false,
-          "neutropenic_fever_notifications": false
+          "neutropenic_fever_notifications": false,
+          "provider_assessment_pdf_writeback": false,
+          "provider_note_pdf_writeback": false
         },
         "notes": {}
       }
@@ -441,14 +455,18 @@
           "redirect_on_active_bundles": false,
           "historical_contributing_factors": false,
           "neutropenic_fever_enabled": false,
-          "neutropenic_fever_notifications": false
+          "neutropenic_fever_notifications": false,
+          "provider_assessment_pdf_writeback": true,
+          "provider_note_pdf_writeback": true
         },
         "notes": {
           "bundle_tracking": "Planned for Phase 2",
           "nurse_escalation_questions": "Not implemented at go-live; consider timing for Phase 2 or earlier release",
           "nurse_writeback_note": "Note name: Bayesian Sepsis Nursing Assessment; PDF format",
           "create_new_note": "Note name: Bayesian Sepsis Provider Assessment; PDF format",
-          "provider_order_set": "Out of scope for Phase 1; need to scope tech feasibility for Phase 2"
+          "provider_order_set": "Out of scope for Phase 1; need to scope tech feasibility for Phase 2",
+          "provider_assessment_pdf_writeback": "PDF writeback for provider assessment; Allscripts-specific",
+          "provider_note_pdf_writeback": "PDF writeback for provider clinical note; Allscripts-specific"
         }
       }
     }

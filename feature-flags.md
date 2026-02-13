@@ -54,6 +54,8 @@
 | `add_to_existing_note` | Add to Existing Note Button | boolean | Enables the Add to Existing Note button to append to an open note |
 | `provider_doc_tab` | Provider Documentation Tab in Treatment Management | boolean | Enables the provider documentation tab within the treatment management view |
 | `nursing_documentation` | Nursing Documentation | boolean | Enables nursing documentation capabilities within the application |
+| `provider_assessment_pdf_writeback` | Provider Assessment - PDF Writeback | boolean | Writes provider assessment as a PDF document back to the EHR |
+| `provider_note_pdf_writeback` | Provider Note - PDF Writeback | boolean | Writes provider clinical note as a PDF document back to the EHR |
 
 ### Bundle Manager
 
@@ -155,6 +157,8 @@
 | Add to Existing Note Button |  | ✓ | Dot-phrase name TBD; build by ClinDoc team |
 | Provider Documentation Tab in Treatment Management | ✓ |  |  |
 | Nursing Documentation |  | ✓ |  |
+| Provider Assessment - PDF Writeback |  | ✓ |  |
+| Provider Note - PDF Writeback |  | ✓ |  |
 | **Bundle Manager** | | | |
 | Bundle Tracking | ✓ |  |  |
 | Nurse Order Set Enabled | ✓ |  | Primary user is rapid response nurses; managed through education |
@@ -213,6 +217,8 @@
 | Add to Existing Note Button |  | ✓ |  |
 | Provider Documentation Tab in Treatment Management | ✓ |  |  |
 | Nursing Documentation |  | ✓ |  |
+| Provider Assessment - PDF Writeback |  | ✓ |  |
+| Provider Note - PDF Writeback |  | ✓ |  |
 | **Bundle Manager** | | | |
 | Bundle Tracking | ✓ |  |  |
 | Nurse Order Set Enabled |  | ✓ |  |
@@ -271,6 +277,8 @@
 | Add to Existing Note Button | ✓ |  | ThedaCare built smartphrase integration using Bayesian flowsheet data |
 | Provider Documentation Tab in Treatment Management | ✓ |  |  |
 | Nursing Documentation |  | ✓ |  |
+| Provider Assessment - PDF Writeback |  | ✓ |  |
+| Provider Note - PDF Writeback |  | ✓ |  |
 | **Bundle Manager** | | | |
 | Bundle Tracking | ✓ |  |  |
 | Nurse Order Set Enabled |  | ✓ | Currently enabled (can turn off later) |
@@ -329,6 +337,8 @@
 | Add to Existing Note Button | ✓ |  |  |
 | Provider Documentation Tab in Treatment Management | ✓ |  |  |
 | Nursing Documentation | ✓ |  |  |
+| Provider Assessment - PDF Writeback |  | ✓ |  |
+| Provider Note - PDF Writeback |  | ✓ |  |
 | **Bundle Manager** | | | |
 | Bundle Tracking | ✓ |  |  |
 | Nurse Order Set Enabled |  | ✓ | qSOFA score will auto order lactate |
@@ -403,6 +413,8 @@
 | Add to Existing Note Button | ✓ |  |  |
 | Provider Documentation Tab in Treatment Management | ✓ |  |  |
 | Nursing Documentation |  | ✓ |  |
+| Provider Assessment - PDF Writeback |  | ✓ |  |
+| Provider Note - PDF Writeback |  | ✓ |  |
 | **Bundle Manager** | | | |
 | Bundle Tracking | ✓ |  |  |
 | Nurse Order Set Enabled | ✓ |  |  |
@@ -473,10 +485,12 @@
 | Provider Follow-Up on Unsure Response |  | ✓ |  |
 | Sepsis De-escalation | ✓ |  |  |
 | **Documentation** | | | |
-| Create a New Note Button | ✓ |  |  |
+| Create a New Note Button |  | ✓ |  |
 | Add to Existing Note Button |  | ✓ |  |
-| Provider Documentation Tab in Treatment Management | ✓ |  |  |
+| Provider Documentation Tab in Treatment Management |  | ✓ |  |
 | Nursing Documentation |  | ✓ |  |
+| Provider Assessment - PDF Writeback |  | ✓ |  |
+| Provider Note - PDF Writeback |  | ✓ |  |
 | **Bundle Manager** | | | |
 | Bundle Tracking | ✓ |  |  |
 | Nurse Order Set Enabled | ✓ |  |  |
@@ -535,6 +549,8 @@
 | Add to Existing Note Button |  | ✓ |  |
 | Provider Documentation Tab in Treatment Management | ✓ |  |  |
 | Nursing Documentation |  | ✓ |  |
+| Provider Assessment - PDF Writeback | ✓ |  | PDF writeback for provider assessment; Allscripts-specific |
+| Provider Note - PDF Writeback | ✓ |  | PDF writeback for provider clinical note; Allscripts-specific |
 | **Bundle Manager** | | | |
 | Bundle Tracking |  | ✓ | Planned for Phase 2 |
 | Nurse Order Set Enabled |  | ✓ |  |

@@ -453,6 +453,22 @@ const FLAG_DATA = {
         "products": [
           "Sepsis"
         ]
+      },
+      {
+        "key": "provider_assessment_pdf_writeback",
+        "name": "Provider Assessment - PDF Writeback",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
+      },
+      {
+        "key": "provider_note_pdf_writeback",
+        "name": "Provider Note - PDF Writeback",
+        "type": "boolean",
+        "products": [
+          "Sepsis"
+        ]
       }
     ],
     "bundle_manager": [
@@ -751,7 +767,9 @@ const FLAG_DATA = {
         "nurse_escalation_questions": "Not implemented at go-live; consider timing for Phase 2 or earlier release",
         "nurse_writeback_note": "Note name: Bayesian Sepsis Nursing Assessment; PDF format",
         "create_new_note": "Note name: Bayesian Sepsis Provider Assessment; PDF format",
-        "provider_order_set": "Out of scope for Phase 1; need to scope tech feasibility for Phase 2"
+        "provider_order_set": "Out of scope for Phase 1; need to scope tech feasibility for Phase 2",
+        "provider_assessment_pdf_writeback": "PDF writeback for provider assessment; Allscripts-specific",
+        "provider_note_pdf_writeback": "PDF writeback for provider clinical note; Allscripts-specific"
       }
     }
   },
@@ -795,7 +813,9 @@ const FLAG_DATA = {
         "redirect_on_active_bundles": true,
         "historical_contributing_factors": true,
         "neutropenic_fever_enabled": false,
-        "neutropenic_fever_notifications": false
+        "neutropenic_fever_notifications": false,
+        "provider_assessment_pdf_writeback": false,
+        "provider_note_pdf_writeback": false
       }
     },
     "Inova Health": {
@@ -837,7 +857,9 @@ const FLAG_DATA = {
         "redirect_on_active_bundles": false,
         "historical_contributing_factors": false,
         "neutropenic_fever_enabled": false,
-        "neutropenic_fever_notifications": false
+        "neutropenic_fever_notifications": false,
+        "provider_assessment_pdf_writeback": false,
+        "provider_note_pdf_writeback": false
       }
     },
     "ThedaCare": {
@@ -879,7 +901,9 @@ const FLAG_DATA = {
         "redirect_on_active_bundles": true,
         "historical_contributing_factors": true,
         "neutropenic_fever_enabled": false,
-        "neutropenic_fever_notifications": false
+        "neutropenic_fever_notifications": false,
+        "provider_assessment_pdf_writeback": false,
+        "provider_note_pdf_writeback": false
       }
     },
     "MedStar Health": {
@@ -921,7 +945,9 @@ const FLAG_DATA = {
         "redirect_on_active_bundles": false,
         "historical_contributing_factors": false,
         "neutropenic_fever_enabled": false,
-        "neutropenic_fever_notifications": false
+        "neutropenic_fever_notifications": false,
+        "provider_assessment_pdf_writeback": false,
+        "provider_note_pdf_writeback": false
       }
     },
     "Mayo Clinic": {
@@ -970,7 +996,9 @@ const FLAG_DATA = {
         "redirect_on_active_bundles": true,
         "historical_contributing_factors": false,
         "neutropenic_fever_enabled": true,
-        "neutropenic_fever_notifications": true
+        "neutropenic_fever_notifications": true,
+        "provider_assessment_pdf_writeback": false,
+        "provider_note_pdf_writeback": false
       }
     },
     "UChicago": {
@@ -988,9 +1016,9 @@ const FLAG_DATA = {
         "nursing_q1_not_diagnostic": false,
         "provider_flowsheet_writeback": true,
         "auto_writeback_note_type": true,
-        "create_new_note": true,
+        "create_new_note": false,
         "add_to_existing_note": false,
-        "provider_doc_tab": true,
+        "provider_doc_tab": false,
         "nursing_documentation": false,
         "bundle_tracking": true,
         "nurse_order_set": true,
@@ -1019,7 +1047,9 @@ const FLAG_DATA = {
         "redirect_on_active_bundles": true,
         "historical_contributing_factors": false,
         "neutropenic_fever_enabled": false,
-        "neutropenic_fever_notifications": false
+        "neutropenic_fever_notifications": false,
+        "provider_assessment_pdf_writeback": false,
+        "provider_note_pdf_writeback": false
       }
     },
     "Northwell": {
@@ -1061,7 +1091,9 @@ const FLAG_DATA = {
         "redirect_on_active_bundles": false,
         "historical_contributing_factors": false,
         "neutropenic_fever_enabled": false,
-        "neutropenic_fever_notifications": false
+        "neutropenic_fever_notifications": false,
+        "provider_assessment_pdf_writeback": true,
+        "provider_note_pdf_writeback": true
       }
     }
   }
