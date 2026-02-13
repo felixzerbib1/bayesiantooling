@@ -20,3 +20,5 @@ index.html
 feature-flags.md
 templates/
 .vercel
+.env*.local
+.env.deploy

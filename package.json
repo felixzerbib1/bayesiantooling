@@ -6,6 +6,7 @@
   "scripts": {
     "build": "BUILD_OUTPUT=public node generate.js",
     "generate": "node generate.js",
-    "test-plans": "cd test-suite && node generate-tests.js"
+    "test-plans": "cd test-suite && node generate-tests.js",
+    "deploy": "./deploy.sh"
   }
 }
