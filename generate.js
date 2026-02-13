@@ -1322,7 +1322,7 @@ async function main() {
         if (webhookUrl) {
           const dashboardUrl =
             process.env.DASHBOARD_URL ||
-            "https://felixzerbib1.github.io/bayesiantooling/";
+            "https://feature-flag-app-pied.vercel.app/";
           const slackMsg = changelog.formatSlackMessage(
             changes,
             dashboardUrl

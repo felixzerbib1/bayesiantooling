@@ -544,7 +544,7 @@ async function main() {
     console.log("\n🔕 Dry run — Slack message preview:");
     const slackMsg = formatSlackMessage(
       changes,
-      "https://felixzerbib1.github.io/bayesiantooling/"
+      "https://feature-flag-app-pied.vercel.app/"
     );
     console.log(JSON.stringify(slackMsg, null, 2));
     process.exit(0);
@@ -554,7 +554,7 @@ async function main() {
   try {
     const slackMsg = formatSlackMessage(
       changes,
-      "https://felixzerbib1.github.io/bayesiantooling/"
+      "https://feature-flag-app-pied.vercel.app/"
     );
     await postToSlack(webhookUrl, slackMsg);
     console.log("\n✅ Slack notification sent.");
