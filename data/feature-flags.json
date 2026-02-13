@@ -361,8 +361,8 @@
     "uchicago": {
       "palliative_care": {
         "flags": {
-          "initiated_by_bedside_workflow": false,
-          "storyboard_alert": false,
+          "initiated_by_bedside_workflow": true,
+          "storyboard_alert": true,
           "initiated_by_palliative_care_team": false
         },
         "notes": {}
