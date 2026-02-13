@@ -1,0 +1,5 @@
+Test Step #,Section,Scenario / Flag,User,Test Step Description,Expected Result,Test Result,Pass/Fail,Description of failure/issues
+,ABSENCE TESTS,=== Palliative Care: Disabled Flag Verification ===,,Verify that disabled features do NOT appear in the application,,,,
+,Absence Test,--- Bedside Workflow ---,,,,,,
+1,Absence Test,Initiated by Bedside Workflow [initiated_by_bedside_workflow],IP Nurse,Verify NO bedside workflow initiation option for palliative care,VERIFY ABSENT,,,
+2,Absence Test,Storyboard Alert [storyboard_alert],IP Provider,Verify NO palliative care alert in EHR Storyboard,VERIFY ABSENT,,,
