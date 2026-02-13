@@ -51,15 +51,15 @@
       { "key": "focused_exam_writeback", "name": "Focused Exam Writeback to Flowsheet Row", "applicableProducts": ["sepsis"], "description": "Writes focused exam data back to EHR flowsheet rows" },
       { "key": "focused_exam_read", "name": "Focused Exam Read from Flowsheet", "applicableProducts": ["sepsis"], "description": "Reads focused exam data from existing EHR flowsheet values" },
       { "key": "prn_fluids", "name": "PRN Fluids", "applicableProducts": ["sepsis"], "description": "Enables PRN fluids tracking within the bundle manager" },
-      { "key": "prn_vasopressors", "name": "PRN Vasopressors", "applicableProducts": ["sepsis"], "description": "Enables PRN vasopressors tracking within the bundle manager" },
-      { "key": "redirect_on_active_bundles", "name": "Redirect to Treatment Management on Active Bundles", "applicableProducts": ["sepsis"], "description": "Redirects clinicians to treatment management view only when active bundles exist" }
+      { "key": "prn_vasopressors", "name": "PRN Vasopressors", "applicableProducts": ["sepsis"], "description": "Enables PRN vasopressors tracking within the bundle manager" }
     ],
     "contributing_factors": [
       { "key": "qsofa", "name": "qSOFA", "applicableProducts": ["sepsis"], "description": "Enables qSOFA scoring driven by nursing assessment" },
       { "key": "historical_contributing_factors", "name": "Historical Contributing Factors", "applicableProducts": ["sepsis"], "description": "Displays historical contributing factor data alongside current values" }
     ],
     "clinical_workflow": [
-      { "key": "redirect_to_treatment_management", "name": "Redirect to Treatment Management", "applicableProducts": ["sepsis"], "description": "Automatically redirects clinicians to the treatment management view" }
+      { "key": "redirect_to_treatment_management", "name": "Redirect to Treatment Management", "applicableProducts": ["sepsis"], "description": "Automatically redirects clinicians to the treatment management view" },
+      { "key": "redirect_on_active_bundles", "name": "Redirect to Treatment Management on Active Bundles", "applicableProducts": ["sepsis"], "description": "Redirects clinicians to treatment management view only when active bundles exist" }
     ],
     "bp_management": [
       { "key": "bp_management", "name": "BP Management", "applicableProducts": ["sepsis"], "description": "Enables blood pressure management workflow and monitoring" },

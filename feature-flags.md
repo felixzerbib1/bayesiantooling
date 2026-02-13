@@ -74,7 +74,6 @@
 | `focused_exam_read` | Focused Exam Read from Flowsheet | boolean | Reads focused exam data from existing EHR flowsheet values |
 | `prn_fluids` | PRN Fluids | boolean | Enables PRN fluids tracking within the bundle manager |
 | `prn_vasopressors` | PRN Vasopressors | boolean | Enables PRN vasopressors tracking within the bundle manager |
-| `redirect_on_active_bundles` | Redirect to Treatment Management on Active Bundles | boolean | Redirects clinicians to treatment management view only when active bundles exist |
 
 ### Contributing Factors
 
@@ -88,6 +87,7 @@
 | Flag Key | Display Name | Type | Description |
 |----------|-------------|------|-------------|
 | `redirect_to_treatment_management` | Redirect to Treatment Management | boolean | Automatically redirects clinicians to the treatment management view |
+| `redirect_on_active_bundles` | Redirect to Treatment Management on Active Bundles | boolean | Redirects clinicians to treatment management view only when active bundles exist |
 
 ### Bp Management
 
@@ -173,12 +173,12 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
-| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Historical Contributing Factors | ✓ |  |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -233,12 +233,12 @@
 | Focused Exam Read from Flowsheet | ✓ |  |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
-| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management | ✓ |  |  |
 | Lactate Trending | ✓ |  |  |
@@ -293,12 +293,12 @@
 | Focused Exam Read from Flowsheet | ✓ |  |  |
 | PRN Fluids | ✓ |  |  |
 | PRN Vasopressors | ✓ |  |  |
-| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Historical Contributing Factors | ✓ |  |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management | ✓ |  |  |
+| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -353,12 +353,12 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
-| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA | ✓ |  | Nursing assessment Q2 drives scoring of modified qSOFA |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -429,12 +429,12 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
-| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -505,12 +505,12 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
-| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management | ✓ |  |  |
+| Redirect to Treatment Management on Active Bundles | ✓ |  |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |
@@ -565,12 +565,12 @@
 | Focused Exam Read from Flowsheet |  | ✓ |  |
 | PRN Fluids |  | ✓ |  |
 | PRN Vasopressors |  | ✓ |  |
-| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Contributing Factors** | | | |
 | qSOFA |  | ✓ |  |
 | Historical Contributing Factors |  | ✓ |  |
 | **Clinical Workflow** | | | |
 | Redirect to Treatment Management |  | ✓ |  |
+| Redirect to Treatment Management on Active Bundles |  | ✓ |  |
 | **Bp Management** | | | |
 | BP Management |  | ✓ |  |
 | Lactate Trending |  | ✓ |  |

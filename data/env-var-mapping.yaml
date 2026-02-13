@@ -170,12 +170,6 @@ bundle_manager:
     note: "No env var found. May be controlled via form schema in S3 or database config."
     envVars: []
 
-  redirect_on_active_bundles:
-    type: boolean
-    envVars:
-      - name: ENABLE_REDIRECT_TO_TREATMENT_MANAGEMENT_ON_ACTIVE_BUNDLES
-        configMaps: [ui-config]
-
 contributing_factors:
 
   qsofa:
@@ -195,6 +189,12 @@ clinical_workflow:
     type: boolean
     envVars:
       - name: ENABLE_REDIRECT_TO_TREATMENT_MANAGEMENT
+        configMaps: [ui-config]
+
+  redirect_on_active_bundles:
+    type: boolean
+    envVars:
+      - name: ENABLE_REDIRECT_TO_TREATMENT_MANAGEMENT_ON_ACTIVE_BUNDLES
         configMaps: [ui-config]
 
 bp_management:
