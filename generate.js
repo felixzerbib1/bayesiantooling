@@ -1263,7 +1263,7 @@ function generateCSVTemplates() {
 //  MAIN
 // ═══════════════════════════════════════════════════════════════════════════════
 
-function main() {
+async function main() {
   console.log("Reading data/feature-flags.json ...\n");
 
   // Generate markdown
@@ -1280,6 +1280,51 @@ function main() {
   console.log("\n📋 Generating CSV templates ...");
   const csvCount = generateCSVTemplates();
   console.log(`✓ Generated ${csvCount} CSV templates in templates/`);
+
+  // Changelog detection & Slack notification
+  try {
+    const changelog = require("./changelog");
+    const { execSync } = require("child_process");
+
+    // Get the previously committed version of the JSON
+    let oldData = null;
+    try {
+      const raw = execSync(`git show HEAD:${path.relative(ROOT, JSON_PATH)}`, {
+        cwd: ROOT,
+        encoding: "utf-8",
+        stdio: ["pipe", "pipe", "pipe"],
+      });
+      oldData = JSON.parse(raw);
+    } catch {
+      // No previous commit or not in a git repo — skip changelog
+    }
+
+    if (oldData) {
+      const changes = changelog.detectChanges(oldData, data);
+      if (changelog.hasChanges(changes)) {
+        console.log("\n📋 Changes detected since last commit:");
+        console.log(changelog.formatChangelog(changes, "HEAD", "current"));
+
+        // Slack notification if webhook URL is set
+        const webhookUrl = process.env.SLACK_WEBHOOK_URL;
+        if (webhookUrl) {
+          const slackMsg = changelog.formatSlackMessage(
+            changes,
+            "https://felixzerbib1.github.io/bayesiantooling/"
+          );
+          await changelog.postToSlack(webhookUrl, slackMsg);
+          console.log("✅ Slack notification sent.");
+        }
+      } else {
+        console.log("\n✓ No flag changes detected since last commit.");
+      }
+    }
+  } catch (err) {
+    // Changelog module not found or error — non-fatal
+    if (err.code !== "MODULE_NOT_FOUND") {
+      console.warn(`\n⚠ Changelog detection error: ${err.message}`);
+    }
+  }
 
   console.log("\nDone! All files are up to date with data/feature-flags.json.");
 }
