@@ -19,3 +19,4 @@ public/
 index.html
 feature-flags.md
 templates/
+.vercel

@@ -3,8 +3,14 @@
   "outputDirectory": "public",
   "framework": null,
   "installCommand": "echo 'No dependencies to install'",
-  "routes": [
-    { "src": "/feature-flags.md", "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }] },
-    { "src": "/templates/(.*)\\.csv", "headers": [{ "key": "Content-Disposition", "value": "attachment" }] }
+  "headers": [
+    {
+      "source": "/feature-flags.md",
+      "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }]
+    },
+    {
+      "source": "/templates/(.*)\\.csv",
+      "headers": [{ "key": "Content-Disposition", "value": "attachment" }]
+    }
   ]
 }
